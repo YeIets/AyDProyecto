@@ -44,7 +44,7 @@ public class VentanaPrincipal {
 		
 		try {
 			stage = new Stage();
-			stage.setTitle("Mi Aplicación");
+			stage.setTitle("Mi app");
 			
 			// Load FXML
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ventana-principal.fxml"));
