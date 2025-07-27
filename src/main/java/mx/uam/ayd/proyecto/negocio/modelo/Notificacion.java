@@ -6,7 +6,7 @@ import java.time.LocalTime;
 
 /**
  *
- * Entidad de negocio Alumno
+ * Entidad de negocio Notificacion
  *
  */
 
@@ -99,7 +99,7 @@ public class Notificacion {
 
     @Override
     public String toString() {
-        return "Notificacion [idNotificacion=" + idNotificacion + ", titulo=" + titulo + 
-        ", destinatario=" + destinatario + ", hora=" + hora + + ", mensaje" + mensaje +"]";
+        return "Notificacion [idNotificacion=" + idNotificacion + ", titulo=" + titulo 
+        + ", destinatario=" + destinatario + ", hora=" + hora + ", mensaje" + mensaje +"]";
     }
 }

@@ -1,6 +1,8 @@
 package mx.uam.ayd.proyecto.negocio.modelo;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -13,8 +15,8 @@ import java.util.List;
 @Entity
 public class Padre {
 
-    @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Id // Esto le dice a Spring que este es el identificador
+    @GeneratedValue (strategy = GenerationType.IDENTITY) // Le dice a Spring que genere el id
     private long idPadre;
 
     private String nombre;
@@ -38,6 +40,14 @@ public class Padre {
         orphanRemoval = true
     )
     private List<Notificacion> notificaciones = new ArrayList <> ();
+
+    @OneToMany(
+        targetEntity = Pago.class,
+        fetch = FetchType.EAGER,
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private List<Pago> pagos = new ArrayList <> ();
 
 
     public long getIdPadre() {
@@ -86,6 +96,14 @@ public class Padre {
 
     public void setNotificaciones(List<Notificacion> notificaciones) {
         this.notificaciones = notificaciones;
+    }
+
+    public List<Pago> getPagos() {
+        return pagos;
+    }
+
+    public void setPagos(List<Pago> pagos) {
+        this.pagos = pagos;
     }
 
     @Override
