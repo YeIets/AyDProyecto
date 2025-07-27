@@ -92,12 +92,12 @@ public class ProyectoApplication {
 	 */
 	public void inicializaBD() {
 		// Vamos a crear los dos grupos de usuarios
-		Grupo grupoAdmin = new Grupo();
-		grupoAdmin.setNombre("Administradores");
+		Grupo grupoAdministrativo = new Grupo();
+		grupoAdministrativo.setNombre("Administradores");
 		grupoRepository.save(grupoAdmin);
 		
-		Grupo grupoOps = new Grupo();
-		grupoOps.setNombre("Operadores");
+		Grupo grupoPadres = new Grupo();
+		grupoPadres.setNombre("Padres");
 		grupoRepository.save(grupoOps);
 	}
 }
