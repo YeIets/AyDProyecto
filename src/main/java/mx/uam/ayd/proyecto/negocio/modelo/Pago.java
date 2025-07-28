@@ -19,9 +19,7 @@ public class Pago {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Le dice a Spring que genere el id
     private long idPago;
 
-    private String titulo;
-
-    private String matriculaAlumno;
+    private int matriculaAlumno;
 
     private float monto;
 
@@ -45,14 +43,6 @@ public class Pago {
 
     public void setIdPago(long idPago) {
         this.idPago = idPago;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
     }
 
     public String getMatriculaAlumno() {
