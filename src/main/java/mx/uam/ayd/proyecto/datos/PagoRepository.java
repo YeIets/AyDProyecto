@@ -20,4 +20,6 @@ public interface PagoRepository extends CrudRepository <Pago, Long> {
 
 	public List <Pago> findByMatricula(int matricula);
 
+	public List <Pago> findByDiaAndEstado(String dia, String estado);
+
 }

@@ -39,7 +39,7 @@ public class Alumno {
         cascade = CascadeType.ALL, 
         orphanRemoval = true
     )
-    private List<Documento> documentos = new ArrayList <> ();
+    private List<Documento> documentos = new ArrayList <>(5);
 
     public long getIdAlumno() {
         return idAlumno;

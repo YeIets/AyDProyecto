@@ -33,9 +33,25 @@ public class Pago {
 
     private String estado;
 
+    private String diaMenu;
+
     @ManyToOne
     @JoinColumn(name = "id_padre")
     private Padre titular;
+
+
+    //Crea un Pago  con atributos "ConceptoDePago", "Estado" y "MetodoDePago" ya definidos
+    //Usado para crear pagos en caja
+    public Pago(Padre titular, float monto, String diaMenu){
+
+        this.titular = titular;
+        this.monto = monto;
+        this.metodoDePago = "Caja";
+        this.conceptoDePago = "Menu Semanal";
+        this.estado = "Pendiente";
+        this.diaMenu = diaMenu;
+
+    }
 
     public long getIdPago() {
         return idPago;
@@ -108,6 +124,15 @@ public class Pago {
     public void setTitular(Padre titular) {
         this.titular = titular;
     }
+
+    public Padre getDiaMenu() {
+        return diaMenu;
+    }
+
+    public void setDiaMenu(String diaMenu) {
+        this.diaMenu = diaMenu;
+    }
+
 
     @Override
     public int hashCode() {
