@@ -31,7 +31,7 @@ public class ServicioPago {
 
 		List<Pago> pagosMenu = new ArrayList<> ();
 
-		for (Pago pago : pagoRepository.findByDestinatario(padre)) {
+		for (Pago pago : pagoRepository.findByTitular(padre)) {
 			if (pago.getConceptoDePago().equals("Menu Semanal")) {
 				pagosMenu.add(pago);
 			}
@@ -43,12 +43,12 @@ public class ServicioPago {
 
 	//Recuperar Pagos de Menu filtrando por dia 
 	public List <Pago> recuperaPagosMenuPorDia(String dia){
-		return pagoRepository.findByDia(dia);
+		return pagoRepository.findByDiaMenu(dia);
 	}
 
 	//Recuperar Pagos de Menu filtrando por dia y estado
 	public List <Pago> recuperaPagosMenuPorDiaEstado(String dia, String estado){
-		return pagoRepository.findByDiaAndEstado(dia, estado);
+		return pagoRepository.findByDiaMenuAndEstado(dia, estado);
 	}
 
 	//Genera una linea de captura para el pago en caja

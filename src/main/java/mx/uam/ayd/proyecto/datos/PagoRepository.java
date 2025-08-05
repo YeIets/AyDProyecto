@@ -17,12 +17,12 @@ public interface PagoRepository extends CrudRepository <Pago, Long> {
 	
 	public List <Pago> findByConceptoDePago(String conceptoDePago);
 
-	public List <Pago> findByDia(String dia);
+	public List <Pago> findByDiaMenu(String dia);
 
 	public List <Pago> findByMatricula(int matricula);
 
-	public List <Pago> findByDestinatario(Padre destinatario);
+	public List <Pago> findByTitular(Padre destinatario);
 
-	public List <Pago> findByDiaAndEstado(String dia, String estado);
+	public List <Pago> findByDiaMenuAndEstado(String dia, String estado);
 
 }

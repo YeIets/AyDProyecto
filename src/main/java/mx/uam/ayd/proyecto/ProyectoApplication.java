@@ -94,10 +94,10 @@ public class ProyectoApplication {
 		// Vamos a crear los dos grupos de usuarios
 		Grupo grupoAdministrativo = new Grupo();
 		grupoAdministrativo.setNombre("Administradores");
-		grupoRepository.save(grupoAdmin);
+		grupoRepository.save(grupoAdministrativo);
 		
 		Grupo grupoPadres = new Grupo();
 		grupoPadres.setNombre("Padres");
-		grupoRepository.save(grupoOps);
+		grupoRepository.save(grupoPadres);
 	}
 }
