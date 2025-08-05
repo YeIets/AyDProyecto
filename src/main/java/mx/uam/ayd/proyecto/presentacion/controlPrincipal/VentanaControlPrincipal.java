@@ -1,4 +1,4 @@
-package mx.uam.ayd.proyecto.presentacion.controlprincipal;
+package mx.uam.ayd.proyecto.presentacion.controlPrincipal;
 
 import java.io.IOException;
 
@@ -31,7 +31,7 @@ public class VentanaControlPrincipal {
     @FXML private MenuItem idMenuCocina;
     @FXML private ImageView logoInstitucional;
 
-    private ControlControlPrincipal control;
+    private controlControlPrincipal control;
 
     public VentanaControlPrincipal() {
         // Constructor vacío, sin inicializar interfaz aquí
@@ -66,7 +66,7 @@ public class VentanaControlPrincipal {
         }
     }
 
-    public void setControl(ControlControlPrincipal control) {
+    public void setControl(controlControlPrincipal control) {
         this.control = control;
     }
 
