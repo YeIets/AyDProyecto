@@ -1,14 +1,12 @@
 package mx.uam.ayd.proyecto.negocio;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import mx.uam.ayd.proyecto.datos.AlumnoRepository;
+import mx.uam.ayd.proyecto.negocio.modelo.Alumno;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-import mx.uam.ayd.proyecto.datos.AlumnoRepository;
-import mx.uam.ayd.proyecto.negocio.modelo.Alumno;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 /**
@@ -29,7 +27,7 @@ public class ServicioAlumno {
 		List <Alumno> alumnos = new ArrayList<>();
 		
 		for(Alumno alumno : alumnoRepository.findAll()) {
-			alumnos.add(alumno)
+			alumnos.add(alumno);
 		}
 				
 		return alumnos;

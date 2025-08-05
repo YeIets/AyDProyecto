@@ -43,12 +43,12 @@ public class ServicioPago {
 
 	//Recuperar Pagos de Menu filtrando por dia 
 	public List <Pago> recuperaPagosMenuPorDia(String dia){
-		return pagoRepository.findByDiaAndEstado(dia)
+		return pagoRepository.findByDia(dia);
 	}
 
 	//Recuperar Pagos de Menu filtrando por dia y estado
 	public List <Pago> recuperaPagosMenuPorDiaEstado(String dia, String estado){
-		return pagoRepository.findByDiaAndEstado(dia, estado)
+		return pagoRepository.findByDiaAndEstado(dia, estado);
 	}
 
 	//Genera una linea de captura para el pago en caja
@@ -57,7 +57,7 @@ public class ServicioPago {
 		
 		Pago persistido = pagoRepository.save(pago);
 
-		if (persistido != null && persistido.getId() != null) {
+		if (persistido != null && persistido.getIdPago() != 0) {
 			return persistido;
 		} else return null;
 	}

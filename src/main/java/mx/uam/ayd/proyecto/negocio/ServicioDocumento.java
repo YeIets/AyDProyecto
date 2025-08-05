@@ -1,20 +1,19 @@
 package mx.uam.ayd.proyecto.negocio;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import mx.uam.ayd.proyecto.datos.AlumnoRepository;
+import mx.uam.ayd.proyecto.datos.DocumentoRepository;
+import mx.uam.ayd.proyecto.negocio.modelo.Alumno;
+import mx.uam.ayd.proyecto.negocio.modelo.Documento;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import mx.uam.ayd.proyecto.datos.DocumentoRepository;
-import mx.uam.ayd.proyecto.negocio.modelo.Documento;
-import mx.uam.ayd.proyecto.negocio.modelo.Alumno;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 /**
@@ -22,7 +21,8 @@ import java.nio.file.Paths;
  *
  */
 public class ServicioDocumento {
-	
+
+	private static final Logger log = LoggerFactory.getLogger(ServicioUsuario.class);
 	private final DocumentoRepository documentoRepository;
 	private final AlumnoRepository alumnoRepository;
 	
@@ -38,7 +38,7 @@ public class ServicioDocumento {
 		List <Documento> documentos = new ArrayList<>();
 		
 		for(Documento documento:documentoRepository.findAll()) {
-			documentos.add(documento)
+			documentos.add(documento);
 		}
 				
 		return documentos;
@@ -61,12 +61,12 @@ public class ServicioDocumento {
 	// Regresa true si lo es y false si no es valida o si es una ruta vacia
 	public boolean validarDireccion(Documento documento){
 
-		if (documento.getDireccion() == null || documento.getDireccion().isBlank()) {
-			log.info("El documento tiene una direccion nula o vacia : " + documento.getDireccion());
+		if (documento.getDireccionArchivo() == null || documento.getDireccionArchivo().isBlank()) {
+			log.info("El documento tiene una direccion nula o vacia : " + documento.getDireccionArchivo());
 			return false;
 		}
 
-		Path ruta = Paths.get(documento.getDireccion());
+		Path ruta = Paths.get(documento.getDireccionArchivo());
 		return Files.exists(ruta) && Files.isRegularFile(ruta);
 
 	}

@@ -1,14 +1,12 @@
 package mx.uam.ayd.proyecto.negocio;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import mx.uam.ayd.proyecto.datos.MenuRepository;
+import mx.uam.ayd.proyecto.negocio.modelo.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-import mx.uam.ayd.proyecto.datos.MenuRepository;
-import mx.uam.ayd.proyecto.negocio.modelo.Menu;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 /**
@@ -21,7 +19,7 @@ public class ServicioMenu {
 	
 	@Autowired
 	public ServicioMenu(MenuRepository menuRepository) {
-		this.menuRepository = menuRepository
+		this.menuRepository = menuRepository;
 	}
 	
 	/**
@@ -34,7 +32,7 @@ public class ServicioMenu {
 		List <Menu> menus = new ArrayList<>();
 		
 		for(Menu menu : menuRepository.findAll()) {
-			menus.add(menu)
+			menus.add(menu);
 		}
 				
 		return menus;

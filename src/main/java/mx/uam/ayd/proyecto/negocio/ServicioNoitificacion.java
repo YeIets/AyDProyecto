@@ -1,17 +1,14 @@
 package mx.uam.ayd.proyecto.negocio;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import mx.uam.ayd.proyecto.datos.NotificacionRepository;
+import mx.uam.ayd.proyecto.negocio.modelo.Notificacion;
+import mx.uam.ayd.proyecto.negocio.modelo.Padre;
+import mx.uam.ayd.proyecto.negocio.modelo.Pago;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import mx.uam.ayd.proyecto.datos.NoticacionRepository;
-import mx.uam.ayd.proyecto.negocio.modelo.Notificacion;
-import mx.uam.ayd.proyecto.negocio.modelo.Pago;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 /**
@@ -19,17 +16,18 @@ import mx.uam.ayd.proyecto.negocio.modelo.Pago;
  *
  */
 public class ServicioNoitificacion {
-	
-	private final NoticacionRepository noticacionRepository;
+
+	private static final Logger log = LoggerFactory.getLogger(ServicioUsuario.class);
+	private final NotificacionRepository notificacionRepository;
 	
 	@Autowired
-	public ServicioNoitificacion(NoticacionRepository noticacionRepository) {
-		this.noticacionRepository = noticacionRepository;
+	public ServicioNoitificacion(NotificacionRepository notificacionRepository) {
+		this.notificacionRepository = notificacionRepository;
 	}
 	
 	//Regresa notificaciones asociadas a un padre, si no tiene notificaciones asociadas regresa una lista vacia
 	public List <Notificacion> recuperaNotificaciones(Padre padre) {
-		return noticacionRepository.findByDestinatario(padre);
+		return notificacionRepository.findByDestinatario(padre);
 	}
 
 	//Redacta y envia un correo de un pago a una direccion de correo 

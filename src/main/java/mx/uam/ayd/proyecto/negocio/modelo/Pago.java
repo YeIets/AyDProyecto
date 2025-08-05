@@ -3,7 +3,6 @@ package mx.uam.ayd.proyecto.negocio.modelo;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 
 /**
@@ -61,11 +60,11 @@ public class Pago {
         this.idPago = idPago;
     }
 
-    public String getMatriculaAlumno() {
+    public int getMatriculaAlumno() {
         return matriculaAlumno;
     }
 
-    public void setMatriculaAlumno(String matriculaAlumno) {
+    public void setMatriculaAlumno(int matriculaAlumno) {
         this.matriculaAlumno = matriculaAlumno;
     }
 
@@ -125,7 +124,7 @@ public class Pago {
         this.titular = titular;
     }
 
-    public Padre getDiaMenu() {
+    public String getDiaMenu() {
         return diaMenu;
     }
 

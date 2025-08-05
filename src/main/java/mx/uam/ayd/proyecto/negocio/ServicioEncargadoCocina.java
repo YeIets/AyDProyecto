@@ -1,15 +1,11 @@
 package mx.uam.ayd.proyecto.negocio;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.time.LocalDateTime;
-
+import mx.uam.ayd.proyecto.datos.EncargadoCocinaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-import mx.uam.ayd.proyecto.datos.EncargadoCocinaRepository;
-import mx.uam.ayd.proyecto.negocio.modelo.EncargadoCocina;
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 
 @Service
 /**
