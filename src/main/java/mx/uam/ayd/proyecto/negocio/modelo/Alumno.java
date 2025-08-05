@@ -23,7 +23,7 @@ public class Alumno {
 
     private String apellido;
 
-    private int matricula;
+    private String matricula;
 
     @OneToMany(
         targetEntity = Menu.class, 

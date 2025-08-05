@@ -18,7 +18,7 @@ public class Pago {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Le dice a Spring que genere el id
     private long idPago;
 
-    private int matriculaAlumno;
+    private int matricula;
 
     private float monto;
 
@@ -60,12 +60,12 @@ public class Pago {
         this.idPago = idPago;
     }
 
-    public int getMatriculaAlumno() {
-        return matriculaAlumno;
+    public int getMatricula() {
+        return matricula;
     }
 
-    public void setMatriculaAlumno(int matriculaAlumno) {
-        this.matriculaAlumno = matriculaAlumno;
+    public void setMatricula(int matricula) {
+        this.matricula = matricula;
     }
 
     public float getMonto() {
@@ -140,7 +140,7 @@ public class Pago {
 
     @Override
     public String toString() {
-        return "Pago [idPago=" + idPago + ", matricula=" + matriculaAlumno
+        return "Pago [idPago=" + idPago + ", matricula=" + matricula
         + ", monto=" + monto + ", metodo=" + metodoDePago + ", fechaPago=" + fechaPago
         + ", fechaLimite=" + fechaLimite + ", concepto=" + conceptoDePago + ", estado" + estado +"]";
     }
