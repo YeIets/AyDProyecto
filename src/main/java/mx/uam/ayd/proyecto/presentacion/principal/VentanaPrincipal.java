@@ -83,7 +83,7 @@ public class VentanaPrincipal {
 	@FXML
 	private void handleAgregarUsuario() {
 		if (control != null) {
-			control.agregarUsuario();
+			control.pruebas();
 		}
 	}
 	
