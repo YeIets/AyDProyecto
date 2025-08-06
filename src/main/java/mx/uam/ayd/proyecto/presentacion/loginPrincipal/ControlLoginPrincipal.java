@@ -17,6 +17,7 @@ public class ControlLoginPrincipal {
 	
 	private static final Logger log = LoggerFactory.getLogger(ControlLoginPrincipal.class);
 
+	//Se declaran los controles que interactuan con el ControlLoginPrincipal
 	private final ControlPadresPrincipal controlPadresPrincipal;
 	private final ControlAdministrativoPrincipal controlAdministrativoPrincipal;
 	private final ControlEncargadoCocinaPrincipal controlEncargadoCocinaPrincipal;
@@ -44,21 +45,23 @@ public class ControlLoginPrincipal {
 		ventana.setControlLoginPrincipal(this);
 	}
 
-	/**
-	 * Inicia el caso de uso
-	 */
+	
+	//Metodo que inicia / muestra la ventana
 	public void inicia() {
 		ventana.muestra();
 	}
 
+	//Metodo que muestra la pantalla principal para padres
 	public void padresPrincipal(){
 		controlPadresPrincipal.inicia();
 	}
 
+	//Metodo que muestra la pantalla principal para administrativos
 	public void administrativoPrincipal(){
 		controlAdministrativoPrincipal.inicia();
 	}
 
+	//Metodo que muestra la pantalla principal para cocineros
 	public void encargadoCocinaPrincipal(){
 		controlEncargadoCocinaPrincipal.inicia();
 	}

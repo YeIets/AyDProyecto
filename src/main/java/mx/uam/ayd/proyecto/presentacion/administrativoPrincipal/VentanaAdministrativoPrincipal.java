@@ -80,11 +80,7 @@ public class VentanaAdministrativoPrincipal{
 		this.control = control;
 	}
 	
-	/**
-	 * Muestra la ventana y carga los usuarios
-	 * 
-	 * @param usuarios La lista de usuarios a mostrar
-	 */
+	//Muestra la ventana
 	public void muestra() {
 		if (!Platform.isFxApplicationThread()) {
 			Platform.runLater(() -> this.muestra());
@@ -96,6 +92,8 @@ public class VentanaAdministrativoPrincipal{
 	}
 
 	// FXML Handle Events
+
+	//Declara las funciones del boton Documentacion
 	@FXML
 	private void handleDocumentacion() {
 		log.info("Se presiono documentacion");
