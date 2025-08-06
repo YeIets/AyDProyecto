@@ -1,4 +1,4 @@
-package mx.uam.ayd.proyecto.presentacion.padreMenuSemanal;
+package mx.uam.ayd.proyecto.presentacion.padresPrincipal.padreMenuSemanal;
 
 import java.io.IOException;
 import java.util.Map;
@@ -11,7 +11,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import mx.uam.ayd.proyecto.presentacion.padresPrincipal.PedidosSemanales.ControlSeleccionMenu;
 
 @Component
 public class VentanaPadreMenuSemanal {
@@ -47,6 +51,9 @@ public class VentanaPadreMenuSemanal {
     @FXML private Button idAceptar;
     @FXML private Button idRegresar;
 
+    @Autowired
+    private ControlSeleccionMenu controlSeleccionMenu; // ← se inyecta el controlador de la siguiente ventana
+
     /**
      * Muestra la ventana y carga los menús
      */
@@ -72,10 +79,15 @@ public class VentanaPadreMenuSemanal {
             actualizarMenu(menuPorDia);
 
             // Eventos
-            idAceptar.setOnAction(e -> control.elegirDias());
+            idAceptar.setOnAction(e -> {
+                cerrar();
+                controlSeleccionMenu.inicia(); // ← abre la siguiente ventana
+            });
+
             idRegresar.setOnAction(e -> stage.close());
 
         } catch (IOException e) {
+            System.err.println("Error al cargar VentanaPadreMenuSemanal.fxml: " + e.getMessage());
             e.printStackTrace();
         }
     }

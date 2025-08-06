@@ -1,4 +1,4 @@
-package mx.uam.ayd.proyecto.presentacion.padreMenuSemanal;
+package mx.uam.ayd.proyecto.presentacion.padresPrincipal.padreMenuSemanal;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import mx.uam.ayd.proyecto.presentacion.seleccionMenu.ControlSeleccionMenu;
+import mx.uam.ayd.proyecto.presentacion.padresPrincipal.PedidosSemanales.ControlSeleccionMenu;
 
 @Component
 public class ControlPadreMenuSemanal {
@@ -41,11 +41,11 @@ public class ControlPadreMenuSemanal {
     }
 
     /**
-     * Método que se ejecuta cuando se presiona el botón "Elegir Días"
+     * Método que se ejecuta cuando se presiona el botón "Aceptar"
      */
     public void elegirDias() {
         ventana.cerrar();
-        controlSeleccionMenu.inicia(); // Aquí conectamos con la ventana de selección
+        controlSeleccionMenu.inicia();
     }
 
     /**
@@ -53,8 +53,6 @@ public class ControlPadreMenuSemanal {
      */
     public void regresar() {
         ventana.cerrar();
-        // Aquí puedes enlazar a la ventana anterior si la tienes
-        // Ejemplo:
-        // controlVentanaPadrePrincipal.inicia();
+        // Aquí podrías enlazar con una ventana anterior (como ControlPadresPrincipal)
     }
 }
