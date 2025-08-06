@@ -80,11 +80,8 @@ public class VentanaEncargadoCocinaPrincipal{
 		this.control = control;
 	}
 	
-	/**
-	 * Muestra la ventana y carga los usuarios
-	 * 
-	 * @param usuarios La lista de usuarios a mostrar
-	 */
+	
+	//Muestra la ventana
 	public void muestra() {
 		if (!Platform.isFxApplicationThread()) {
 			Platform.runLater(() -> this.muestra());
@@ -96,11 +93,14 @@ public class VentanaEncargadoCocinaPrincipal{
 	}
 
 	// FXML Handle Events
+
+	//Declara las funciones del boton VerPedidos
 	@FXML
 	private void handleVerPedidos() {
 		log.info("Se presiono Ver Pedidos");
 	}
 
+	//Declara las funciones del boton SubirMenu
 	@FXML
 	private void handleSubirMenu() {
 		log.info("Se presiono Subir Menu");

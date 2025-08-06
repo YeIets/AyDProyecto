@@ -84,11 +84,8 @@ public class VentanaLoginPrincipal {
 		this.control = control;
 	}
 	
-	/**
-	 * Muestra la ventana y carga los usuarios
-	 * 
-	 * @param usuarios La lista de usuarios a mostrar
-	 */
+
+	//Muestra la ventana y se agregan opciones al combobox
 	public void muestra() {
 		if (!Platform.isFxApplicationThread()) {
 			Platform.runLater(() -> this.muestra());
@@ -107,6 +104,8 @@ public class VentanaLoginPrincipal {
 	}
 
 	// FXML Handle Events
+
+	//Declara las funciones del boton IniciarSesion para cada valor del combobox
 	@FXML
 	private void handleIniciarSesion() {		
 		

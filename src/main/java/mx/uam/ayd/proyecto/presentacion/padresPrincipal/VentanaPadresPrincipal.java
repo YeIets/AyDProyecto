@@ -80,11 +80,8 @@ public class VentanaPadresPrincipal {
 		this.control = control;
 	}
 	
-	/**
-	 * Muestra la ventana y carga los usuarios
-	 * 
-	 * @param usuarios La lista de usuarios a mostrar
-	 */
+
+	//Muestra la ventana
 	public void muestra() {
 		if (!Platform.isFxApplicationThread()) {
 			Platform.runLater(() -> this.muestra());
@@ -96,16 +93,19 @@ public class VentanaPadresPrincipal {
 	}
 
 	// FXML Handle Events
+
+	//Declara las funciones del boton SubirDocumentos
 	@FXML
 	private void handleSubirDocumentos() {
 		log.info("Se presiono subir documento");
 	}
 
+	//Declara las funciones del boton HacerPagos
 	@FXML
 	private void handleHacerPagos() {
 		log.info("Se presiono hacer pagos");
 	}
-
+	//Declara las funciones del boton MenuSemanal
 	@FXML
 	private void handleMenuSemanal() {
 		log.info("Se presiono menu semanal");
