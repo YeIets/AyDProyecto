@@ -1,4 +1,4 @@
-package mx.uam.ayd.proyecto.presentacion.listarUsuarios;
+package mx.uam.ayd.proyecto.presentacion.loginPrincipal;
 
 import java.util.List;
 
@@ -11,44 +11,37 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-import mx.uam.ayd.proyecto.negocio.modelo.Usuario;
-
 /**
  * Ventana para listar usuarios usando JavaFX con FXML
  */
 @Component
-public class VentanaListarUsuarios {
+public class VentanaLoginPrincipal {
+
+	private static final Logger log = LoggerFactory.getLogger(VentanaLoginPrincipal.class);
 
 	private Stage stage;
 	
-	@FXML
-	private TableView<Usuario> tableUsuarios;
-	
-	@FXML
-	private TableColumn<Usuario, Long> idColumn;
-	
-	@FXML
-	private TableColumn<Usuario, String> nombreColumn;
-	
-	@FXML
-	private TableColumn<Usuario, String> apellidoColumn;
-	
-	@FXML
-	private TableColumn<Usuario, Integer> edadColumn;
-	
-	private ControlListarUsuarios control;
+	private ControlLoginPrincipal control;
 	private boolean initialized = false;
+
+	@FXML
+	private ComboBox<String> miComboBox;
+
 
 	/**
 	 * Constructor without UI initialization
 	 */
-	public VentanaListarUsuarios() {
+	public VentanaLoginPrincipal() {
 		// Don't initialize JavaFX components in constructor
 	}
 	
@@ -68,19 +61,13 @@ public class VentanaListarUsuarios {
 		
 		try {
 			stage = new Stage();
-			stage.setTitle("Lista de Usuarios");
+			stage.setTitle("Ventana Login Principal");
 			
 			// Load FXML
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ventana-listar-usuarios.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginPrincipal.fxml"));
 			loader.setController(this);
 			Scene scene = new Scene(loader.load(), 450, 400);
 			stage.setScene(scene);
-			
-			// Configure columns after FXML is loaded
-			idColumn.setCellValueFactory(new PropertyValueFactory<>("idUsuario"));
-			nombreColumn.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-			apellidoColumn.setCellValueFactory(new PropertyValueFactory<>("apellido"));
-			edadColumn.setCellValueFactory(new PropertyValueFactory<>("edad"));
 			
 			initialized = true;
 		} catch (IOException e) {
@@ -93,7 +80,7 @@ public class VentanaListarUsuarios {
 	 * 
 	 * @param control El controlador asociado
 	 */
-	public void setControlListarUsuarios(ControlListarUsuarios control) {
+	public void setControlLoginPrincipal(ControlLoginPrincipal control) {
 		this.control = control;
 	}
 	
@@ -102,24 +89,53 @@ public class VentanaListarUsuarios {
 	 * 
 	 * @param usuarios La lista de usuarios a mostrar
 	 */
-	public void muestra(List<Usuario> usuarios) {
+	public void muestra() {
 		if (!Platform.isFxApplicationThread()) {
-			Platform.runLater(() -> this.muestra(usuarios));
+			Platform.runLater(() -> this.muestra());
 			return;
 		}
 		
 		initializeUI();
-		
-		ObservableList<Usuario> data = FXCollections.observableArrayList(usuarios);
-		tableUsuarios.setItems(data);
-		
+
+		if (miComboBox != null) {
+			miComboBox.getItems().clear();
+			miComboBox.getItems().addAll("Padres", "Administradores", "Cocineros");
+		}
+
+
 		stage.show();
 	}
-	
-	// FXML Event Handlers
-	
+
+	// FXML Handle Events
 	@FXML
-	private void handleCerrar() {
-		stage.close();
+	private void handleIniciarSesion() {		
+		
+		String opcion = miComboBox.getValue();
+
+		if (opcion != null) {
+			
+			switch(opcion.toLowerCase()){
+
+			case  "padres":
+				log.info("El combobox dice: " + opcion);
+				control.padresPrincipal();
+				break;
+
+			case  "administradores":
+				log.info("El combobox dice: " + opcion);
+				control.administrativoPrincipal();
+				break;
+
+			case  "cocineros":
+				log.info("El combobox dice: " + opcion);
+				control.encargadoCocinaPrincipal();
+				break;
+
+			default:
+				break;
+
+			}
+		}else log.info("El combobox no ha sido seleccionado");
 	}
+
 }
