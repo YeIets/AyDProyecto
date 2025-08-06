@@ -1,4 +1,4 @@
-package mx.uam.ayd.proyecto.presentacion.login;
+package mx.uam.ayd.proyecto.presentacion.administrativoPrincipal;
 
 import java.util.List;
 
@@ -25,23 +25,19 @@ import java.io.IOException;
  * Ventana para listar usuarios usando JavaFX con FXML
  */
 @Component
-public class VentanaLogin {
+public class VentanaAdministrativoPrincipal{
 
-	private static final Logger log = LoggerFactory.getLogger(VentanaLogin.class);
+	private static final Logger log = LoggerFactory.getLogger(VentanaAdministrativoPrincipal.class);
 
 	private Stage stage;
 	
-	private ControlLogin control;
+	private ControlAdministrativoPrincipal control;
 	private boolean initialized = false;
-
-	@FXML
-	private ComboBox<String> miComboBox;
-
 
 	/**
 	 * Constructor without UI initialization
 	 */
-	public VentanaLogin() {
+	public VentanaAdministrativoPrincipal() {
 		// Don't initialize JavaFX components in constructor
 	}
 	
@@ -61,10 +57,10 @@ public class VentanaLogin {
 		
 		try {
 			stage = new Stage();
-			stage.setTitle("Ventana Login");
+			stage.setTitle("Ventana Administrativo Principal");
 			
 			// Load FXML
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ControlLogin.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AdministrativoPrincipal.fxml"));
 			loader.setController(this);
 			Scene scene = new Scene(loader.load(), 450, 400);
 			stage.setScene(scene);
@@ -80,7 +76,7 @@ public class VentanaLogin {
 	 * 
 	 * @param control El controlador asociado
 	 */
-	public void setControlLogin(ControlLogin control) {
+	public void setControlAdministrativoPrincipal(ControlAdministrativoPrincipal control) {
 		this.control = control;
 	}
 	
@@ -96,28 +92,12 @@ public class VentanaLogin {
 		}
 		
 		initializeUI();
-
-		if (miComboBox != null) {
-		miComboBox.getItems().clear();
-		miComboBox.getItems().addAll("Admin", "Invitado", "Usuario");
-		}
-
-
 		stage.show();
 	}
 
 	// FXML Handle Events
 	@FXML
-	private void handleIniciarSesion() {
-		String campo = miComboBox.getValue();
-
-		if (campo != null) {
-			log.info("El combobox tiene valor: " + campo);
-		}else{
-			log.info("No se selecciono ningun valor" );
-		}
-
-
+	private void handleDocumentacion() {
+		log.info("Se presiono documentacion");
 	}
-
 }

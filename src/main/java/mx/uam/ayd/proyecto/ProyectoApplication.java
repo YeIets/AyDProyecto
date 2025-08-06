@@ -11,8 +11,7 @@ import javafx.stage.Stage;
 
 import mx.uam.ayd.proyecto.datos.GrupoRepository;
 import mx.uam.ayd.proyecto.negocio.modelo.Grupo;
-import mx.uam.ayd.proyecto.presentacion.principal.ControlPrincipal;
-import mx.uam.ayd.proyecto.presentacion.login.ControlLogin;
+import mx.uam.ayd.proyecto.presentacion.loginPrincipal.ControlLoginPrincipal;
 
 /**
  * 
@@ -26,13 +25,11 @@ import mx.uam.ayd.proyecto.presentacion.login.ControlLogin;
 @SpringBootApplication
 public class ProyectoApplication {
 
-	private final ControlLogin controlLogin;
-	private final GrupoRepository grupoRepository;
+	private final ControlLoginPrincipal controlLoginPrincipal;
 	
 	@Autowired
-	public ProyectoApplication(ControlLogin controlLogin, GrupoRepository grupoRepository) {
-		this.controlLogin = controlLogin;
-		this.grupoRepository = grupoRepository;
+	public ProyectoApplication(ControlLoginPrincipal controlLoginPrincipal) {
+		this.controlLoginPrincipal = controlLoginPrincipal;
 	}
 
 	/**
@@ -84,7 +81,7 @@ public class ProyectoApplication {
 		
 		// Make sure controllers are created on JavaFX thread
 		Platform.runLater(() -> {
-			controlLogin.inicia();
+			controlLoginPrincipal.inicia();
 		});
 	}
 	
@@ -93,12 +90,6 @@ public class ProyectoApplication {
 	 */
 	public void inicializaBD() {
 		// Vamos a crear los dos grupos de usuarios
-		Grupo grupoAdministrativo = new Grupo();
-		grupoAdministrativo.setNombre("Administradores");
-		grupoRepository.save(grupoAdministrativo);
 		
-		Grupo grupoPadres = new Grupo();
-		grupoPadres.setNombre("Padres");
-		grupoRepository.save(grupoPadres);
 	}
 }

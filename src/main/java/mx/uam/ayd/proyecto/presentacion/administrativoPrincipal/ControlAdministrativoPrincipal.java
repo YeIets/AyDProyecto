@@ -1,4 +1,4 @@
-package mx.uam.ayd.proyecto.presentacion.login;
+package mx.uam.ayd.proyecto.presentacion.administrativoPrincipal;
 
 import java.util.List;
 
@@ -9,14 +9,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Component
-public class ControlLogin {
+public class ControlAdministrativoPrincipal {
 	
-	private static final Logger log = LoggerFactory.getLogger(ControlLogin.class);
+	private static final Logger log = LoggerFactory.getLogger(ControlAdministrativoPrincipal.class);
 	
-	private final VentanaLogin ventana;
+	private final VentanaAdministrativoPrincipal ventana;
 
 	@Autowired
-	public ControlLogin(VentanaLogin ventana) {
+	public ControlAdministrativoPrincipal(VentanaAdministrativoPrincipal ventana) {
 		this.ventana = ventana;
 	}
 	
@@ -26,7 +26,7 @@ public class ControlLogin {
 	 */
 	@PostConstruct
 	public void init() {
-		ventana.setControlLogin(this);
+		ventana.setControlAdministrativoPrincipal(this);
 	}
 
 	/**
