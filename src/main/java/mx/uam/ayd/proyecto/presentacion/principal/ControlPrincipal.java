@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import mx.uam.ayd.proyecto.presentacion.agregarUsuario.ControlAgregarUsuario;
 import mx.uam.ayd.proyecto.presentacion.listarUsuarios.ControlListarUsuarios;
 import mx.uam.ayd.proyecto.presentacion.listarGrupos.ControlListarGrupos;
-import mx.uam.ayd.proyecto.presentacion.prueba.ControlPrueba;
+import mx.uam.ayd.proyecto.presentacion.login.ControlLogin;
 
 /**
  * Esta clase lleva el flujo de control de la ventana principal
@@ -22,7 +22,7 @@ public class ControlPrincipal {
 	private final ControlAgregarUsuario controlAgregarUsuario;
 	private final ControlListarUsuarios controlListarUsuarios;
 	private final ControlListarGrupos controlListarGrupos;
-	private final ControlPrueba controlPrueba;
+	private final ControlLogin controlLogin;
 	private final VentanaPrincipal ventana;
 	
 	@Autowired
@@ -30,12 +30,12 @@ public class ControlPrincipal {
 			ControlAgregarUsuario controlAgregarUsuario,
 			ControlListarUsuarios controlListarUsuarios,
 			ControlListarGrupos controlListarGrupos,
-			ControlPrueba controlPrueba,
+			ControlLogin controlLogin,
 			VentanaPrincipal ventana) {
 		this.controlAgregarUsuario = controlAgregarUsuario;
 		this.controlListarUsuarios = controlListarUsuarios;
 		this.controlListarGrupos = controlListarGrupos;
-		this.controlPrueba = controlPrueba;
+		this.controlLogin = controlLogin;
 		this.ventana = ventana;
 	}
 	
@@ -64,8 +64,8 @@ public class ControlPrincipal {
 		controlAgregarUsuario.inicia();
 	}
 	
-	public void pruebas() {
-		controlPrueba.inicia();
+	public void login() {
+		controlLogin.inicia();
 	}
 
 	/**

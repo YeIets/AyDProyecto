@@ -49,7 +49,7 @@ public class VentanaPrincipal {
 			// Load FXML
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ventana-principal.fxml"));
 			loader.setController(this);
-			Scene scene = new Scene(loader.load(), 450, 300);
+			Scene scene = new Scene(loader.load(), 450, 350);
 			stage.setScene(scene);
 			
 			initialized = true;
@@ -83,7 +83,7 @@ public class VentanaPrincipal {
 	@FXML
 	private void handleAgregarUsuario() {
 		if (control != null) {
-			control.pruebas();
+			control.login();
 		}
 	}
 	

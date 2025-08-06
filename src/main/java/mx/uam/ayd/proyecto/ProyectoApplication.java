@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import mx.uam.ayd.proyecto.datos.GrupoRepository;
 import mx.uam.ayd.proyecto.negocio.modelo.Grupo;
 import mx.uam.ayd.proyecto.presentacion.principal.ControlPrincipal;
+import mx.uam.ayd.proyecto.presentacion.login.ControlLogin;
 
 /**
  * 
@@ -25,12 +26,12 @@ import mx.uam.ayd.proyecto.presentacion.principal.ControlPrincipal;
 @SpringBootApplication
 public class ProyectoApplication {
 
-	private final ControlPrincipal controlPrincipal;
+	private final ControlLogin controlLogin;
 	private final GrupoRepository grupoRepository;
 	
 	@Autowired
-	public ProyectoApplication(ControlPrincipal controlPrincipal, GrupoRepository grupoRepository) {
-		this.controlPrincipal = controlPrincipal;
+	public ProyectoApplication(ControlLogin controlLogin, GrupoRepository grupoRepository) {
+		this.controlLogin = controlLogin;
 		this.grupoRepository = grupoRepository;
 	}
 
@@ -83,7 +84,7 @@ public class ProyectoApplication {
 		
 		// Make sure controllers are created on JavaFX thread
 		Platform.runLater(() -> {
-			controlPrincipal.inicia();
+			controlLogin.inicia();
 		});
 	}
 	
