@@ -1,4 +1,4 @@
-package mx.uam.ayd.proyecto.presentacion.padresPrincipal;
+package mx.uam.ayd.proyecto.presentacion.padresPrincipal.Principal;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,9 +6,12 @@ import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-// <-- 1. IMPORTAMOS LOS NUEVOS CONTROLES
+// --- IMPORTAMOS LOS CONTROLES ---
 import mx.uam.ayd.proyecto.presentacion.padresPrincipal.PadreMenuSemanal.ControlPadreMenuSemanal;
 import mx.uam.ayd.proyecto.presentacion.padresPrincipal.ActualizarDocumentos.ControlActualizarDocumentos;
+// 1. IMPORTAR el nuevo controlador de pagos
+import mx.uam.ayd.proyecto.presentacion.padresPrincipal.pagosPadres.ControlPagosPadres;
+
 
 @Component
 public class ControlPadresPrincipal {
@@ -20,9 +23,12 @@ public class ControlPadresPrincipal {
     @Autowired
     private ControlPadreMenuSemanal controlPadreMenuSemanal;
 
-    // <-- 2. INYECTAMOS EL NUEVO CONTROLADOR
     @Autowired
     private ControlActualizarDocumentos controlActualizarDocumentos;
+
+    // 2. INYECTAR el nuevo controlador de pagos
+    @Autowired
+    private ControlPagosPadres controlPagosPadres;
 
     @Autowired
     public ControlPadresPrincipal(VentanaPadresPrincipal ventana) {
@@ -38,16 +44,19 @@ public class ControlPadresPrincipal {
         ventana.muestra();
     }
 
-    // <-- 3. CREAMOS EL MÉTODO DE NAVEGACIÓN
-    /**
-     * Inicia el flujo de la HU-05 para subir documentos
-     */
     public void irAActualizarDocumentos() {
         controlActualizarDocumentos.inicia();
     }
 
-    // Método que será llamado al presionar el botón "Menú Semanal"
     public void irAMenuSemanal() {
         controlPadreMenuSemanal.inicia();
+    }
+
+    // 3. CREAR MÉTODO de navegación para los pagos
+    /**
+     * Inicia el flujo para realizar pagos (seleccionar conceptos)
+     */
+    public void irAHacerPagos() {
+        controlPagosPadres.inicia();
     }
 }

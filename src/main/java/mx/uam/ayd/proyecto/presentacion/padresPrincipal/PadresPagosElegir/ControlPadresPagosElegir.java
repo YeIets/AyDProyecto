@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import mx.uam.ayd.proyecto.presentacion.padresPrincipal.PagoMenuCaja.ControlPagoCajaMenu;
-import mx.uam.ayd.proyecto.presentacion.padresPrincipal.PagoMenuLinea.ControlPagoLineaMenu;
+// --- Estos son los imports correctos que me diste ---
+import mx.uam.ayd.proyecto.presentacion.Pagos.PagoCaja.ControlPagoCaja;
+import mx.uam.ayd.proyecto.presentacion.Pagos.pagoLineaDatos.ControlPagoLineaDatos;
+import mx.uam.ayd.proyecto.presentacion.Pagos.pagoEnLinea.ControlPagoLinea;
 import mx.uam.ayd.proyecto.presentacion.padresPrincipal.PedidosSemanales.ControlSeleccionMenu;
 
 @Component
@@ -14,13 +16,18 @@ public class ControlPadresPagosElegir {
     @Autowired
     private VentanaPadresPagosElegir ventana;
 
+    // Corregido: El tipo y nombre coinciden con tu import
     @Autowired
-    @Lazy // Para romper el primer ciclo
-    private ControlPagoLineaMenu controlPagoLineaMenu;
+    @Lazy
+    private ControlPagoLinea controlPagoLinea; // Este es el del "ticket" final
 
     @Autowired
-    @Lazy // <-- APLICA LA SOLUCIÓN AQUÍ TAMBIÉN
-    private ControlPagoCajaMenu controlPagoCajaMenu;
+    @Lazy
+    private ControlPagoCaja controlPagoCaja;
+
+    // Corregido: El tipo y nombre coinciden con tu import
+    @Autowired
+    private ControlPagoLineaDatos controlPagoLineaDatos; // Este es el del formulario de tarjeta
 
     private ControlSeleccionMenu controlSeleccionMenu;
     private int total;
@@ -31,25 +38,29 @@ public class ControlPadresPagosElegir {
         ventana.muestra(this, total);
     }
 
+    /**
+     * MÉTODO CLAVE:
+     * Ahora llama a los controladores con los nombres correctos.
+     */
     public void irAPagoLinea() {
         ventana.cerrar();
-        controlPagoLineaMenu.inicia(total);
+
+        // Corregido: Se usan las variables correctas
+        controlPagoLineaDatos.inicia(total, () -> controlPagoLinea.inicia(total));
     }
 
     public void irAPagoCaja() {
         ventana.cerrar();
-        controlPagoCajaMenu.inicia(total);
+        controlPagoCaja.inicia(total);
     }
 
     public void regresar() {
-        ventana.muestra(this, total);
+        ventana.cerrar();
     }
 
     public ControlSeleccionMenu getControlSeleccionMenu() {
         return controlSeleccionMenu;
     }
 
-    public void cerrar() {
-        ventana.cerrar();
-    }
+
 }

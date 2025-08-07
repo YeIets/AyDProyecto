@@ -1,4 +1,4 @@
-package mx.uam.ayd.proyecto.presentacion.padresPrincipal.PagoMenuCaja;
+package mx.uam.ayd.proyecto.presentacion.Pagos.PagoCaja;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -18,10 +18,10 @@ import java.util.Date;
 import java.util.Random;
 
 @Component
-public class VentanaPagoCajaMenu {
+public class VentanaPagoCaja {
 
     private Stage stage;
-    private ControlPagoCajaMenu control;
+    private ControlPagoCaja control;
 
     @FXML
     private Label idTotal;
@@ -43,7 +43,7 @@ public class VentanaPagoCajaMenu {
      * @param control el controlador asociado a esta ventana
      * @param total el total a pagar
      */
-    public void muestra(ControlPagoCajaMenu control, int total) {
+    public void muestra(ControlPagoCaja control, int total) {
         this.control = control;
 
         // Asegura que la operación se ejecute en el hilo de la UI de JavaFX

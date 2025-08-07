@@ -1,13 +1,13 @@
-package mx.uam.ayd.proyecto.presentacion.padresPrincipal.PagoMenuCaja;
+package mx.uam.ayd.proyecto.presentacion.Pagos.PagoCaja;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ControlPagoCajaMenu {
+public class ControlPagoCaja {
 
     @Autowired
-    private VentanaPagoCajaMenu ventana;
+    private VentanaPagoCaja ventana;
 
     /**
      * Inicia la visualización de la ventana de pago en caja.

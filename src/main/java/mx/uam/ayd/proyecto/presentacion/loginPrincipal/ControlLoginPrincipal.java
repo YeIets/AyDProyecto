@@ -1,14 +1,12 @@
 package mx.uam.ayd.proyecto.presentacion.loginPrincipal;
 
-import java.util.List;
-
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import mx.uam.ayd.proyecto.presentacion.padresPrincipal.ControlPadresPrincipal;
+import mx.uam.ayd.proyecto.presentacion.padresPrincipal.Principal.ControlPadresPrincipal;
 import mx.uam.ayd.proyecto.presentacion.administrativoPrincipal.ControlAdministrativoPrincipal;
 import mx.uam.ayd.proyecto.presentacion.encargadoCocinaPrincipal.ControlEncargadoCocinaPrincipal;
 

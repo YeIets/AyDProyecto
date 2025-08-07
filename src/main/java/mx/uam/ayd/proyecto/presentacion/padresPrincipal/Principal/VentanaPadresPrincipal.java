@@ -1,10 +1,9 @@
-package mx.uam.ayd.proyecto.presentacion.padresPrincipal;
+package mx.uam.ayd.proyecto.presentacion.padresPrincipal.Principal;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import org.slf4j.Logger;
@@ -77,19 +76,19 @@ public class VentanaPadresPrincipal {
     @FXML
     private void handleSubirDocumentos() {
         log.info("Se presionó subir documento");
-        // <-- CAMBIO AQUÍ: Llamamos al controlador para que inicie el nuevo flujo
         control.irAActualizarDocumentos();
     }
 
     @FXML
     private void handleHacerPagos() {
         log.info("Se presionó hacer pagos");
-        // Aquí puedes enlazar a otra ventana si se requiere
+        // <-- CAMBIO AQUÍ: Llamamos al nuevo método del controlador
+        control.irAHacerPagos();
     }
 
     @FXML
     private void handleMenuSemanal() {
         log.info("Se presionó menú semanal");
-        control.irAMenuSemanal();  // Aquí se llama al controlador para abrir la ventana del menú semanal
+        control.irAMenuSemanal();
     }
 }
