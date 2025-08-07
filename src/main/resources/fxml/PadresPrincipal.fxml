@@ -22,5 +22,6 @@
             </ImageView>
          </children>
       </VBox>
+      <Button fx:id="idCancelar" layoutX="59.0" layoutY="341.0" mnemonicParsing="false" text="Cerrar" onAction="#handleCerrar"/>
    </children>
 </AnchorPane>

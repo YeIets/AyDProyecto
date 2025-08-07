@@ -68,6 +68,13 @@ public class VentanaPadresPrincipal {
 
     // FXML Handle Events
     @FXML
+    private void handleCerrar() {
+        if (stage != null) {
+            stage.close();
+        }
+    }
+
+    @FXML
     private void handleSubirDocumentos() {
         log.info("Se presionó subir documento");
         // <-- CAMBIO AQUÍ: Llamamos al controlador para que inicie el nuevo flujo

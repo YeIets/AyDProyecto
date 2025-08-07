@@ -7,6 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
@@ -56,11 +58,22 @@ public class VentanaActualizarDocumentos {
      * Muestra un mensaje de error en la etiqueta de estado.
      * @param mensaje El error que ocurrió.
      */
-    public void muestraDialogoError(String mensaje) {
-        if(lblEstado != null) {
-            lblEstado.setText("Error: " + mensaje);
-        }
+    public void muestraMensajeError(String mensaje) {
+        Alert alerta = new Alert(AlertType.ERROR);
+        alerta.setTitle("Error al subir archivo");
+        alerta.setHeaderText("El archivo " + " no se pudo subir"); // puedes poner un encabezado si quieres
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
     }
+
+    public void muestraMensajeExito(String mensaje) {
+        Alert alerta = new Alert(AlertType.INFORMATION);
+        alerta.setTitle("Archivo subido Exitosamente");
+        alerta.setHeaderText("Archivo subido Exitosamente"); // opcional, puedes agregar un encabezado si lo deseas
+        alerta.setContentText("Se subio el archivo " + mensaje);
+        alerta.showAndWait();
+    }
+
 
     public Stage getStage() {
         return stage;

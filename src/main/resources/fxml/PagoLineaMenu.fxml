@@ -25,7 +25,7 @@
       <Label fx:id="idFecha" layoutX="432.0" layoutY="299.0" text="00/00/00" />
       <Label layoutX="248.0" layoutY="225.0" text="Linea de captura:" />
       <Label layoutX="279.0" layoutY="155.0" text="Total:" />
-      <Button fx:id="idCancelar" layoutX="59.0" layoutY="341.0" mnemonicParsing="false" text="Cancelar" />
+      <Button fx:id="idCancelar" layoutX="59.0" layoutY="341.0" mnemonicParsing="false" text="Volver" />
       <Label layoutX="372.0" layoutY="333.0" text="Pagado" />
    </children>
 </AnchorPane>

@@ -46,9 +46,9 @@ public class ControlActualizarDocumentos {
             // Si el usuario seleccionó un archivo, intentamos subirlo
             try {
                 servicioDocumento.subirDocumento(archivoSeleccionado, tipoDeDocumento);
-                ventana.muestraDialogoExito(archivoSeleccionado.getName());
+                ventana.muestraMensajeExito(archivoSeleccionado.getName());
             } catch (IOException e) {
-                ventana.muestraDialogoError("No se pudo guardar el archivo.");
+                ventana.muestraMensajeError(archivoSeleccionado.getName());
                 e.printStackTrace();
             }
         }
