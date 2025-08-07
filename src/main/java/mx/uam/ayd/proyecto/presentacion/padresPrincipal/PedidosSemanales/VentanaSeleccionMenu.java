@@ -17,6 +17,7 @@ import java.io.IOException;
 public class VentanaSeleccionMenu {
 
     private Stage stage;
+    private ControlSeleccionMenu control;
 
     @FXML private CheckBox idLunesCheck;
     @FXML private CheckBox idMartesCheck;
@@ -32,11 +33,13 @@ public class VentanaSeleccionMenu {
     private static final int PRECIO_POR_DIA = 35;
 
     /**
-     * Muestra la ventana.
+     * Muestra la ventana con su controlador asociado.
      */
-    public void muestra() {
+    public void muestra(ControlSeleccionMenu control) {
+        this.control = control;
+
         if (!Platform.isFxApplicationThread()) {
-            Platform.runLater(this::muestra);
+            Platform.runLater(() -> muestra(control));
             return;
         }
 
@@ -81,12 +84,12 @@ public class VentanaSeleccionMenu {
         idPago.setOnAction(event -> {
             int total = calcularTotal();
             System.out.println("Total a pagar: $" + total);
-            // Aquí podrías abrir ventana de pago o notificación
+            control.irAVentanaPagos(total);
         });
 
         idVolver.setOnAction(event -> {
-            stage.close();
-            // Aquí puedes invocar al controlador para regresar, si lo deseas
+            cerrar();
+            // Puedes agregar lógica para volver a la pantalla anterior
         });
     }
 

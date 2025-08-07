@@ -3,26 +3,36 @@ package mx.uam.ayd.proyecto.presentacion.padresPrincipal.PedidosSemanales;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import mx.uam.ayd.proyecto.presentacion.padresPrincipal.PadresPagosElegir.ControlPadresPagosElegir;
+
 @Component
 public class ControlSeleccionMenu {
 
     @Autowired
-    private VentanaSeleccionMenu ventanaSeleccionMenu;
+    private VentanaSeleccionMenu ventana;
+
+    @Autowired
+    private ControlPadresPagosElegir controlPadresPagosElegir;
 
     /**
-     * Inicia la ventana de selección del menú.
+     * Inicia la ventana de selección de menú
      */
     public void inicia() {
-        ventanaSeleccionMenu.muestra();
+        ventana.muestra(this);
     }
 
     /**
-     * Método que se llama cuando el usuario presiona "Volver al menú".
-     * Aquí puedes implementar la lógica para regresar a la ventana anterior.
+     * Llama a la ventana de pagos, pasando el total y referencia a este controlador
      */
-    public void volverAlMenuAnterior() {
-        System.out.println("Regresando al menú anterior...");
-        // Aquí puedes agregar lógica para volver al menú semanal, por ejemplo:
-        // controlPadreMenuSemanal.inicia(); si lo inyectas
+    public void irAVentanaPagos(int total) {
+        ventana.cerrar();
+        controlPadresPagosElegir.inicia(total, this);
+    }
+
+    /**
+     * Método para volver a mostrar esta ventana (por ejemplo, desde la de pago)
+     */
+    public void regresar() {
+        inicia();
     }
 }

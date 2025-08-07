@@ -70,7 +70,8 @@ public class VentanaPadresPrincipal {
     @FXML
     private void handleSubirDocumentos() {
         log.info("Se presionó subir documento");
-        // Aquí puedes enlazar a otra ventana si se requiere
+        // <-- CAMBIO AQUÍ: Llamamos al controlador para que inicie el nuevo flujo
+        control.irAActualizarDocumentos();
     }
 
     @FXML
