@@ -8,6 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
@@ -26,9 +28,6 @@ public class VentanaSeleccionMenu {
     @FXML private CheckBox idViernesCheck;
 
     @FXML private Label idTotal;
-
-    @FXML private Button idPago;
-    @FXML private Button idVolver;
 
     private static final int PRECIO_POR_DIA = 35;
 
@@ -63,6 +62,8 @@ public class VentanaSeleccionMenu {
             stage.setTitle("Seleccionar días del menú");
             stage.setScene(new Scene(root));
 
+            actualizarTotal();
+
             configurarEventos();
 
         } catch (IOException e) {
@@ -80,17 +81,6 @@ public class VentanaSeleccionMenu {
         idMiercolesCheck.setOnAction(event -> actualizarTotal());
         idJuvesCheck.setOnAction(event -> actualizarTotal());
         idViernesCheck.setOnAction(event -> actualizarTotal());
-
-        idPago.setOnAction(event -> {
-            int total = calcularTotal();
-            System.out.println("Total a pagar: $" + total);
-            control.irAVentanaPagos(total);
-        });
-
-        idVolver.setOnAction(event -> {
-            cerrar();
-            // Puedes agregar lógica para volver a la pantalla anterior
-        });
     }
 
     /**
@@ -122,4 +112,26 @@ public class VentanaSeleccionMenu {
             stage.close();
         }
     }
+
+    public void mostrarMensajeError(String mensaje) {
+        Alert alerta = new Alert(AlertType.ERROR);
+        alerta.setTitle("Error");
+        alerta.setHeaderText("Error al pagar"); // puedes poner un encabezado si quieres
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
+    }
+
+    @FXML
+    public void handlePagar(){
+        if (calcularTotal() == 0) {
+            mostrarMensajeError("Seleccione al menos un dia del menu");
+        }
+        else control.irAVentanaPagos(calcularTotal());
+    }
+
+    @FXML
+    public void handleVolver(){
+        cerrar();
+    }
+
 }

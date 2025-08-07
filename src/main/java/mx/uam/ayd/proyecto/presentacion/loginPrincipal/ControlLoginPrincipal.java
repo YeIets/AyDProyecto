@@ -53,16 +53,19 @@ public class ControlLoginPrincipal {
 
 	//Metodo que muestra la pantalla principal para padres
 	public void padresPrincipal(){
+		ventana.cerrar();
 		controlPadresPrincipal.inicia();
 	}
 
 	//Metodo que muestra la pantalla principal para administrativos
 	public void administrativoPrincipal(){
+		ventana.cerrar();
 		controlAdministrativoPrincipal.inicia();
 	}
 
 	//Metodo que muestra la pantalla principal para cocineros
 	public void encargadoCocinaPrincipal(){
+		ventana.cerrar();
 		controlEncargadoCocinaPrincipal.inicia();
 	}
 

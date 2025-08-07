@@ -35,8 +35,8 @@
          </children>
       </VBox>
       <Label layoutX="283.0" layoutY="282.0" text="Total:" />
-      <Label fx:id="idTotal" layoutX="421.0" layoutY="282.0" text="Label" />
-      <Button fx:id="idPago" layoutX="342.0" layoutY="320.0" mnemonicParsing="false" text="Pagar" />
-      <Button fx:id="idVolver" layoutX="38.0" layoutY="346.0" mnemonicParsing="false" text="Volver al menú" />
+      <Label fx:id="idTotal" layoutX="421.0" layoutY="282.0" text="" />
+      <Button fx:id="idPago" layoutX="342.0" layoutY="320.0" mnemonicParsing="false" text="Pagar" onAction="#handlePagar"/>
+      <Button fx:id="idVolver" layoutX="38.0" layoutY="346.0" mnemonicParsing="false" text="Volver al menú" onAction="#handleVolver"/>
    </children>
 </AnchorPane>

@@ -12,6 +12,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 import org.slf4j.Logger;
@@ -103,6 +105,12 @@ public class VentanaLoginPrincipal {
 		stage.show();
 	}
 
+	public void cerrar() {
+		if (stage != null) {
+			stage.close();
+		}
+	}
+
 	// FXML Handle Events
 
 	//Declara las funciones del boton IniciarSesion para cada valor del combobox
@@ -134,7 +142,19 @@ public class VentanaLoginPrincipal {
 				break;
 
 			}
-		}else log.info("El combobox no ha sido seleccionado");
+		}else {
+			log.info("No hay opcion seleccionada en ComboBox");
+			mostrarMensajeError("Tienes que seleccionar un Rol");
+		}
 	}
+
+	public void mostrarMensajeError(String mensaje) {
+		Alert alerta = new Alert(AlertType.ERROR);
+		alerta.setTitle("Error");
+    	alerta.setHeaderText("Error al iniciar sesion"); // puedes poner un encabezado si quieres
+    	alerta.setContentText(mensaje);
+    	alerta.showAndWait();
+    }
+
 
 }
