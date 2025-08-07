@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+import java.time.LocalDate;
 
 @Service
 public class ServicioDocumento {
@@ -47,15 +48,16 @@ public class ServicioDocumento {
         }
     }
 
-    public Documento subirDocumento(File archivo) throws IOException {
+    public Documento subirDocumento(File archivo, String tipoDeDocumento) throws IOException {
         Path destino = Paths.get(UPLOAD_DIR).resolve(archivo.getName());
         Files.copy(archivo.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
         log.info("Archivo copiado a: " + destino.toAbsolutePath());
 
         Documento nuevoDocumento = new Documento();
         nuevoDocumento.setNombre(archivo.getName());
-        nuevoDocumento.setTipo("PDF");
+        nuevoDocumento.setTipo(tipoDeDocumento);
         nuevoDocumento.setDireccionArchivo(destino.toString());
+        nuevoDocumento.setFechaDeSubida(LocalDate.now());
 
         return documentoRepository.save(nuevoDocumento);
     }

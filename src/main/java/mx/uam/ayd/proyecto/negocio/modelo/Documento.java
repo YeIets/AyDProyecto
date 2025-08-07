@@ -18,7 +18,5 @@ public class Documento {
     private String nombre;
     private String tipo;
     private String direccionArchivo;
-
-    // Campo con el nombre correcto para que coincida con el Repository
     private LocalDate fechaDeSubida;
 }

@@ -24,7 +24,7 @@
          <children>
             <Label prefHeight="17.0" prefWidth="125.0" style="-fx-background-color: #9c9c9c;" text="Acta de Nacimiento" />
             <Label prefHeight="17.0" prefWidth="0.0" />
-            <Label style="-fx-background-color: #9c9c9c;" text="curp" />
+            <Label style="-fx-background-color: #9c9c9c;" text="CURP" />
             <Label prefHeight="17.0" prefWidth="0.0" />
             <Label style="-fx-background-color: #9c9c9c;" text="Comprobante de domicilio" />
             <Label prefHeight="17.0" prefWidth="0.0" />
@@ -32,10 +32,10 @@
          </children>
       </VBox>
       <Label layoutX="156.0" layoutY="224.0" />
-      <Button fx:id="idActa" layoutX="431.0" layoutY="133.0" mnemonicParsing="false" text="Subir Archivo" />
-      <Button fx:id="idCurp" layoutX="431.0" layoutY="165.0" mnemonicParsing="false" text="Subir Archivo" />
-      <Button fx:id="idDomicilio" layoutX="431.0" layoutY="201.0" mnemonicParsing="false" text="Subir Archivo" />
-      <Button fx:id="idMedico" layoutX="431.0" layoutY="241.0" mnemonicParsing="false" text="Subir Archivo" />
-      <Button fx:id="idVolver" layoutX="64.0" layoutY="323.0" mnemonicParsing="false" text="Volver" />
+      <Button fx:id="ActaDeNacimiento" layoutX="431.0" layoutY="133.0" mnemonicParsing="false" text="Subir Archivo" onAction="#handleSubirDocumento"/>
+      <Button fx:id="CURP" layoutX="431.0" layoutY="165.0" mnemonicParsing="false" text="Subir Archivo" onAction="#handleSubirDocumento"/>
+      <Button fx:id="ComprobanteDeDomicilio" layoutX="431.0" layoutY="201.0" mnemonicParsing="false" text="Subir Archivo" onAction="#handleSubirDocumento"/>
+      <Button fx:id="CertificadoMedico" layoutX="431.0" layoutY="241.0" mnemonicParsing="false" text="Subir Archivo" onAction="#handleSubirDocumento"/>
+      <Button fx:id="idVolver" layoutX="64.0" layoutY="323.0" mnemonicParsing="false" text="Volver" onAction="#handleCerrar"/>
    </children>
 </AnchorPane>

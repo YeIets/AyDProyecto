@@ -1,5 +1,6 @@
 package mx.uam.ayd.proyecto.presentacion.padresPrincipal.ActualizarDocumentos;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,21 +17,6 @@ public class VentanaActualizarDocumentos {
 
     private Stage stage;
     private ControlActualizarDocumentos control;
-
-    @FXML
-    private Button idActa;
-
-    @FXML
-    private Button idCurp;
-
-    @FXML
-    private Button idDomicilio;
-
-    @FXML
-    private Button idMedico;
-
-    @FXML
-    private Button idVolver;
 
     // NOTA: Agrega un Label en tu FXML con este fx:id para mostrar mensajes
     @FXML
@@ -51,23 +37,9 @@ public class VentanaActualizarDocumentos {
             stage.setTitle("Actualización de Documentos");
             stage.show();
 
-            // Conectamos los botones a las acciones del controlador
-            configurarBotones();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private void configurarBotones() {
-        // Cada botón llama al mismo método en el controlador, pero con un
-        // parámetro diferente para identificar qué documento se está subiendo.
-        idActa.setOnAction(e -> control.iniciaSubida("Acta de Nacimiento"));
-        idCurp.setOnAction(e -> control.iniciaSubida("CURP"));
-        idDomicilio.setOnAction(e -> control.iniciaSubida("Comprobante de Domicilio"));
-        idMedico.setOnAction(e -> control.iniciaSubida("Certificado Médico"));
-
-        idVolver.setOnAction(e -> cerrar());
     }
 
     /**
@@ -94,7 +66,18 @@ public class VentanaActualizarDocumentos {
         return stage;
     }
 
-    public void cerrar() {
+    @FXML
+    public void handleSubirDocumento(ActionEvent event){
+
+        Button boton = (Button) event.getSource();
+        String documento = boton.getId();
+
+        control.subirDocumento(documento);
+
+    }
+
+    @FXML
+    public void handleCerrar() {
         if (stage != null) {
             stage.close();
         }

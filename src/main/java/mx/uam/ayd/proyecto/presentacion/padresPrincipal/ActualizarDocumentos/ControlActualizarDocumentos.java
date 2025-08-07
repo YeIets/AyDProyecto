@@ -30,7 +30,7 @@ public class ControlActualizarDocumentos {
      * Es llamado por los botones en la ventana.
      * @param tipoDeDocumento Una cadena que identifica el tipo de documento.
      */
-    public void iniciaSubida(String tipoDeDocumento) {
+    public void subirDocumento(String tipoDeDocumento) {
         System.out.println("Iniciando subida para: " + tipoDeDocumento);
 
         FileChooser fileChooser = new FileChooser();
@@ -45,7 +45,7 @@ public class ControlActualizarDocumentos {
         if (archivoSeleccionado != null) {
             // Si el usuario seleccionó un archivo, intentamos subirlo
             try {
-                servicioDocumento.subirDocumento(archivoSeleccionado);
+                servicioDocumento.subirDocumento(archivoSeleccionado, tipoDeDocumento);
                 ventana.muestraDialogoExito(archivoSeleccionado.getName());
             } catch (IOException e) {
                 ventana.muestraDialogoError("No se pudo guardar el archivo.");

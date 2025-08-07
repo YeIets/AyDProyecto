@@ -1,4 +1,4 @@
-package mx.uam.ayd.proyecto.presentacion.padresPrincipal.padreMenuSemanal;
+package mx.uam.ayd.proyecto.presentacion.padresPrincipal.PadreMenuSemanal;
 
 import java.io.IOException;
 import java.util.Map;

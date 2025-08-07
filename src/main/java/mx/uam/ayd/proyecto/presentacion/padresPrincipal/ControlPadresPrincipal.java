@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 // <-- 1. IMPORTAMOS LOS NUEVOS CONTROLES
-import mx.uam.ayd.proyecto.presentacion.padresPrincipal.padreMenuSemanal.ControlPadreMenuSemanal;
+import mx.uam.ayd.proyecto.presentacion.padresPrincipal.PadreMenuSemanal.ControlPadreMenuSemanal;
 import mx.uam.ayd.proyecto.presentacion.padresPrincipal.ActualizarDocumentos.ControlActualizarDocumentos;
 
 @Component
