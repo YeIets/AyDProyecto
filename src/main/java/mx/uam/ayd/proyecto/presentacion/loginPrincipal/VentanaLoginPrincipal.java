@@ -68,7 +68,7 @@ public class VentanaLoginPrincipal {
 			// Load FXML
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginPrincipal.fxml"));
 			loader.setController(this);
-			Scene scene = new Scene(loader.load(), 450, 400);
+			Scene scene = new Scene(loader.load(), 600, 420);
 			stage.setScene(scene);
 			
 			initialized = true;

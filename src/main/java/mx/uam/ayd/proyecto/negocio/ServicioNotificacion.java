@@ -15,13 +15,13 @@ import java.util.List;
  * Servicio relacionado con las notificaciones
  *
  */
-public class ServicioNoitificacion {
+public class ServicioNotificacion {
 
-	private static final Logger log = LoggerFactory.getLogger(ServicioUsuario.class);
+	private static final Logger log = LoggerFactory.getLogger(ServicioNotificacion.class);
 	private final NotificacionRepository notificacionRepository;
 	
 	@Autowired
-	public ServicioNoitificacion(NotificacionRepository notificacionRepository) {
+	public ServicioNotificacion(NotificacionRepository notificacionRepository) {
 		this.notificacionRepository = notificacionRepository;
 	}
 	

@@ -62,7 +62,7 @@ public class VentanaEncargadoCocinaPrincipal{
 			// Load FXML
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/EncargadoCocinaPrincipal.fxml"));
 			loader.setController(this);
-			Scene scene = new Scene(loader.load(), 450, 400);
+			Scene scene = new Scene(loader.load(), 600, 420);
 			stage.setScene(scene);
 			
 			initialized = true;

@@ -11,12 +11,31 @@ import java.time.LocalDate;
 @Entity
 public class Documento {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     private String nombre;
     private String tipo;
     private String direccionArchivo;
     private LocalDate fechaDeSubida;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idDocumento;
+
+    public Documento(){
+
+    }
+
+    public Documento(Long id, String nombre, String tipo, String direccionArchivo, LocalDate fechaDeSubida) {
+        this.idDocumento = id;
+        this.nombre = nombre;
+        this.tipo = tipo;
+        this.direccionArchivo = direccionArchivo;
+        this.fechaDeSubida = fechaDeSubida;
+    }
+
+    @Override
+    public String toString() {
+        return "Documento [idDocumento=" + idDocumento + ", Nombre=" + nombre + ", tipo=" + tipo + ", Direccion="
+         + direccionArchivo + ", Fecha=" + fechaDeSubida + "]";
+    }
+
 }

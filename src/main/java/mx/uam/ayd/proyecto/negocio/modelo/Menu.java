@@ -2,20 +2,20 @@ package mx.uam.ayd.proyecto.negocio.modelo;
 
 import jakarta.persistence.*;
 import java.util.List;
-
+import lombok.Data;
 
 /**
  *
  * Entidad de negocio Menu
  *
  */
-
+@Data
 @Entity
 public class Menu {
 
     @Id // Esto le dice a Spring que este es el identificador
     @GeneratedValue (strategy = GenerationType.IDENTITY) // Le dice a Spring que genere el id
-    private long idMenu;
+    private Long idMenu;
 
     private String comida;
 
@@ -27,51 +27,12 @@ public class Menu {
 
     private String dia;
 
-    public long getIdMenu() {
-        return idMenu;
-    }
-
-    public void setIdMenu(long idMenu) {
+    public Menu(Long idMenu, String comida, String agua, String gelatina, String fruta, String dia) {
         this.idMenu = idMenu;
-    }
-
-    public String getComida() {
-        return comida;
-    }
-
-    public void setComida(String comida) {
         this.comida = comida;
-    }
-
-    public String getAgua() {
-        return agua;
-    }
-
-    public void setAgua(String agua) {
         this.agua = agua;
-    }
-
-    public String getGelatina() {
-        return gelatina;
-    }
-
-    public void setGelatina(String gelatina) {
         this.gelatina = gelatina;
-    }
-
-    public String getFruta() {
-        return fruta;
-    }
-
-    public void setFruta(String fruta) {
         this.fruta = fruta;
-    }
-
-    public String getDia() {
-        return dia;
-    }
-
-    public void setDia(String dia) {
         this.dia = dia;
     }
 

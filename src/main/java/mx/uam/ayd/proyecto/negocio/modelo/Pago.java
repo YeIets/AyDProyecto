@@ -1,7 +1,7 @@
 package mx.uam.ayd.proyecto.negocio.modelo;
 
 import jakarta.persistence.*;
-
+import lombok.Data;
 import java.time.LocalDate;
 
 
@@ -10,13 +10,13 @@ import java.time.LocalDate;
  * Entidad de negocio Pago
  *
  */
-
+@Data
 @Entity
 public class Pago {
 
     @Id // Esto le dice a Spring que este es el identificador
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Le dice a Spring que genere el id
-    private long idPago;
+    private Long idPago;
 
     private int matricula;
 
@@ -50,92 +50,6 @@ public class Pago {
         this.estado = "Pendiente";
         this.diaMenu = diaMenu;
 
-    }
-
-    public long getIdPago() {
-        return idPago;
-    }
-
-    public void setIdPago(long idPago) {
-        this.idPago = idPago;
-    }
-
-    public int getMatricula() {
-        return matricula;
-    }
-
-    public void setMatricula(int matricula) {
-        this.matricula = matricula;
-    }
-
-    public float getMonto() {
-        return monto;
-    }
-
-    public void setMonto(float monto) {
-        this.monto = monto;
-    }
-
-    public String getMetodoDePago() {
-        return metodoDePago;
-    }
-
-    public void setMetodoDePago(String metodoDePago) {
-        this.metodoDePago = metodoDePago;
-    }
-
-    public LocalDate getFechaPago() {
-        return fechaPago;
-    }
-
-    public void setFechaPago(LocalDate fechaPago) {
-        this.fechaPago = fechaPago;
-    }
-
-    public LocalDate getFechaLimite() {
-        return fechaLimite;
-    }
-
-    public void setFechaLimite(LocalDate fechaLimite) {
-        this.fechaLimite = fechaLimite;
-    }
-
-    public String getConceptoDePago() {
-        return conceptoDePago;
-    }
-
-    public void setConceptoDePago(String conceptoDePago) {
-        this.conceptoDePago = conceptoDePago;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public Padre getTitular() {
-        return titular;
-    }
-
-    public void setTitular(Padre titular) {
-        this.titular = titular;
-    }
-
-    public String getDiaMenu() {
-        return diaMenu;
-    }
-
-    public void setDiaMenu(String diaMenu) {
-        this.diaMenu = diaMenu;
-    }
-
-
-    @Override
-    public int hashCode() {
-        return (int) (31 * idPago);
     }
 
     @Override

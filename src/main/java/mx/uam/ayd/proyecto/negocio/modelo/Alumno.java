@@ -1,7 +1,7 @@
 package mx.uam.ayd.proyecto.negocio.modelo;
 
 import jakarta.persistence.*;
-
+import lombok.Data;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,13 +11,13 @@ import java.util.List;
  * Entidad de negocio Alumno
  *
  */
-
+@Data
 @Entity
 public class Alumno {
 
     @Id // Esto le dice a Spring que este es el identificador
     @GeneratedValue (strategy = GenerationType.IDENTITY) // Le dice a Spring que genere el id
-    private long idAlumno;
+    private Long idAlumno;
 
     private String nombre;
 
@@ -31,7 +31,7 @@ public class Alumno {
         cascade = CascadeType.ALL, 
         orphanRemoval = true
     )
-    private List<Menu> menus = new ArrayList<>();
+    private List<Menu> menus = new ArrayList<>(5);
 
     @OneToMany(
         targetEntity = Documento.class, 
@@ -41,64 +41,40 @@ public class Alumno {
     )
     private List<Documento> documentos = new ArrayList <>(5);
 
-    public long getIdAlumno() {
-        return idAlumno;
+    public boolean agregarDocumento(Documento documento){
+
+        if (documento == null){
+            throw new IllegalArgumentException("Documento no puede ser nulo");
+        }
+
+        //Checar si el menu esta en la lista de menu ya que no pueden haber duplicados
+        if (documentos.contains(documento)) {
+            return false;
+        }
+
+        return documentos.add(documento);
     }
 
-    public void setIdAlumno(long idAlumno) {
-        this.idAlumno = idAlumno;
-    }
+    public boolean agregarMenu(Menu menu){
 
-    public String getNombre() {
-        return nombre;
-    }
+        if (menu == null){
+            throw new IllegalArgumentException("Menu no puede ser nulo");
+        }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+        //Checar si el menu esta en la lista de menu ya que no pueden haber duplicados
+        if (menus.contains(menu)) {
+            return false;
+        }
 
-    public String getApellido() {
-        return apellido;
-    }
+       return menus.add(menu);
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public String getMatricula() {
-        return matricula;
-    }
-
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
-    }
-
-    public List<Menu> getMenus() {
-        return menus;
-    }
-
-    public void setMenus(List<Menu> menus) {
-        this.menus = menus;
-    }
-
-    public List<Documento> getDocumentos() {
-        return documentos;
-    }
-
-    public void setDocumentos(List<Documento> documentos) {
-        this.documentos = documentos;
-    }
-
-    @Override
-    public int hashCode() {
-        return (int) (31 * idAlumno);
-    }
-    
+   }
+   
     @Override
     public String toString() {
         return "Alumno [idAlumno=" + idAlumno + ", nombre=" + nombre 
         + ", apellido=" + apellido + ", matricula=" + matricula 
-        + ", menus=" + menus + ", documentos" + documentos + "]";
+        + ", menus=" + menus.size() + ", documentos" + documentos.size() + "]";
     }
 
 }
