@@ -39,10 +39,10 @@ public class VentanaLoginPrincipal {
 	private boolean initialized = false;
 
 
-    @FXML
-    private TextField idUsuario;
-    @FXML
-    private PasswordField idPassword;
+	@FXML
+	private TextField idUsuario;
+	@FXML
+	private PasswordField idPassword;
 
 	@FXML
 	private ComboBox<String> miComboBox;
@@ -123,47 +123,48 @@ public class VentanaLoginPrincipal {
 
 	//Declara las funciones del boton IniciarSesion para cada valor del combobox
 	@FXML
-	private void handleIniciarSesion() {		
-		
+	private void handleIniciarSesion() {
+
 		String opcion = miComboBox.getValue();
+		String usuario = idUsuario.getText();
+		String password = idPassword.getText();
 
-		if (opcion != null) {
-			
-			switch(opcion.toLowerCase()){
-
-			case  "padres":
-				log.info("El combobox dice: " + opcion);
-				control.padresPrincipal(idUsuario.getText(), idPassword.getText());
-				log.info("Usuario = " + idUsuario.getText() + ", Contraseña = " + idPassword.getText());
-				break;
-
-			case  "administradores":
-				log.info("El combobox dice: " + opcion);
-				control.administrativoPrincipal(idUsuario.getText(), idPassword.getText());
-				log.info("Usuario = " + idUsuario.getText() + ", Contraseña = " + idPassword.getText());
-				break;
-
-			case  "cocineros":
-				log.info("El combobox dice: " + opcion);
-				control.encargadoCocinaPrincipal(idUsuario.getText(), idPassword.getText());
-				log.info("Usuario = " + idUsuario.getText() + ", Contraseña = " + idPassword.getText());
-				break;
-
-			default:
-				break;
-
-			}
-		}else {
-			log.info("No hay opcion seleccionada en ComboBox");
-			mostrarMensajeError("Tienes que seleccionar un Rol");
+		if (verificarCamposNoVacios()) {
+			mostrarMensajeError("Los campos estan vacios");
+			return;
 		}
+		
+		if (opcion == null) {
+			log.info("No hay opción seleccionada en ComboBox");
+			mostrarMensajeError("Tienes que seleccionar un Rol");
+			return;
+		}
+
+		switch (opcion.toLowerCase()) {
+			case "padres" -> control.padresPrincipal(usuario, password);
+			case "administradores" -> control.administrativoPrincipal(usuario, password);
+			case "cocineros" -> control.encargadoCocinaPrincipal(usuario, password);
+			default -> mostrarMensajeError("Rol no existente");
+		}
+
 	}
 
+	private boolean verificarCamposNoVacios(){
+		return isEmpty(idUsuario) && isEmpty(idPassword);
+	}
+
+	//Revisa si un campo de texto es vacio, regresa True si es vacio, False si no
+	private boolean isEmpty(TextField textField) {
+		String texto = textField.getText();
+		return texto == null || texto.trim().isEmpty();
+	}
+
+	//Muestra un mensaje de error
 	public void mostrarMensajeError(String mensaje) {
 		Alert alerta = new Alert(AlertType.ERROR);
-		alerta.setTitle("Error");
-    	alerta.setHeaderText("Error al iniciar sesion"); // puedes poner un encabezado si quieres
-    	alerta.setContentText(mensaje);
+		alerta.setTitle("Error"); //Titulo de la ventana
+    	alerta.setHeaderText("Error al iniciar sesion"); // El encabezado del error
+    	alerta.setContentText(mensaje); //Texto del error
     	alerta.showAndWait();
     }
 

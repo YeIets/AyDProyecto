@@ -28,7 +28,7 @@
                            <children>
                               <ImageView fitHeight="66.0" fitWidth="115.0">
                                  <image>
-                                    <Image url="@../../AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/TempState/6E4621AF9A4DA94A7C85D7ECD19B1271/Imagen%20de%20WhatsApp%202025-08-04%20a%20las%2018.42.20_be90d385.jpg" />
+                                    <Image url="@../Image/LogoInstitucional.jpg" />
                                  </image>
                               </ImageView>
                               <HBox>

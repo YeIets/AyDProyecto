@@ -25,12 +25,12 @@
       <Label layoutX="193.0" layoutY="97.0" text="Número de tarjeta:" />
       <TextField fx:id="idNoTarjeta" layoutX="190.0" layoutY="114.0" prefHeight="25.0" prefWidth="353.0" />
       <Label layoutX="193.0" layoutY="149.0" text="Fecha de vencimiento:" />
-      <TextField fx:id="idFecha" layoutX="314.0" layoutY="145.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="idFecha" layoutX="345.0" layoutY="145.0" prefHeight="25.0" prefWidth="50.0" />
       <Label layoutX="404.0" layoutY="149.0" text="CVV:" />
       <PasswordField fx:id="idCVV" layoutX="437.0" layoutY="145.0" prefHeight="25.0" prefWidth="41.0" />
       <Label layoutX="389.0" layoutY="46.0" text="Total:" />
       <Label fx:id="idTotal" layoutX="444.0" layoutY="46.0" text="\$00.00" />
       <Button fx:id="idPagar" layoutX="363.0" layoutY="242.0" mnemonicParsing="false" text="Pagar" />
-      <Button fx:id="idRegresar" layoutX="59.0" layoutY="327.0" mnemonicParsing="false" text="Regresar" />
+      <Button fx:id="idRegresar" layoutX="59.0" layoutY="327.0" mnemonicParsing="false" text="Volver" />
    </children>
 </AnchorPane>
