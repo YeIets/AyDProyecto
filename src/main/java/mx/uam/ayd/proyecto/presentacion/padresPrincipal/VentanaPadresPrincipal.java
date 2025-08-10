@@ -3,6 +3,7 @@ package mx.uam.ayd.proyecto.presentacion.padresPrincipal;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
@@ -28,6 +29,8 @@ public class VentanaPadresPrincipal {
     @FXML
     private ImageView iconoNotificacionActiva;
 
+    private Scene scene;
+
     public VentanaPadresPrincipal() {
         // Constructor vacío
     }
@@ -48,8 +51,16 @@ public class VentanaPadresPrincipal {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/VentanasPadre/PadresPrincipal.fxml"));
             loader.setController(this);
-            Scene scene = new Scene(loader.load(), 600, 420);
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            this.scene = scene;
+
             stage.setScene(scene);
+            stage.setWidth(600);
+            stage.setHeight(420);
+            stage.setResizable(false);
+
+            stage.show();
 
             initialized = true;
         } catch (IOException e) {
