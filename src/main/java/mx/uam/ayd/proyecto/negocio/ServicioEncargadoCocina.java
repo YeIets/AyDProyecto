@@ -32,4 +32,9 @@ public class ServicioEncargadoCocina {
 		EncargadoCocina encargado = new EncargadoCocina(nombre, password);
 		return encargadoCocinaRepository.save(encargado);
 	}
+
+    public boolean verificarEncargadoDeCocinaRegistrado(String correo, String password) {
+		EncargadoCocina encargado = encargadoCocinaRepository.findByCorreoAndPassword(correo,password);
+		return encargado != null;
+    }
 }

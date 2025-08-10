@@ -39,4 +39,10 @@ public class ServicioPadre {
 		return padreRepository.save(padre);
 	}
 
+	//Regresa True si esta registrado en la BD
+	public boolean verificarPadreRegistrado(String correo, String password){
+		Padre padre = padreRepository.findByCorreoAndPassword(correo,password);
+		return padre != null;
+	}
+
 }

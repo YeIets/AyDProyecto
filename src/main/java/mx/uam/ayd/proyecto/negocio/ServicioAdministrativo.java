@@ -24,4 +24,9 @@ public class ServicioAdministrativo {
 		Administrativo admin = new Administrativo(nombre, password);
 		return administrativoRepository.save(admin);
 	}
+
+    public boolean verificarAdministrativoRegistrado(String correo, String password) {
+		Administrativo admin = administrativoRepository.findByCorreoAndPassword(correo,password);
+		return admin != null;
+    }
 }

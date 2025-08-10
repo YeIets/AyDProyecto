@@ -14,4 +14,5 @@ public interface EncargadoCocinaRepository extends CrudRepository <EncargadoCoci
 	
 	public EncargadoCocina findByNombreAndApellido(String nombre, String apellido);
 
+    EncargadoCocina findByCorreoAndPassword(String correo, String password);
 }

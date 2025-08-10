@@ -56,6 +56,18 @@ public class ControlLoginPrincipal {
 		controlPadresPrincipal.agregarPadre(usuarioNombre, usuarioContraseña);
 	}
 
+	public boolean verificarPadreRegistrado(String correo, String password){
+		return controlPadresPrincipal.verificarPadreRegistrado(correo,password);
+	}
+
+	public boolean verificarAdministradorRegistrado(String correo, String password){
+		return controlAdministrativoPrincipal.verificarAdministradorRegistrado(correo,password);
+	}
+
+	public boolean verificarEncargadoDeCocinaRegistrado(String correo, String password){
+		return controlEncargadoCocinaPrincipal.verificarEncargadoDeCocinaRegistrado(correo,password);
+	}
+
 	//Metodo que muestra la pantalla principal para administrativos
 	public void administrativoPrincipal(String usuarioNombre, String usuarioContraseña){
 		ventana.cerrar();

@@ -45,4 +45,7 @@ public class ControlEncargadoCocinaPrincipal {
         servicioEncargadoCocina.agregarEncargadoCocina(nombre, contraseña);
     }
 
+    public boolean verificarEncargadoDeCocinaRegistrado(String correo, String password) {
+		return servicioEncargadoCocina.verificarEncargadoDeCocinaRegistrado(correo, password);
+    }
 }

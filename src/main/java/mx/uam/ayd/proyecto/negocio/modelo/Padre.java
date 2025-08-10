@@ -50,8 +50,12 @@ public class Padre {
     )
     private List<Pago> pagos = new ArrayList <> ();
 
-    public Padre(String nombre, String password){
-        this.nombre = nombre;
+    public Padre(){
+        
+    }
+
+    public Padre(String correo, String password){
+        this.correo = correo;
         this.password = password;
     }
 

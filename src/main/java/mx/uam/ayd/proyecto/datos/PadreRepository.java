@@ -13,5 +13,5 @@ import mx.uam.ayd.proyecto.negocio.modelo.Padre;
 public interface PadreRepository extends CrudRepository <Padre, Long> {
 	
 	public Padre findByNombreAndApellido(String nombre, String apellido);
-
+    Padre findByCorreoAndPassword(String correo, String password);
 }

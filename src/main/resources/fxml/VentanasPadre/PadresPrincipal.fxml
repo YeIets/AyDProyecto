@@ -17,11 +17,21 @@
          <children>
             <ImageView fitHeight="182.0" fitWidth="200.0">
                <image>
-                  <Image url="@../../../Image/LogoInstitucional.jpg" />
+                  <Image url="@../../Image/LogoInstitucional.jpg" />
                </image>
             </ImageView>
          </children>
       </VBox>
-      <Button fx:id="idCancelar" layoutX="59.0" layoutY="341.0" mnemonicParsing="false" text="Cerrar" onAction="#handleCerrar"/>
+      <Button fx:id="idCancelar" layoutX="59.0" layoutY="341.0" mnemonicParsing="false" onAction="#handleCerrar" text="Cerrar" />
+      <ImageView fx:id="iconoNotificacion" fitWidth="40.0" layoutX="520.0" layoutY="14.0" preserveRatio="true">
+         <image>
+            <Image url="@../../Image/notificacion.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="iconoNotificacionActiva" fitHeight="64.0" fitWidth="40.0" layoutX="520.0" layoutY="14.0" preserveRatio="true">
+         <image>
+            <Image url="@../../Image/notificacionActiva.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

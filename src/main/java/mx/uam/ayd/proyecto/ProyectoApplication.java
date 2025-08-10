@@ -1,15 +1,21 @@
 package mx.uam.ayd.proyecto;
 
+import mx.uam.ayd.proyecto.datos.AdministrativoRepository;
+import mx.uam.ayd.proyecto.datos.EncargadoCocinaRepository;
+import mx.uam.ayd.proyecto.negocio.modelo.Administrativo;
+import mx.uam.ayd.proyecto.negocio.modelo.EncargadoCocina;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
+import mx.uam.ayd.proyecto.negocio.modelo.Padre;
 
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 
 import mx.uam.ayd.proyecto.presentacion.loginPrincipal.ControlLoginPrincipal;
+import mx.uam.ayd.proyecto.datos.PadreRepository;
 
 /**
  * 
@@ -24,11 +30,17 @@ import mx.uam.ayd.proyecto.presentacion.loginPrincipal.ControlLoginPrincipal;
 public class ProyectoApplication {
 
 	private final ControlLoginPrincipal controlLoginPrincipal;
+	private final PadreRepository padreRepository;
+	private final AdministrativoRepository administrativoRepository;
+	private final EncargadoCocinaRepository encargadoCocinaRepository;
 	
 	@Autowired
-	public ProyectoApplication(ControlLoginPrincipal controlLoginPrincipal) {
+	public ProyectoApplication(ControlLoginPrincipal controlLoginPrincipal, PadreRepository padreRepository, AdministrativoRepository administrativoRepository, EncargadoCocinaRepository encargadoCocinaRepository) {
 		this.controlLoginPrincipal = controlLoginPrincipal;
-	}
+		this.padreRepository = padreRepository;
+        this.administrativoRepository = administrativoRepository;
+        this.encargadoCocinaRepository = encargadoCocinaRepository;
+    }
 
 	/**
 	 * Método principal
@@ -87,7 +99,11 @@ public class ProyectoApplication {
 	 * Inicializa la BD con datos
 	 */
 	public void inicializaBD() {
-		// Vamos a crear los dos grupos de usuarios
-		
+		Padre padre = new Padre("Juan@uam.com", "Juan123");
+		Administrativo admin = new Administrativo("Humberto@uam.com", "Humberto123");
+		EncargadoCocina encargado = new EncargadoCocina("Alberto@uam.com", "Alberto123");
+		padreRepository.save(padre);
+		administrativoRepository.save(admin);
+		encargadoCocinaRepository.save(encargado);
 	}
 }

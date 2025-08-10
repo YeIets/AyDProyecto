@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+import javafx.scene.image.ImageView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -21,6 +21,12 @@ public class VentanaPadresPrincipal {
 
     private ControlPadresPrincipal control;
     private boolean initialized = false;
+
+    @FXML
+    private ImageView iconoNotificacion;
+
+    @FXML
+    private ImageView iconoNotificacionActiva;
 
     public VentanaPadresPrincipal() {
         // Constructor vacío
@@ -40,7 +46,7 @@ public class VentanaPadresPrincipal {
             stage = new Stage();
             stage.setTitle("Ventana Padres Principal");
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/VentanasPadre/MenuSemanal/PadresPrincipal.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/VentanasPadre/PadresPrincipal.fxml"));
             loader.setController(this);
             Scene scene = new Scene(loader.load(), 600, 420);
             stage.setScene(scene);
@@ -60,8 +66,9 @@ public class VentanaPadresPrincipal {
             Platform.runLater(() -> this.muestra());
             return;
         }
-
+        
         initializeUI();
+
         stage.show();
     }
 
@@ -82,7 +89,6 @@ public class VentanaPadresPrincipal {
     @FXML
     private void handleHacerPagos() {
         log.info("Se presionó hacer pagos");
-        // <-- CAMBIO AQUÍ: Llamamos al nuevo método del controlador
         control.irAHacerPagos();
     }
 

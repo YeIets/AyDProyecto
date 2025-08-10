@@ -14,4 +14,5 @@ public interface AdministrativoRepository extends CrudRepository <Administrativo
 	
 	public Administrativo findByNombreAndApellido(String nombre, String apellido);
 
+    Administrativo findByCorreoAndPassword(String correo, String password);
 }

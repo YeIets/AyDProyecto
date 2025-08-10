@@ -36,8 +36,12 @@ public class EncargadoCocina {
     @JoinColumn(name = "idEncargadoCocina") // Llave Foranea de Menu
     private List<Menu> menusSemanal = new ArrayList<>();
 
-    public EncargadoCocina(String nombre, String password){
-        this.nombre = nombre;
+    public EncargadoCocina(){
+
+    }
+
+    public EncargadoCocina(String correo, String password){
+        this.correo = correo;
         this.password = password;
     }
 

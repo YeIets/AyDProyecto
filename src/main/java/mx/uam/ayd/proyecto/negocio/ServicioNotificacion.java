@@ -50,4 +50,9 @@ public class ServicioNotificacion {
 		return true;
 	}
 
+	//Regresa True si el padre tiene notificaciones, False si no
+	public boolean tieneNotificaciones(Padre padre){
+		return notificacionRepository.findByDestinatario(padre).size() == 0;
+	}
+
 }

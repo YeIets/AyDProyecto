@@ -41,12 +41,12 @@ public class VentanaLoginPrincipal {
 
 	@FXML
 	private TextField idUsuario;
+
 	@FXML
 	private PasswordField idPassword;
 
 	@FXML
 	private ComboBox<String> miComboBox;
-
 
 	/**
 	 * Constructor without UI initialization
@@ -78,95 +78,101 @@ public class VentanaLoginPrincipal {
 			loader.setController(this);
 			Scene scene = new Scene(loader.load(), 600, 420);
 			stage.setScene(scene);
-			
+
 			initialized = true;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	/**
-	 * Establece el controlador asociado a esta ventana
-	 * 
-	 * @param control El controlador asociado
-	 */
-	public void setControlLoginPrincipal(ControlLoginPrincipal control) {
-		this.control = control;
-	}
-	
+
+	//Establece el controlador asociado a la ventana
+    public void setControlLoginPrincipal(ControlLoginPrincipal control) {
+    	this.control = control;
+    }
 
 	//Muestra la ventana y se agregan opciones al combobox
-	public void muestra() {
-		if (!Platform.isFxApplicationThread()) {
-			Platform.runLater(() -> this.muestra());
-			return;
-		}
-		
-		initializeUI();
+    public void muestra() {
+    	if (!Platform.isFxApplicationThread()) {
+    		Platform.runLater(() -> this.muestra());
+    		return;
+    	}
 
-		if (miComboBox != null) {
-			miComboBox.getItems().clear();
-			miComboBox.getItems().addAll("Padres", "Administradores", "Cocineros");
-		}
+    	initializeUI();
 
+    	if (miComboBox != null) {
+    		miComboBox.getItems().clear();
+    		miComboBox.getItems().addAll("Padres", "Administradores", "Cocineros");
+    	}
 
-		stage.show();
-	}
+    	stage.show();
+    }
 
-	public void cerrar() {
-		if (stage != null) {
-			stage.close();
-		}
-	}
+    public void cerrar() {
+    	if (stage != null) {
+    		stage.close();
+    	}
+    }
 
 	// FXML Handle Events
 
 	//Declara las funciones del boton IniciarSesion para cada valor del combobox
-	@FXML
-	private void handleIniciarSesion() {
+    @FXML
+    private void handleIniciarSesion() {
 
-		String opcion = miComboBox.getValue();
-		String usuario = idUsuario.getText();
-		String password = idPassword.getText();
+    	String opcion = miComboBox.getValue();
+    	String usuario = idUsuario.getText();
+    	String password = idPassword.getText();
 
-		if (verificarCamposNoVacios()) {
-			mostrarMensajeError("Los campos estan vacios");
-			return;
-		}
-		
-		if (opcion == null) {
-			log.info("No hay opción seleccionada en ComboBox");
-			mostrarMensajeError("Tienes que seleccionar un Rol");
-			return;
-		}
+    	if (verificarCamposNoVacios()) {
+    		mostrarMensajeError("Los campos estan vacios");
+    		return;
+    	}
+
+    	if (opcion == null) {
+    		log.info("No hay opción seleccionada en ComboBox");
+    		mostrarMensajeError("Tienes que seleccionar un Rol");
+    		return;
+    	}
 
 		switch (opcion.toLowerCase()) {
-			case "padres" -> control.padresPrincipal(usuario, password);
-			case "administradores" -> control.administrativoPrincipal(usuario, password);
-			case "cocineros" -> control.encargadoCocinaPrincipal(usuario, password);
-			default -> mostrarMensajeError("Rol no existente");
+		    case "padres" -> {
+		    	if (control.verificarPadreRegistrado(usuario,password)) {
+		        	control.padresPrincipal(usuario, password);
+		    	}else mostrarMensajeError("El usuario no esta registrado");
+		    }
+		    case "administradores" -> {
+				if (control.verificarAdministradorRegistrado(usuario,password)) {
+		        	control.administrativoPrincipal(usuario, password);
+		    	}else mostrarMensajeError("El usuario no esta registrado");
+		    }
+		    case "cocineros" -> {
+				if (control.verificarEncargadoDeCocinaRegistrado(usuario,password)) {
+		        	control.encargadoCocinaPrincipal(usuario, password);
+		    	}else mostrarMensajeError("El usuario no esta registrado");
+		    }
+		    default -> mostrarMensajeError("Rol no existente");
 		}
 
-	}
 
-	private boolean verificarCamposNoVacios(){
-		return isEmpty(idUsuario) && isEmpty(idPassword);
-	}
+    }
+
+    private boolean verificarCamposNoVacios(){
+    	return isEmpty(idUsuario) && isEmpty(idPassword);
+    }
 
 	//Revisa si un campo de texto es vacio, regresa True si es vacio, False si no
-	private boolean isEmpty(TextField textField) {
-		String texto = textField.getText();
-		return texto == null || texto.trim().isEmpty();
-	}
+    private boolean isEmpty(TextField textField) {
+    	String texto = textField.getText();
+    	return texto == null || texto.trim().isEmpty();
+    }
 
 	//Muestra un mensaje de error
-	public void mostrarMensajeError(String mensaje) {
-		Alert alerta = new Alert(AlertType.ERROR);
+    public void mostrarMensajeError(String mensaje) {
+    	Alert alerta = new Alert(AlertType.ERROR);
 		alerta.setTitle("Error"); //Titulo de la ventana
     	alerta.setHeaderText("Error al iniciar sesion"); // El encabezado del error
     	alerta.setContentText(mensaje); //Texto del error
     	alerta.showAndWait();
     }
-
 
 }

@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import mx.uam.ayd.proyecto.negocio.ServicioPadre;
+import mx.uam.ayd.proyecto.negocio.ServicioNotificacion;
+import mx.uam.ayd.proyecto.negocio.modelo.Padre;
 import mx.uam.ayd.proyecto.presentacion.padresPrincipal.MenuSemanal.ControlMenuSemanal;
 import mx.uam.ayd.proyecto.presentacion.padresPrincipal.ActualizarDocumentos.ControlActualizarDocumentos;
 import mx.uam.ayd.proyecto.presentacion.padresPrincipal.PagoServicios.ControlPagoServicios;
@@ -21,6 +23,9 @@ public class ControlPadresPrincipal {
 
     @Autowired
     private ServicioPadre servicioPadre;
+
+    @Autowired
+    private ServicioNotificacion servicioNotificacion;
 
     @Autowired
     private ControlMenuSemanal controlMenuSemanal;
@@ -46,8 +51,12 @@ public class ControlPadresPrincipal {
     }
 
     //Añade un Padre a la base de datos
-    public void agregarPadre(String nombre, String contraseña){
-        servicioPadre.agregarPadre(nombre, contraseña);
+    public void agregarPadre(String nombre, String password){
+        servicioPadre.agregarPadre(nombre, password);
+    }
+
+    public boolean verificarPadreRegistrado(String correo, String password){
+        return servicioPadre.verificarPadreRegistrado(correo,password);
     }
 
     //Abre la ventana de Actualizar Documentos

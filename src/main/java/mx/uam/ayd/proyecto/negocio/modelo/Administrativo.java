@@ -32,8 +32,8 @@ public class Administrativo {
         
     }
 
-    public Administrativo(String nombre, String password){
-        this.nombre = nombre;
+    public Administrativo(String correo, String password){
+        this.correo = correo;
         this.password = password;
     }
 

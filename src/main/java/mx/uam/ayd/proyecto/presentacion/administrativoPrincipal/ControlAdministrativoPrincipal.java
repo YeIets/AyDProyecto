@@ -43,4 +43,8 @@ public class ControlAdministrativoPrincipal {
     public void agregarAdministrativo(String nombre, String contraseña){
         servicioAdministrativo.agregarAdministrativo(nombre, contraseña);
     }
+
+    public boolean verificarAdministradorRegistrado(String correo, String password) {
+		return servicioAdministrativo.verificarAdministrativoRegistrado(correo,password);
+    }
 }
