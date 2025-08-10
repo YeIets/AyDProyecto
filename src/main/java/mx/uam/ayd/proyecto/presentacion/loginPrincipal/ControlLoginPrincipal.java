@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import mx.uam.ayd.proyecto.presentacion.padresPrincipal.Principal.ControlPadresPrincipal;
+import mx.uam.ayd.proyecto.presentacion.padresPrincipal.ControlPadresPrincipal;
 import mx.uam.ayd.proyecto.presentacion.administrativoPrincipal.ControlAdministrativoPrincipal;
 import mx.uam.ayd.proyecto.presentacion.encargadoCocinaPrincipal.ControlEncargadoCocinaPrincipal;
 
@@ -50,21 +50,24 @@ public class ControlLoginPrincipal {
 	}
 
 	//Metodo que muestra la pantalla principal para padres
-	public void padresPrincipal(){
+	public void padresPrincipal(String usuarioNombre, String usuarioContraseña){
 		ventana.cerrar();
 		controlPadresPrincipal.inicia();
+		controlPadresPrincipal.agregarPadre(usuarioNombre, usuarioContraseña);
 	}
 
 	//Metodo que muestra la pantalla principal para administrativos
-	public void administrativoPrincipal(){
+	public void administrativoPrincipal(String usuarioNombre, String usuarioContraseña){
 		ventana.cerrar();
 		controlAdministrativoPrincipal.inicia();
+		controlAdministrativoPrincipal.agregarAdministrativo(usuarioNombre, usuarioContraseña);
 	}
 
 	//Metodo que muestra la pantalla principal para cocineros
-	public void encargadoCocinaPrincipal(){
+	public void encargadoCocinaPrincipal(String usuarioNombre, String usuarioContraseña){
 		ventana.cerrar();
 		controlEncargadoCocinaPrincipal.inicia();
+		controlEncargadoCocinaPrincipal.agregarEncargadoCocina(usuarioNombre, usuarioContraseña);
 	}
 
 }

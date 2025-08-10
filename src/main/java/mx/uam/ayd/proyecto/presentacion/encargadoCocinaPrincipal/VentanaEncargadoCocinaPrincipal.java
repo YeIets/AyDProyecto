@@ -1,17 +1,9 @@
 package mx.uam.ayd.proyecto.presentacion.encargadoCocinaPrincipal;
 
-import java.util.List;
-
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
 import org.slf4j.Logger;
@@ -60,7 +52,7 @@ public class VentanaEncargadoCocinaPrincipal{
 			stage.setTitle("Ventana Encargado de Cocina Principal");
 			
 			// Load FXML
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/EncargadoCocinaPrincipal.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/VentanasEncargadoDeCocina/EncargadoCocinaPrincipal.fxml"));
 			loader.setController(this);
 			Scene scene = new Scene(loader.load(), 600, 420);
 			stage.setScene(scene);

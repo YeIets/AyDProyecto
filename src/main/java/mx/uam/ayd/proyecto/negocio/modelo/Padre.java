@@ -5,7 +5,6 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  *
  * Entidad de negocio Padre
@@ -22,6 +21,8 @@ public class Padre {
     private String nombre;
 
     private String apellido;
+
+    private String password;
 
     private String correo;
 
@@ -48,6 +49,11 @@ public class Padre {
         orphanRemoval = true
     )
     private List<Pago> pagos = new ArrayList <> ();
+
+    public Padre(String nombre, String password){
+        this.nombre = nombre;
+        this.password = password;
+    }
 
     @Override
     public boolean equals(Object obj) {

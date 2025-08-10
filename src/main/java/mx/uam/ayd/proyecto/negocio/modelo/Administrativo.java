@@ -24,8 +24,19 @@ public class Administrativo {
 
     private String apellido;
 
+    private String password;
+
     private String correo;
-    
+
+    public Administrativo(){
+        
+    }
+
+    public Administrativo(String nombre, String password){
+        this.nombre = nombre;
+        this.password = password;
+    }
+
     @Override
     public String toString() {
         return "Administrativo [idAdministrativo=" + idAdministrativo

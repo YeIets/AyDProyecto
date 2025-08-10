@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutX="14.0" layoutY="14.0" prefHeight="151.0" prefWidth="159.0">
+         <children>
+            <ImageView fitHeight="144.0" fitWidth="164.0">
+               <image>
+                  <Image url="@../../../Image/LogoInstitucional.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
+      <Label layoutX="289.0" layoutY="35.0" text="Bienvenido al portal de pagos." />
+      <Label layoutX="181.0" layoutY="77.0" text="Seleccione el pago que desea realizar:" />
+      <ImageView fitHeight="47.0" fitWidth="48.0" layoutX="476.0" layoutY="98.0">
+         <image>
+            <Image url="@../../../Image/Inscripción.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="184.0" layoutY="120.0" text="Inscripción." />
+      <Label layoutX="349.0" layoutY="120.0" text="\$5000.00" />
+      <Label layoutX="182.0" layoutY="156.0" text="Colegiatura." />
+      <Label layoutX="186.0" layoutY="196.0" text="Uniforme." />
+      <Label layoutX="196.0" layoutY="230.0" text="Libros." />
+      <Label layoutX="349.0" layoutY="153.0" text="\$2000.00" />
+      <Label layoutX="349.0" layoutY="196.0" text="\$1500.00" />
+      <Label layoutX="351.0" layoutY="230.0" text="\$950.00" />
+      <CheckBox fx:id="idCheckInscripcion" layoutX="286.0" layoutY="120.0" mnemonicParsing="false" />
+      <CheckBox fx:id="idCheckColegiatura" layoutX="287.0" layoutY="153.0" mnemonicParsing="false" />
+      <CheckBox fx:id="idCheckUniforme" layoutX="286.0" layoutY="195.0" mnemonicParsing="false" />
+      <CheckBox fx:id="idCheckLibros" layoutX="286.0" layoutY="229.0" mnemonicParsing="false" />
+      <Label layoutX="200.0" layoutY="268.0" text="Total:" />
+      <Label fx:id="idTotal" layoutX="352.0" layoutY="268.0" text="\$00.00" />
+      <ImageView fitHeight="43.0" fitWidth="46.0" layoutX="477.0" layoutY="143.0">
+         <image>
+            <Image url="@../../../Image/Colegiatura.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="34.0" fitWidth="32.0" layoutX="486.0" layoutY="185.0">
+         <image>
+            <Image url="@../../../Image/Uniforme.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="42.0" fitWidth="41.0" layoutX="483.0" layoutY="220.0">
+         <image>
+            <Image url="@../../../Image/Libros.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnPagar" layoutX="269.0" layoutY="312.0" mnemonicParsing="false" text="Pagar" />
+   </children>
+</AnchorPane>

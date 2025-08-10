@@ -15,7 +15,7 @@
       <Button fx:id="idAceptar" layoutX="275.0" layoutY="295.0" mnemonicParsing="false" onAction="#handleIniciarSesion" text="Iniciar Sesion" />
       <Label layoutX="166.0" layoutY="146.0" text="Usuario:" />
       <Label layoutX="156.0" layoutY="192.0" text="Contraseña:" />
-      <PasswordField fx:id="idContraseña" layoutX="250.0" layoutY="188.0" />
+      <PasswordField fx:id="idPassword" layoutX="250.0" layoutY="188.0" />
       <TextField fx:id="idUsuario" layoutX="250.0" layoutY="142.0" />
       <VBox layoutX="14.0" layoutY="21.0" prefHeight="200.0" prefWidth="100.0">
          <children>

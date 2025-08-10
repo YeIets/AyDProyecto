@@ -12,6 +12,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
@@ -35,6 +37,12 @@ public class VentanaLoginPrincipal {
 	
 	private ControlLoginPrincipal control;
 	private boolean initialized = false;
+
+
+    @FXML
+    private TextField idUsuario;
+    @FXML
+    private PasswordField idPassword;
 
 	@FXML
 	private ComboBox<String> miComboBox;
@@ -125,17 +133,20 @@ public class VentanaLoginPrincipal {
 
 			case  "padres":
 				log.info("El combobox dice: " + opcion);
-				control.padresPrincipal();
+				control.padresPrincipal(idUsuario.getText(), idPassword.getText());
+				log.info("Usuario = " + idUsuario.getText() + ", Contraseña = " + idPassword.getText());
 				break;
 
 			case  "administradores":
 				log.info("El combobox dice: " + opcion);
-				control.administrativoPrincipal();
+				control.administrativoPrincipal(idUsuario.getText(), idPassword.getText());
+				log.info("Usuario = " + idUsuario.getText() + ", Contraseña = " + idPassword.getText());
 				break;
 
 			case  "cocineros":
 				log.info("El combobox dice: " + opcion);
-				control.encargadoCocinaPrincipal();
+				control.encargadoCocinaPrincipal(idUsuario.getText(), idPassword.getText());
+				log.info("Usuario = " + idUsuario.getText() + ", Contraseña = " + idPassword.getText());
 				break;
 
 			default:

@@ -5,6 +5,7 @@ import java.util.List;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import mx.uam.ayd.proyecto.negocio.ServicioAdministrativo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +15,9 @@ public class ControlAdministrativoPrincipal {
 	private static final Logger log = LoggerFactory.getLogger(ControlAdministrativoPrincipal.class);
 	
 	private final VentanaAdministrativoPrincipal ventana;
+
+    @Autowired
+    private ServicioAdministrativo servicioAdministrativo;
 
 	@Autowired
 	public ControlAdministrativoPrincipal(VentanaAdministrativoPrincipal ventana) {
@@ -36,4 +40,7 @@ public class ControlAdministrativoPrincipal {
 		ventana.muestra();
 	}
 
+    public void agregarAdministrativo(String nombre, String contraseña){
+        servicioAdministrativo.agregarAdministrativo(nombre, contraseña);
+    }
 }

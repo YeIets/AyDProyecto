@@ -31,7 +31,7 @@ public class VentanaActualizarDocumentos {
     public void muestra(ControlActualizarDocumentos control) {
         this.control = control;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ActualizarDocumentos.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/VentanasPadre/ActualizarDocumentos/ActualizarDocumentos.fxml"));
             loader.setController(this);
             Parent root = loader.load();
             stage = new Stage();

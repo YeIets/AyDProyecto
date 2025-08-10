@@ -23,8 +23,10 @@ public class EncargadoCocina {
 
     private String apellido;
 
+    private String password;
+
     private String correo;
-   
+
     @OneToMany(
         targetEntity = Menu.class, 
         fetch = FetchType.EAGER,
@@ -33,6 +35,11 @@ public class EncargadoCocina {
     )
     @JoinColumn(name = "idEncargadoCocina") // Llave Foranea de Menu
     private List<Menu> menusSemanal = new ArrayList<>();
+
+    public EncargadoCocina(String nombre, String password){
+        this.nombre = nombre;
+        this.password = password;
+    }
 
     @Override
     public String toString() {
