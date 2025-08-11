@@ -33,8 +33,13 @@ public class VentanaPagoEnLinea {
             loader.setController(this);
             Parent root = loader.load();
             stage = new Stage();
-            stage.setScene(new Scene(root));
             stage.setTitle("Recibo de Pago");
+
+            stage.setScene(new Scene(root));
+            stage.setResizable(false); 
+            stage.setWidth(600);       
+            stage.setHeight(420);      
+            stage.show();
 
             // CORREGIDO: La lógica ahora llena los Labels del ticket
             idTotal.setText("$" + total);

@@ -7,20 +7,46 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox layoutX="14.0" layoutY="14.0" prefHeight="141.0" prefWidth="170.0">
-         <children>
-            <ImageView fitHeight="138.0" fitWidth="170.0">
-               <image>
-                  <Image url="@../../../Image/LogoInstitucional.jpg" />
-               </image>
-            </ImageView>
-         </children>
-      </VBox>
-      <Label layoutX="284.0" layoutY="63.0" text="Seleccione los días que desea el menú" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="400.0" stroke="TRANSPARENT" strokeType="INSIDE" width="600.0">
+         <fill>
+            <LinearGradient endX="0.6142857142857143" endY="1.0" startX="0.32857142857142857" startY="0.5857142857142856">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" opacity="0.8500000238418579" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.9882352948188782" green="0.9176470637321472" blue="0.7019608020782471" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <Label layoutX="129.0" layoutY="21.0" text="&quot;Educar para la vida, guiar para el éxito&quot;">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="225.0" fitWidth="238.0" layoutX="25.0" layoutY="85.0" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../../media/laura/KINGSTON1/ESCUDOS/ESCUDO%20%232%201.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="235.0" layoutY="60.0" text="Seleccione los días que desea el menú">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
       <VBox layoutX="325.0" layoutY="104.0" prefHeight="95.0" prefWidth="100.0">
          <children>
             <CheckBox fx:id="idLunesCheck" mnemonicParsing="false" text="Lunes" />
@@ -36,7 +62,7 @@
       </VBox>
       <Label layoutX="283.0" layoutY="282.0" text="Total:" />
       <Label fx:id="idTotal" layoutX="421.0" layoutY="282.0" text="" />
-      <Button fx:id="idPago" layoutX="342.0" layoutY="320.0" mnemonicParsing="false" text="Pagar" onAction="#handlePagar"/>
-      <Button fx:id="idVolver" layoutX="38.0" layoutY="346.0" mnemonicParsing="false" text="Volver al menú" onAction="#handleVolver"/>
+      <Button fx:id="idPago" layoutX="491.0" layoutY="346.0" mnemonicParsing="false" onAction="#handlePagar" text="Pagar" />
+      <Button fx:id="idVolver" layoutX="38.0" layoutY="346.0" mnemonicParsing="false" onAction="#handleVolver" text="Volver al menú" />
    </children>
 </AnchorPane>

@@ -29,9 +29,14 @@ public class VentanaSeleccionPagoMenu {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/VentanasPadre/MenuSemanal/SeleccionPagoMenu.fxml"));
             loader.setController(this);
             Parent root = loader.load();
+
             stage = new Stage();
+            stage.setTitle("Elegir Método de Pago 5");
             stage.setScene(new Scene(root));
-            stage.setTitle("Elegir Método de Pago");
+            stage.setResizable(false); 
+            stage.setWidth(600);       
+            stage.setHeight(420);      
+            stage.show();
 
             idTotal.setText("$" + total);
 
