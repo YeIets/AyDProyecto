@@ -38,9 +38,14 @@ public class VentanaDatosPagoEnLinea {
             loader.setController(this);
             Parent root = loader.load();
             stage = new Stage();
+            stage.setTitle("Datos de Pago 7");
+            
             stage.setScene(new Scene(root));
-            stage.setTitle("Datos de Pago");
-
+            stage.setResizable(false); 
+            stage.setWidth(600);       
+            stage.setHeight(420);      
+            stage.show();
+            
             // Y aquí usamos el 'total' para actualizar la etiqueta en la interfaz
             idTotal.setText("$" + total);
 

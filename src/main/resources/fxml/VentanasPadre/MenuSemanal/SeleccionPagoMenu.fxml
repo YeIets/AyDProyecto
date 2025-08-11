@@ -5,25 +5,50 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="287.0" layoutY="87.0" text="Pago del Menú" />
-      <Label layoutX="204.0" layoutY="142.0" text="Total:" />
-      <Label fx:id="idTotal" layoutX="419.0" layoutY="142.0" text="0.00" />
-      <VBox layoutY="4.0" prefHeight="200.0" prefWidth="100.0">
-         <children>
-            <ImageView fitHeight="123.0" fitWidth="135.0">
-               <image>
-                  <Image url="@../../../Image/LogoInstitucional.jpg" />
-               </image>
-            </ImageView>
-         </children>
-      </VBox>
-      <Button fx:id="idPagoCaja" layoutX="175.0" layoutY="229.0" mnemonicParsing="false" text="Pagar en caja" />
-      <Button fx:id="idPagoLinea" layoutX="385.0" layoutY="229.0" mnemonicParsing="false" text="Pagar en linea" />
-      <Button fx:id="idVolver" layoutX="68.0" layoutY="332.0" mnemonicParsing="false" text="Volver" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="400.0" stroke="TRANSPARENT" strokeType="INSIDE" width="600.0">
+         <fill>
+            <LinearGradient endX="0.6142857142857143" endY="1.0" startX="0.32857142857142857" startY="0.5857142857142856">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" opacity="0.8500000238418579" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.9882352948188782" green="0.9176470637321472" blue="0.7019608020782471" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <Label layoutX="287.0" layoutY="93.0" text="Pago del Menú">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <Label layoutX="242.0" layoutY="142.0" text="Total:" />
+      <Label fx:id="idTotal" layoutX="457.0" layoutY="142.0" text="0.00" />
+      <Button fx:id="idPagoCaja" layoutX="226.0" layoutY="229.0" mnemonicParsing="false" text="Pagar en caja" />
+      <Button fx:id="idPagoLinea" layoutX="430.0" layoutY="229.0" mnemonicParsing="false" text="Pagar en linea" />
+      <Button fx:id="idVolver" layoutX="28.0" layoutY="332.0" mnemonicParsing="false" text="Volver" />
+      <ImageView fitHeight="165.0" fitWidth="178.0" layoutX="28.0" layoutY="78.0" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../../media/laura/KINGSTON1/ESCUDOS/ESCUDO%20%232%201.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="146.0" layoutY="14.0" text="&quot;Educar para la vida, guiar para el éxito&quot;">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -5,33 +5,64 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button id="botonSubirDocumentos" layoutX="304.0" layoutY="274.0" mnemonicParsing="false" onAction="#handleSubirDocumentos" prefHeight="25.0" prefWidth="150.0" text="Subir Documentos" />
-      <Button id="botonHacerPagos" layoutX="304.0" layoutY="225.0" mnemonicParsing="false" onAction="#handleHacerPagos" prefWidth="150.0" text="Hacer Pagos" />
-      <Button id="botonMenuSemanal" layoutX="304.0" layoutY="166.0" mnemonicParsing="false" onAction="#handleMenuSemanal" prefWidth="150.0" text="Menu Semanal" />
-      <Label layoutX="344.0" layoutY="99.0" text="Portal Padres" />
-      <VBox layoutX="14.0" layoutY="16.0" prefHeight="174.0" prefWidth="200.0">
-         <children>
-            <ImageView fitHeight="182.0" fitWidth="200.0">
-               <image>
-                  <Image url="@../../Image/LogoInstitucional.jpg" />
-               </image>
-            </ImageView>
-         </children>
-      </VBox>
-      <Button fx:id="idCancelar" layoutX="59.0" layoutY="341.0" mnemonicParsing="false" onAction="#handleCerrar" text="Cerrar" />
-      <ImageView fx:id="iconoNotificacion" fitWidth="40.0" layoutX="520.0" layoutY="14.0" preserveRatio="true">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="400.0" stroke="TRANSPARENT" strokeType="INSIDE" width="200.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.9882352948188782" green="0.6980392336845398" blue="0.0784313753247261" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.9882352948188782" green="0.9176470637321472" blue="0.7019608020782471" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <ImageView fx:id="iconoNotificacion" fitWidth="40.0" layoutX="546.0" layoutY="12.0" preserveRatio="true">
          <image>
             <Image url="@../../Image/notificacion.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="iconoNotificacionActiva" fitHeight="64.0" fitWidth="40.0" layoutX="520.0" layoutY="14.0" preserveRatio="true">
+      <ImageView fx:id="iconoNotificacionActiva" fitHeight="64.0" fitWidth="40.0" layoutX="546.0" layoutY="12.0" preserveRatio="true">
          <image>
             <Image url="@../../Image/notificacionActiva.png" />
          </image>
       </ImageView>
+      <ImageView fitHeight="251.0" fitWidth="303.0" layoutX="283.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../media/laura/KINGSTON1/ESCUDOS/ESCUDO%20%232%201.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="14.0" layoutY="14.0" text="Menú">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font></Label>
+      <Button id="botonMenuSemanal" layoutX="-1.0" layoutY="52.0" mnemonicParsing="false" onAction="#handleMenuSemanal" prefHeight="26.0" prefWidth="200.0" text="Menu Semanal" />
+      <Button id="botonSubirDocumentos" layoutY="88.0" mnemonicParsing="false" onAction="#handleSubirDocumentos" prefHeight="26.0" prefWidth="200.0" text="Subir Documentos" />
+      <Button id="botonHacerPagos" layoutX="-1.0" layoutY="124.0" mnemonicParsing="false" onAction="#handleHacerPagos" prefHeight="26.0" prefWidth="200.0" text="Hacer Pagos" />
+      <Button fx:id="idCancelar" layoutX="59.0" layoutY="341.0" mnemonicParsing="false" onAction="#handleCerrar" text="Cerrar" />
+      <Label layoutX="247.0" layoutY="300.0" text="&quot;Educar para la vida, guiar para el éxito&quot;">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="355.0" layoutY="330.0" text="¡Bienvenidos!">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
