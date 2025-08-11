@@ -33,6 +33,14 @@ public class Notificacion {
     @JoinColumn(name = "id_padre")
     private Padre destinatario;
 
+    public Notificacion(){
+
+    }
+
+    public Notificacion(Padre destinatario){
+        this.destinatario = destinatario;
+    }
+
     @Override
     public String toString() {
         return "Notificacion [idNotificacion=" + idNotificacion + ", titulo=" + titulo 

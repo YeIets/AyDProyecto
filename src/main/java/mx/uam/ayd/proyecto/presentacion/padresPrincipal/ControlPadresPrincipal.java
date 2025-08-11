@@ -1,6 +1,7 @@
 package mx.uam.ayd.proyecto.presentacion.padresPrincipal;
 
 import jakarta.annotation.PostConstruct;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
@@ -13,6 +14,8 @@ import mx.uam.ayd.proyecto.presentacion.padresPrincipal.MenuSemanal.ControlMenuS
 import mx.uam.ayd.proyecto.presentacion.padresPrincipal.ActualizarDocumentos.ControlActualizarDocumentos;
 import mx.uam.ayd.proyecto.presentacion.padresPrincipal.PagoServicios.ControlPagoServicios;
 
+import java.util.Optional;
+
 
 @Component
 public class ControlPadresPrincipal {
@@ -21,6 +24,8 @@ public class ControlPadresPrincipal {
 
     private final VentanaPadresPrincipal ventana;
 
+    @Setter
+    private Padre padreSesion;
     @Autowired
     private ServicioPadre servicioPadre;
 
@@ -63,5 +68,16 @@ public class ControlPadresPrincipal {
     //Abre la ventana de Hacer Pagos
     public void irAHacerPagos() {
         controlPagoServicios.inicia();
+    }
+
+    public Padre recuperarPadre(String correo) {
+        return servicioPadre.recuperaPadrePorCorreo(correo);
+    }
+
+    public boolean padreTieneNotificaciones() {
+    if (padreSesion == null) {
+            return false;
+        }
+        return servicioNotificacion.tieneNotificaciones(padreSesion);
     }
 }

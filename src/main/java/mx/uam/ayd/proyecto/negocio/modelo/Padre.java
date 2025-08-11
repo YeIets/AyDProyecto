@@ -62,4 +62,8 @@ public class Padre {
         this.hijos.add(hijo);
         hijo.setPadre(this);
     }
+
+    public void agregaNotificacion(Notificacion noti) {
+        notificaciones.add(noti);
+    }
 }

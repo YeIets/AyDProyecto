@@ -35,15 +35,10 @@ public class ServicioPadre {
      * @return La entidad Padre si la autenticación es exitosa; de lo contrario, retorna null.
      */
     public Padre verificarPadreRegistrado(String correo, String password) {
-        Optional<Padre> padreOpt = padreRepository.findByCorreo(correo);
+        return padreRepository.findByCorreoAndPassword(correo, password);
+    }
 
-        if (padreOpt.isPresent()) {
-            Padre padre = padreOpt.get();
-            if (padre.getPassword().equals(password)) {
-                return padre;
-            }
-        }
-
-        return null;
+    public Padre recuperaPadrePorCorreo(String correo) {
+        return padreRepository.findByCorreo(correo);
     }
 }

@@ -4,10 +4,7 @@ import mx.uam.ayd.proyecto.datos.AdministrativoRepository;
 import mx.uam.ayd.proyecto.datos.EncargadoCocinaRepository;
 import mx.uam.ayd.proyecto.datos.AlumnoRepository;
 import mx.uam.ayd.proyecto.datos.PadreRepository;
-import mx.uam.ayd.proyecto.negocio.modelo.Administrativo;
-import mx.uam.ayd.proyecto.negocio.modelo.EncargadoCocina;
-import mx.uam.ayd.proyecto.negocio.modelo.Alumno;
-import mx.uam.ayd.proyecto.negocio.modelo.Padre;
+import mx.uam.ayd.proyecto.negocio.modelo.*;
 import mx.uam.ayd.proyecto.presentacion.loginPrincipal.ControlLoginPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -84,6 +81,8 @@ public class ProyectoApplication {
 
         // --- LÓGICA PARA CREAR Y VINCULAR PADRE CON ALUMNOS ---
         Padre padre = new Padre("Juan", "Pérez", "Juan@uam.com", "Juan123");
+        Notificacion noti = new Notificacion(padre);
+        padre.agregaNotificacion(noti);
 
         Alumno alumno1 = new Alumno("Sofia", "Pérez", "2193034567");
         Alumno alumno2 = new Alumno("Luis", "Pérez", "2193034588");

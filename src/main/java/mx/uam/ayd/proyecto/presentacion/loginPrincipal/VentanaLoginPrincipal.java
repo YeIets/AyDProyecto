@@ -111,8 +111,7 @@ public class VentanaLoginPrincipal {
         switch (opcion.toLowerCase()) {
             case "padres" -> {
                 if (control.verificarPadreRegistrado(usuario, password)) {
-                    // CORRECCIÓN: Se llama al método sin argumentos.
-                    control.padresPrincipal();
+                    control.padresPrincipal(usuario);
                 } else {
                     mostrarMensajeError("El usuario o la contraseña son incorrectos.");
                 }

@@ -80,7 +80,20 @@ public class VentanaPadresPrincipal {
         
         initializeUI();
 
+        boolean hayNotificacion = control.padreTieneNotificaciones();
+        actualizarIconoNotificacion(hayNotificacion);
+
         stage.show();
+    }
+
+    public void actualizarIconoNotificacion(boolean tieneNotificaciones) {
+        Platform.runLater(() -> {
+            if (iconoNotificacion != null && iconoNotificacionActiva != null) {
+                iconoNotificacionActiva.setVisible(tieneNotificaciones);
+                iconoNotificacion.setVisible(!tieneNotificaciones);
+                log.info("Tiene notificaciones es = " + tieneNotificaciones);
+            }
+        });
     }
 
     // FXML Handle Events

@@ -4,12 +4,15 @@ import jakarta.annotation.PostConstruct;
 import mx.uam.ayd.proyecto.negocio.ServicioAdministrativo;
 import mx.uam.ayd.proyecto.negocio.ServicioEncargadoCocina;
 import mx.uam.ayd.proyecto.negocio.ServicioPadre;
+import mx.uam.ayd.proyecto.negocio.modelo.Padre;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import mx.uam.ayd.proyecto.presentacion.padresPrincipal.ControlPadresPrincipal;
 import mx.uam.ayd.proyecto.presentacion.administrativoPrincipal.ControlAdministrativoPrincipal;
 import mx.uam.ayd.proyecto.presentacion.encargadoCocinaPrincipal.ControlEncargadoCocinaPrincipal;
+
+import java.util.Optional;
 
 @Component
 public class ControlLoginPrincipal {
@@ -55,8 +58,10 @@ public class ControlLoginPrincipal {
         ventana.muestra();
     }
 
-    public void padresPrincipal() {
+    public void padresPrincipal(String correo) {
         ventana.cerrar();
+        Padre padre = controlPadresPrincipal.recuperarPadre(correo);
+        controlPadresPrincipal.setPadreSesion(padre);
         controlPadresPrincipal.inicia();
     }
 

@@ -16,6 +16,7 @@ public interface PadreRepository extends CrudRepository<Padre, Long> {
      * @param correo El correo electrónico a buscar.
      * @return un Optional que contiene al Padre si se encuentra, o un Optional vacío si no.
      */
-    Optional<Padre> findByCorreo(String correo);
+    Padre findByCorreo(String correo);
+    Padre findByCorreoAndPassword(String correo, String password);
 
 }
