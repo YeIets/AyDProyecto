@@ -50,15 +50,6 @@ public class ControlPadresPrincipal {
         ventana.muestra();
     }
 
-    //Añade un Padre a la base de datos
-    public void agregarPadre(String nombre, String password){
-        servicioPadre.agregarPadre(nombre, password);
-    }
-
-    public boolean verificarPadreRegistrado(String correo, String password){
-        return servicioPadre.verificarPadreRegistrado(correo,password);
-    }
-
     //Abre la ventana de Actualizar Documentos
     public void irAActualizarDocumentos() {
         controlActualizarDocumentos.inicia();

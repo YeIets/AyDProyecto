@@ -7,42 +7,43 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-@Service
 /**
- * Servicio relacionado con los alumnos
- *
+ * Servicio de negocio relacionado con la entidad Padre.
  */
+@Service
 public class ServicioPadre {
-	
-	private final PadreRepository padreRepository;
-	
-	@Autowired
-	public ServicioPadre(PadreRepository padreRepository) {
-		this.padreRepository = padreRepository;
-	}
-	
-	//Recupera TODOS los padres
-	public List <Padre> recuperaPadres() {
-		List <Padre> padres = new ArrayList<>();
-		
-		for(Padre padre : padreRepository.findAll()) {
-			padres.add(padre);
-		}
-				
-		return padres;
-	}
 
-	//Persiste un padre en la base de datos
-	public Padre agregarPadre(String nombre, String password){
-		Padre padre = new Padre(nombre, password);
-		return padreRepository.save(padre);
-	}
+    @Autowired
+    private PadreRepository padreRepository;
 
-	//Regresa True si esta registrado en la BD
-	public boolean verificarPadreRegistrado(String correo, String password){
-		Padre padre = padreRepository.findByCorreoAndPassword(correo,password);
-		return padre != null;
-	}
+    /**
+     * Recupera todas las entidades Padre de la base de datos.
+     * @return una lista de entidades Padre.
+     */
+    public List<Padre> recuperaPadres() {
+        List<Padre> padres = new ArrayList<>();
+        padreRepository.findAll().forEach(padres::add);
+        return padres;
+    }
 
+    /**
+     * Autentica a un padre verificando sus credenciales.
+     * @param correo El correo electrónico del padre.
+     * @param password La contraseña del padre.
+     * @return La entidad Padre si la autenticación es exitosa; de lo contrario, retorna null.
+     */
+    public Padre verificarPadreRegistrado(String correo, String password) {
+        Optional<Padre> padreOpt = padreRepository.findByCorreo(correo);
+
+        if (padreOpt.isPresent()) {
+            Padre padre = padreOpt.get();
+            if (padre.getPassword().equals(password)) {
+                return padre;
+            }
+        }
+
+        return null;
+    }
 }

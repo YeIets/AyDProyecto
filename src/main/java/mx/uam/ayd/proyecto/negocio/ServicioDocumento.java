@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jakarta.annotation.PostConstruct; //
+import jakarta.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -63,7 +63,6 @@ public class ServicioDocumento {
     }
 
     public List<String> recuperarNombresDeDocumentos() {
-        // VERSIÓN CORREGIDA para el error del .stream()
         return StreamSupport.stream(documentoRepository.findAll().spliterator(), false)
                 .map(Documento::getNombre)
                 .collect(Collectors.toList());
@@ -76,6 +75,8 @@ public class ServicioDocumento {
     public List <Documento> recuperaDocumentos() {
         return (List<Documento>) documentoRepository.findAll();
     }
+
+
 
     public List <Alumno> validarDocumentos(List <Alumno> alumnos) {
         List <Alumno> alumnosConDocumentos = new ArrayList<>();
@@ -94,5 +95,17 @@ public class ServicioDocumento {
         }
         Path ruta = Paths.get(documento.getDireccionArchivo());
         return Files.exists(ruta) && Files.isRegularFile(ruta);
+    }
+
+
+    /**
+     * Busca alumnos cuyo nombre contenga el texto de búsqueda.
+     * No distingue entre mayúsculas y minúsculas.
+     * @param nombre El texto a buscar en el nombre del alumno.
+     * @return Una lista de alumnos que coinciden con la búsqueda.
+     */
+    public List<Alumno> buscarAlumnosPorNombre(String nombre) {
+        // CORRECCIÓN: Se usa la variable "alumnoRepository" (con 'a' minúscula)
+        return alumnoRepository.findByNombreContainingIgnoreCase(nombre);
     }
 }

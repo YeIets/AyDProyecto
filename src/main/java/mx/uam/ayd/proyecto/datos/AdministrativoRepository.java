@@ -1,18 +1,9 @@
 package mx.uam.ayd.proyecto.datos;
 
-import org.springframework.data.repository.CrudRepository;
 import mx.uam.ayd.proyecto.negocio.modelo.Administrativo;
+import org.springframework.data.repository.CrudRepository;
+import java.util.Optional;
 
-/**
- * 
- * Repositorio para administrativos
- * 
- *
- */
-
-public interface AdministrativoRepository extends CrudRepository <Administrativo, Long> {
-	
-	public Administrativo findByNombreAndApellido(String nombre, String apellido);
-
-    Administrativo findByCorreoAndPassword(String correo, String password);
+public interface AdministrativoRepository extends CrudRepository<Administrativo, Long> {
+    Optional<Administrativo> findByCorreo(String correo);
 }

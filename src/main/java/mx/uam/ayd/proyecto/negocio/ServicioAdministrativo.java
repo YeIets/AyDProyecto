@@ -5,28 +5,34 @@ import mx.uam.ayd.proyecto.negocio.modelo.Administrativo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+import java.util.Optional;
+
 /**
- * Servicio relacionado con los alumnos
- *
+ * Servicio de negocio para la entidad Administrativo.
  */
+@Service
 public class ServicioAdministrativo {
-	
-	private final AdministrativoRepository administrativoRepository;
-	
-	@Autowired
-	public ServicioAdministrativo(AdministrativoRepository administrativoRepository) {
-		this.administrativoRepository = administrativoRepository;
-	}
 
-	//Persiste un administrativo en la base de datos
-	public Administrativo agregarAdministrativo(String nombre, String password){
-		Administrativo admin = new Administrativo(nombre, password);
-		return administrativoRepository.save(admin);
-	}
+    @Autowired
+    private AdministrativoRepository administrativoRepository;
 
-    public boolean verificarAdministrativoRegistrado(String correo, String password) {
-		Administrativo admin = administrativoRepository.findByCorreoAndPassword(correo,password);
-		return admin != null;
+    /**
+     * Autentica a un administrador verificando sus credenciales.
+     * @param correo El correo electrónico del administrador.
+     * @param password La contraseña del administrador.
+     * @return La entidad Administrativo si la autenticación es exitosa; de lo contrario, retorna null.
+     */
+    public Administrativo verificarAdministrativoRegistrado(String correo, String password) {
+        // Se asume que tienes un `AdministrativoRepository` con el método findByCorreo
+        Optional<Administrativo> adminOpt = administrativoRepository.findByCorreo(correo);
+
+        if (adminOpt.isPresent()) {
+            Administrativo admin = adminOpt.get();
+            if (admin.getPassword().equals(password)) {
+                return admin; // Credenciales válidas.
+            }
+        }
+
+        return null; // Credenciales inválidas o el usuario no existe.
     }
 }

@@ -2,79 +2,82 @@ package mx.uam.ayd.proyecto.negocio.modelo;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor; // Import para el constructor sin argumentos
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.stream.Collectors;
 
 /**
- *
  * Entidad de negocio Alumno
- *
  */
 @Data
 @Entity
+@NoArgsConstructor // Lombok crea el constructor vacío requerido por JPA
 public class Alumno {
 
-    @Id // Esto le dice a Spring que este es el identificador
-    @GeneratedValue (strategy = GenerationType.IDENTITY) // Le dice a Spring que genere el id
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAlumno;
 
     private String nombre;
-
     private String apellido;
-
     private String matricula;
 
+    // ✅ RELACIÓN AÑADIDA: La contraparte de la relación. Muchos Alumnos tienen un Padre.
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "padre_id") // Define la columna de llave foránea en la tabla Alumno
+    private Padre padre;
+
     @OneToMany(
-        targetEntity = Menu.class, 
-        fetch = FetchType.EAGER, 
-        cascade = CascadeType.ALL, 
-        orphanRemoval = true
+            targetEntity = Menu.class,
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
     )
     private List<Menu> menus = new ArrayList<>(5);
 
     @OneToMany(
-        targetEntity = Documento.class, 
-        fetch = FetchType.EAGER, 
-        cascade = CascadeType.ALL, 
-        orphanRemoval = true
+            targetEntity = Documento.class,
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
     )
-    private List<Documento> documentos = new ArrayList <>(5);
+    private List<Documento> documentos = new ArrayList<>(5);
 
-    public boolean agregarDocumento(Documento documento){
 
-        if (documento == null){
+    public Alumno(String nombre, String apellido, String matricula) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.matricula = matricula;
+    }
+
+    public String getNombreCompleto() {
+        return this.nombre + " " + this.apellido;
+    }
+
+    public List<Documento> getDocumentosPorTipo(String tipo) {
+        return this.documentos.stream()
+                .filter(documento -> documento.getTipo().equalsIgnoreCase(tipo))
+                .collect(Collectors.toList());
+    }
+
+    public boolean agregarDocumento(Documento documento) {
+        if (documento == null) {
             throw new IllegalArgumentException("Documento no puede ser nulo");
         }
-
-        //Checar si el menu esta en la lista de menu ya que no pueden haber duplicados
         if (documentos.contains(documento)) {
             return false;
         }
-
         return documentos.add(documento);
     }
 
-    public boolean agregarMenu(Menu menu){
-
-        if (menu == null){
+    public boolean agregarMenu(Menu menu) {
+        if (menu == null) {
             throw new IllegalArgumentException("Menu no puede ser nulo");
         }
-
-        //Checar si el menu esta en la lista de menu ya que no pueden haber duplicados
         if (menus.contains(menu)) {
             return false;
         }
-
-       return menus.add(menu);
-
-   }
-   
-    @Override
-    public String toString() {
-        return "Alumno [idAlumno=" + idAlumno + ", nombre=" + nombre 
-        + ", apellido=" + apellido + ", matricula=" + matricula 
-        + ", menus=" + menus.size() + ", documentos" + documentos.size() + "]";
+        return menus.add(menu);
     }
-
 }

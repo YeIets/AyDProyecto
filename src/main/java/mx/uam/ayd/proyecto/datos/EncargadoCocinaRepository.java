@@ -1,18 +1,9 @@
 package mx.uam.ayd.proyecto.datos;
 
-import org.springframework.data.repository.CrudRepository;
 import mx.uam.ayd.proyecto.negocio.modelo.EncargadoCocina;
+import org.springframework.data.repository.CrudRepository;
+import java.util.Optional;
 
-/**
- * 
- * Repositorio para encargados de cocina
- * 
- *
- */
-
-public interface EncargadoCocinaRepository extends CrudRepository <EncargadoCocina, Long> {
-	
-	public EncargadoCocina findByNombreAndApellido(String nombre, String apellido);
-
-    EncargadoCocina findByCorreoAndPassword(String correo, String password);
+public interface EncargadoCocinaRepository extends CrudRepository<EncargadoCocina, Long> {
+    Optional<EncargadoCocina> findByCorreo(String correo);
 }

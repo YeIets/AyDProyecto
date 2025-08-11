@@ -1,10 +1,11 @@
 package mx.uam.ayd.proyecto.presentacion.loginPrincipal;
 
 import jakarta.annotation.PostConstruct;
+import mx.uam.ayd.proyecto.negocio.ServicioAdministrativo;
+import mx.uam.ayd.proyecto.negocio.ServicioEncargadoCocina;
+import mx.uam.ayd.proyecto.negocio.ServicioPadre;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import mx.uam.ayd.proyecto.presentacion.padresPrincipal.ControlPadresPrincipal;
 import mx.uam.ayd.proyecto.presentacion.administrativoPrincipal.ControlAdministrativoPrincipal;
@@ -12,74 +13,93 @@ import mx.uam.ayd.proyecto.presentacion.encargadoCocinaPrincipal.ControlEncargad
 
 @Component
 public class ControlLoginPrincipal {
-	
-	private static final Logger log = LoggerFactory.getLogger(ControlLoginPrincipal.class);
 
-	//Se declaran los controles que interactuan con el ControlLoginPrincipal
-	private final ControlPadresPrincipal controlPadresPrincipal;
-	private final ControlAdministrativoPrincipal controlAdministrativoPrincipal;
-	private final ControlEncargadoCocinaPrincipal controlEncargadoCocinaPrincipal;
-	private final VentanaLoginPrincipal ventana;
+    // Se inyectan los controladores de las ventanas principales
+    private final ControlPadresPrincipal controlPadresPrincipal;
+    private final ControlAdministrativoPrincipal controlAdministrativoPrincipal;
+    private final ControlEncargadoCocinaPrincipal controlEncargadoCocinaPrincipal;
+    private final VentanaLoginPrincipal ventana;
 
-	@Autowired
-	public ControlLoginPrincipal(
-		VentanaLoginPrincipal ventana, 
-		ControlPadresPrincipal controlPadresPrincipal,
-		ControlAdministrativoPrincipal controlAdministrativoPrincipal,
-		ControlEncargadoCocinaPrincipal controlEncargadoCocinaPrincipal) 
-	{
-		this.controlPadresPrincipal = controlPadresPrincipal;
-		this.controlAdministrativoPrincipal = controlAdministrativoPrincipal;
-		this.controlEncargadoCocinaPrincipal = controlEncargadoCocinaPrincipal;
-		this.ventana = ventana;
-	}
-	
-	/**
-	 * Método que se ejecuta después de la construcción del bean
-	 * y realiza la conexión bidireccional entre el control y la ventana
-	 */
-	@PostConstruct
-	public void init() {
-		ventana.setControlLoginPrincipal(this);
-	}
+    // Se inyectan los servicios necesarios para la lógica de negocio de autenticación
+    private final ServicioPadre servicioPadre;
+    private final ServicioAdministrativo servicioAdministrativo;
+    private final ServicioEncargadoCocina servicioEncargadoCocina;
 
-	
-	//Metodo que inicia / muestra la ventana
-	public void inicia() {
-		ventana.muestra();
-	}
+    @Autowired
+    public ControlLoginPrincipal(
+            VentanaLoginPrincipal ventana,
+            ControlPadresPrincipal controlPadresPrincipal,
+            ControlAdministrativoPrincipal controlAdministrativoPrincipal,
+            ControlEncargadoCocinaPrincipal controlEncargadoCocinaPrincipal,
+            ServicioPadre servicioPadre,
+            ServicioAdministrativo servicioAdministrativo,
+            ServicioEncargadoCocina servicioEncargadoCocina
+    ) {
+        this.ventana = ventana;
+        this.controlPadresPrincipal = controlPadresPrincipal;
+        this.controlAdministrativoPrincipal = controlAdministrativoPrincipal;
+        this.controlEncargadoCocinaPrincipal = controlEncargadoCocinaPrincipal;
+        this.servicioPadre = servicioPadre;
+        this.servicioAdministrativo = servicioAdministrativo;
+        this.servicioEncargadoCocina = servicioEncargadoCocina;
+    }
 
-	//Metodo que muestra la pantalla principal para padres
-	public void padresPrincipal(String usuarioNombre, String usuarioContraseña){
-		ventana.cerrar();
-		controlPadresPrincipal.inicia();
-		controlPadresPrincipal.agregarPadre(usuarioNombre, usuarioContraseña);
-	}
+    @PostConstruct
+    public void init() {
+        if (this.ventana != null) {
+            this.ventana.setControlLoginPrincipal(this);
+        }
+    }
 
-	public boolean verificarPadreRegistrado(String correo, String password){
-		return controlPadresPrincipal.verificarPadreRegistrado(correo,password);
-	}
+    public void inicia() {
+        ventana.muestra();
+    }
 
-	public boolean verificarAdministradorRegistrado(String correo, String password){
-		return controlAdministrativoPrincipal.verificarAdministradorRegistrado(correo,password);
-	}
+    public void padresPrincipal() {
+        ventana.cerrar();
+        controlPadresPrincipal.inicia();
+    }
 
-	public boolean verificarEncargadoDeCocinaRegistrado(String correo, String password){
-		return controlEncargadoCocinaPrincipal.verificarEncargadoDeCocinaRegistrado(correo,password);
-	}
+    public void administrativoPrincipal() {
+        ventana.cerrar();
+        controlAdministrativoPrincipal.inicia();
+    }
 
-	//Metodo que muestra la pantalla principal para administrativos
-	public void administrativoPrincipal(String usuarioNombre, String usuarioContraseña){
-		ventana.cerrar();
-		controlAdministrativoPrincipal.inicia();
-		controlAdministrativoPrincipal.agregarAdministrativo(usuarioNombre, usuarioContraseña);
-	}
+    public void encargadoCocinaPrincipal() {
+        ventana.cerrar();
+        controlEncargadoCocinaPrincipal.inicia();
+    }
 
-	//Metodo que muestra la pantalla principal para cocineros
-	public void encargadoCocinaPrincipal(String usuarioNombre, String usuarioContraseña){
-		ventana.cerrar();
-		controlEncargadoCocinaPrincipal.inicia();
-		controlEncargadoCocinaPrincipal.agregarEncargadoCocina(usuarioNombre, usuarioContraseña);
-	}
+    /**
+     * Verifica las credenciales de un Padre directamente a través del ServicioPadre.
+     * @param correo El correo del padre a verificar.
+     * @param password La contraseña a verificar.
+     * @return true si las credenciales son válidas, false en caso contrario.
+     */
+    public boolean verificarPadreRegistrado(String correo, String password) {
+        // Se invoca directamente al servicio para la verificación.
+        return servicioPadre.verificarPadreRegistrado(correo, password) != null;
+    }
 
+    /**
+     * Verifica las credenciales de un Administrador directamente a través del ServicioAdministrativo.
+     * @param correo El correo del administrador a verificar.
+     * @param password La contraseña a verificar.
+     * @return true si las credenciales son válidas, false en caso contrario.
+     */
+    public boolean verificarAdministradorRegistrado(String correo, String password) {
+        // Se invoca directamente al servicio para la verificación.
+        return servicioAdministrativo.verificarAdministrativoRegistrado(correo, password) != null;
+    }
+
+    /**
+     * Verifica las credenciales de un Encargado de Cocina directamente a través del ServicioEncargadoCocina.
+     * @param correo El correo del encargado a verificar.
+     * @param password La contraseña a verificar.
+     * @return true si las credenciales son válidas, false en caso contrario.
+     */
+    public boolean verificarEncargadoDeCocinaRegistrado(String correo, String password) {
+        // Se invoca directamente al servicio para la verificación.
+        return servicioEncargadoCocina.verificarEncargadoDeCocinaRegistrado(correo, password) != null;
+    }
 }
