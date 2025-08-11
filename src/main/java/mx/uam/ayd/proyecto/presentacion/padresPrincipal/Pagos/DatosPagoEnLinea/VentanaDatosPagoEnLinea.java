@@ -27,10 +27,6 @@ public class VentanaDatosPagoEnLinea {
     @FXML private Button idPagar;
     @FXML private Button idRegresar;
 
-    /**
-     * CORRECCIÓN AQUÍ:
-     * El método ahora acepta el segundo argumento 'int total'.
-     */
     public void muestra(ControlDatosPagoEnLinea control, int total) {
         this.control = control;
         try {
@@ -39,18 +35,16 @@ public class VentanaDatosPagoEnLinea {
             Parent root = loader.load();
             stage = new Stage();
             stage.setTitle("Datos de Pago");
-            
+
             stage.setScene(new Scene(root));
-            stage.setResizable(false); 
-            stage.setWidth(600);       
-            stage.setHeight(420);      
-            stage.show();
-            
-            // Y aquí usamos el 'total' para actualizar la etiqueta en la interfaz
+            stage.setResizable(false);
+            stage.setWidth(600);
+            stage.setHeight(420);
+
             idTotal.setText("$" + total);
 
-            // Conexión de los botones
-            idPagar.setOnAction(e -> control.procesarPago());
+            // Se cambia la acción del botón para que primero valide
+            idPagar.setOnAction(e -> control.validarYProcesarPago());
             idRegresar.setOnAction(e -> control.regresar());
 
             stage.show();
@@ -77,6 +71,15 @@ public class VentanaDatosPagoEnLinea {
         alert.setTitle("Pago Exitoso");
         alert.setHeaderText(null);
         alert.setContentText("¡El pago se ha procesado correctamente!");
+        alert.showAndWait();
+    }
+
+    // MÉTODO AÑADIDO para mostrar los errores de validación
+    public void muestraDialogoDeError(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error de Validación");
+        alert.setHeaderText("Por favor, corrige los siguientes errores:");
+        alert.setContentText(mensaje);
         alert.showAndWait();
     }
 
