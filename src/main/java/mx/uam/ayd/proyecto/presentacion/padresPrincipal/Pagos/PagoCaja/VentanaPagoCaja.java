@@ -59,7 +59,7 @@ public class VentanaPagoCaja {
             Parent root = loader.load();
 
             stage = new Stage();
-            stage.setTitle("Pago en Caja 6");
+            stage.setTitle("Pago en Caja");
             stage.setScene(new Scene(root));
             stage.setResizable(false); 
             stage.setWidth(600);       

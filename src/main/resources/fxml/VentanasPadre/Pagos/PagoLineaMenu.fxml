@@ -48,7 +48,7 @@
       <Label layoutX="337.0" layoutY="160.0" text="Total:" />
       <Button fx:id="idCancelar" layoutX="33.0" layoutY="341.0" mnemonicParsing="false" text="Volver" />
       <Label layoutX="412.0" layoutY="274.0" text="Pagado" />
-      <Label layoutX="257.0" layoutY="19.0" text="&quot;Educar para la vida, guiar para el éxito&quot;">
+      <Label layoutX="146.0" layoutY="21.0" text="&quot;Educar para la vida, guiar para el éxito&quot;">
          <font>
             <Font name="System Bold Italic" size="16.0" />
          </font>

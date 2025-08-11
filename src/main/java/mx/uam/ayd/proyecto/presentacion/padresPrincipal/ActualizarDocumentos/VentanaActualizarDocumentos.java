@@ -35,8 +35,12 @@ public class VentanaActualizarDocumentos {
             loader.setController(this);
             Parent root = loader.load();
             stage = new Stage();
-            stage.setScene(new Scene(root));
             stage.setTitle("Actualización de Documentos");
+
+            stage.setScene(new Scene(root));
+            stage.setResizable(false); 
+            stage.setWidth(600);       
+            stage.setHeight(420);      
             stage.show();
 
         } catch (IOException e) {

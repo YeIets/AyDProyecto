@@ -71,7 +71,7 @@ public class VentanaMenuSemanal {
             Parent root = loader.load();
 
             stage = new Stage();
-            stage.setTitle("Menú Semanal 3");
+            stage.setTitle("Menú Semanal");
             stage.setScene(new Scene(root));
             stage.setResizable(false); 
             stage.setWidth(600);       

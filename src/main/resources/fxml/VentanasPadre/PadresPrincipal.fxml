@@ -53,7 +53,7 @@
       <Button id="botonMenuSemanal" layoutX="-1.0" layoutY="52.0" mnemonicParsing="false" onAction="#handleMenuSemanal" prefHeight="26.0" prefWidth="200.0" text="Menu Semanal" />
       <Button id="botonSubirDocumentos" layoutY="88.0" mnemonicParsing="false" onAction="#handleSubirDocumentos" prefHeight="26.0" prefWidth="200.0" text="Subir Documentos" />
       <Button id="botonHacerPagos" layoutX="-1.0" layoutY="124.0" mnemonicParsing="false" onAction="#handleHacerPagos" prefHeight="26.0" prefWidth="200.0" text="Hacer Pagos" />
-      <Button fx:id="idCancelar" layoutX="59.0" layoutY="341.0" mnemonicParsing="false" onAction="#handleCerrar" text="Cerrar" />
+      <Button fx:id="idCancelar" layoutX="71.0" layoutY="339.0" mnemonicParsing="false" onAction="#handleCerrar" text="Cerrar" />
       <Label layoutX="247.0" layoutY="300.0" text="&quot;Educar para la vida, guiar para el éxito&quot;">
          <font>
             <Font name="System Bold Italic" size="16.0" />

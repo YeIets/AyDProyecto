@@ -31,7 +31,7 @@ public class VentanaSeleccionPagoMenu {
             Parent root = loader.load();
 
             stage = new Stage();
-            stage.setTitle("Elegir Método de Pago 5");
+            stage.setTitle("Elegir Método de Pago");
             stage.setScene(new Scene(root));
             stage.setResizable(false); 
             stage.setWidth(600);       

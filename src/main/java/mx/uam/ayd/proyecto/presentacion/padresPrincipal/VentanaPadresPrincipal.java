@@ -47,7 +47,7 @@ public class VentanaPadresPrincipal {
 
         try {
             stage = new Stage();
-            stage.setTitle("Ventana Padres Principal 2");
+            stage.setTitle("Ventana Padres Principal");
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/VentanasPadre/PadresPrincipal.fxml"));
             loader.setController(this);

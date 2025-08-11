@@ -38,7 +38,7 @@ public class VentanaDatosPagoEnLinea {
             loader.setController(this);
             Parent root = loader.load();
             stage = new Stage();
-            stage.setTitle("Datos de Pago 7");
+            stage.setTitle("Datos de Pago");
             
             stage.setScene(new Scene(root));
             stage.setResizable(false); 

@@ -3,6 +3,7 @@ package mx.uam.ayd.proyecto.presentacion.encargadoCocinaPrincipal;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -25,6 +26,8 @@ public class VentanaEncargadoCocinaPrincipal{
 	
 	private ControlEncargadoCocinaPrincipal control;
 	private boolean initialized = false;
+
+	private Scene scene;
 
 	/**
 	 * Constructor without UI initialization
@@ -54,8 +57,16 @@ public class VentanaEncargadoCocinaPrincipal{
 			// Load FXML
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/VentanasEncargadoDeCocina/EncargadoCocinaPrincipal.fxml"));
 			loader.setController(this);
-			Scene scene = new Scene(loader.load(), 600, 420);
-			stage.setScene(scene);
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            this.scene = scene;
+
+            stage.setScene(scene);
+            stage.setWidth(600);
+            stage.setHeight(420);
+            stage.setResizable(false);
+
+            stage.show();
 			
 			initialized = true;
 		} catch (IOException e) {
@@ -84,8 +95,6 @@ public class VentanaEncargadoCocinaPrincipal{
 		stage.show();
 	}
 
-	// FXML Handle Events
-
 	//Declara las funciones del boton VerPedidos
 	@FXML
 	private void handleVerPedidos() {
@@ -97,4 +106,12 @@ public class VentanaEncargadoCocinaPrincipal{
 	private void handleSubirMenu() {
 		log.info("Se presiono Subir Menu");
 	}
+
+		// FXML Handle Events
+	@FXML
+    private void handleCerrar() {
+        if (stage != null) {
+            stage.close();
+        }
+    }
 }

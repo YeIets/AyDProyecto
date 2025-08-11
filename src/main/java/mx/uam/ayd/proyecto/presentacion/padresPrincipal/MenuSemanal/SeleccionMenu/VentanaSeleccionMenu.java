@@ -58,7 +58,7 @@ public class VentanaSeleccionMenu {
             Parent root = loader.load();
 
             stage = new Stage();
-            stage.setTitle("Seleccionar días del menú 4");
+            stage.setTitle("Seleccionar días del menú");
             stage.setScene(new Scene(root));
             stage.setResizable(false); 
             stage.setWidth(600);       

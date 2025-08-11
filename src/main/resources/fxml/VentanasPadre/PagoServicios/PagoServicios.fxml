@@ -6,55 +6,81 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox layoutX="14.0" layoutY="14.0" prefHeight="151.0" prefWidth="159.0">
-         <children>
-            <ImageView fitHeight="144.0" fitWidth="164.0">
-               <image>
-                  <Image url="@../../../Image/LogoInstitucional.jpg" />
-               </image>
-            </ImageView>
-         </children>
-      </VBox>
-      <Label layoutX="289.0" layoutY="35.0" text="Bienvenido al portal de pagos." />
-      <Label layoutX="181.0" layoutY="77.0" text="Seleccione el pago que desea realizar:" />
-      <ImageView fitHeight="47.0" fitWidth="48.0" layoutX="476.0" layoutY="98.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="400.0" layoutX="5.0" layoutY="4.0" stroke="TRANSPARENT" strokeType="INSIDE" width="600.0">
+         <fill>
+            <LinearGradient endX="0.6142857142857143" endY="1.0" startX="0.32857142857142857" startY="0.5857142857142856">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" opacity="0.8500000238418579" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.9882352948188782" green="0.9176470637321472" blue="0.7019608020782471" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <Label layoutX="250.0" layoutY="53.0" text="Bienvenido al portal de pagos">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Label>
+      <Label layoutX="180.0" layoutY="113.0" text="Seleccione el pago que desea realizar:" />
+      <ImageView fitHeight="33.0" fitWidth="34.0" layoutX="435.0" layoutY="146.0">
          <image>
             <Image url="@../../../Image/Inscripción.png" />
          </image>
       </ImageView>
-      <Label layoutX="184.0" layoutY="120.0" text="Inscripción." />
-      <Label layoutX="349.0" layoutY="120.0" text="\$5000.00" />
-      <Label layoutX="182.0" layoutY="156.0" text="Colegiatura." />
-      <Label layoutX="186.0" layoutY="196.0" text="Uniforme." />
-      <Label layoutX="196.0" layoutY="230.0" text="Libros." />
-      <Label layoutX="349.0" layoutY="153.0" text="\$2000.00" />
-      <Label layoutX="349.0" layoutY="196.0" text="\$1500.00" />
-      <Label layoutX="351.0" layoutY="230.0" text="\$950.00" />
-      <CheckBox fx:id="idCheckInscripcion" layoutX="286.0" layoutY="120.0" mnemonicParsing="false" />
-      <CheckBox fx:id="idCheckColegiatura" layoutX="287.0" layoutY="153.0" mnemonicParsing="false" />
-      <CheckBox fx:id="idCheckUniforme" layoutX="286.0" layoutY="195.0" mnemonicParsing="false" />
-      <CheckBox fx:id="idCheckLibros" layoutX="286.0" layoutY="229.0" mnemonicParsing="false" />
-      <Label layoutX="200.0" layoutY="268.0" text="Total:" />
-      <Label fx:id="idTotal" layoutX="352.0" layoutY="268.0" text="\$00.00" />
-      <ImageView fitHeight="43.0" fitWidth="46.0" layoutX="477.0" layoutY="143.0">
+      <Label layoutX="184.0" layoutY="153.0" text="Inscripción" />
+      <Label layoutX="355.0" layoutY="153.0" text="\$5000.00" />
+      <Label layoutX="182.0" layoutY="191.0" text="Colegiatura" />
+      <Label layoutX="195.0" layoutY="231.0" text="Uniforme" />
+      <Label layoutX="213.0" layoutY="269.0" text="Libros" />
+      <Label layoutX="355.0" layoutY="191.0" text="\$2000.00" />
+      <Label layoutX="355.0" layoutY="230.0" text="\$1500.00" />
+      <Label layoutX="356.0" layoutY="269.0" text="\$950.00" />
+      <CheckBox fx:id="idCheckInscripcion" layoutX="291.0" layoutY="153.0" mnemonicParsing="false" />
+      <CheckBox fx:id="idCheckColegiatura" layoutX="291.0" layoutY="191.0" mnemonicParsing="false" />
+      <CheckBox fx:id="idCheckUniforme" layoutX="291.0" layoutY="230.0" mnemonicParsing="false" />
+      <CheckBox fx:id="idCheckLibros" layoutX="291.0" layoutY="269.0" mnemonicParsing="false" />
+      <Label layoutX="279.0" layoutY="309.0" text="Total:" />
+      <Label fx:id="idTotal" layoutX="355.0" layoutY="309.0" text="\$00.00" />
+      <ImageView fitHeight="33.0" fitWidth="34.0" layoutX="435.0" layoutY="184.0">
          <image>
-            <Image url="@../../../Image/Colegiatura.png" />
+            <Image url="@../../../../../../../Descargas/02.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="34.0" fitWidth="32.0" layoutX="486.0" layoutY="185.0">
+      <ImageView fitHeight="33.0" fitWidth="34.0" layoutX="435.0" layoutY="223.0">
          <image>
-            <Image url="@../../../Image/Uniforme.jpg" />
+            <Image url="@../../../../../../../Descargas/03.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="42.0" fitWidth="41.0" layoutX="483.0" layoutY="220.0">
+      <ImageView fitHeight="26.0" fitWidth="27.0" layoutX="438.0" layoutY="265.0">
          <image>
-            <Image url="@../../../Image/Libros.jpg" />
+            <Image url="@../../../../../../../Descargas/04.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnPagar" layoutX="269.0" layoutY="312.0" mnemonicParsing="false" text="Pagar" />
+      <Button fx:id="btnPagar" layoutX="504.0" layoutY="348.0" mnemonicParsing="false" text="Pagar" />
+      <ImageView fitHeight="160.0" fitWidth="186.0" layoutX="14.0" layoutY="137.0" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../../media/laura/KINGSTON1/ESCUDOS/ESCUDO%20%232%201.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="142.0" layoutY="17.0" text="&quot;Educar para la vida, guiar para el éxito&quot;">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

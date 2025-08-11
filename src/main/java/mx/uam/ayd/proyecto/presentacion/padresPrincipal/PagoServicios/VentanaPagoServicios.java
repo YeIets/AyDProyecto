@@ -42,10 +42,16 @@ public class VentanaPagoServicios {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/VentanasPadre/PagoServicios/PagoServicios.fxml"));
             loader.setController(this);
             Parent root = loader.load();
+
             stage = new Stage();
-            stage.setScene(new Scene(root));
             stage.setTitle("Portal de Pagos");
 
+            stage.setScene(new Scene(root));
+            stage.setResizable(false); 
+            stage.setWidth(600);       
+            stage.setHeight(420);      
+            stage.show();
+            
             // Configura los listeners para los checkboxes y el botón de pagar
             configurarControles();
 

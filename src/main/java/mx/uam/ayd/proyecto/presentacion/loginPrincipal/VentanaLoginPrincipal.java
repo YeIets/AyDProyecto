@@ -4,6 +4,7 @@ import java.io.IOException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -36,6 +37,8 @@ public class VentanaLoginPrincipal {
     @FXML
     private ComboBox<String> miComboBox;
 
+    private Scene scene;
+
     public VentanaLoginPrincipal() {
         // No se inicializan componentes de JavaFX en el constructor
     }
@@ -56,8 +59,16 @@ public class VentanaLoginPrincipal {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginPrincipal.fxml"));
             loader.setController(this);
-            Scene scene = new Scene(loader.load(), 600, 420);
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            this.scene = scene;
+
             stage.setScene(scene);
+            stage.setWidth(600);
+            stage.setHeight(420);
+            stage.setResizable(false);
+
+            stage.show();
 
             initialized = true;
         } catch (IOException e) {
