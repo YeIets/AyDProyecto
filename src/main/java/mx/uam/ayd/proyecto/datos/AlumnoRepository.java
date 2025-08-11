@@ -14,4 +14,6 @@ public interface AlumnoRepository extends CrudRepository<Alumno, Long> {
     public Alumno findByMatricula(String matricula);
 
     public List<Alumno> findByNombreContainingIgnoreCase(String nombre);
+
+    Alumno findByNombre(String nombre);
 }

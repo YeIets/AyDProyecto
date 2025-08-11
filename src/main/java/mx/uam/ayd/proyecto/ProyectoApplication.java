@@ -14,6 +14,8 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+
 @SpringBootApplication
 public class ProyectoApplication {
 
@@ -86,6 +88,9 @@ public class ProyectoApplication {
 
         Alumno alumno1 = new Alumno("Sofia", "Pérez", "2193034567");
         Alumno alumno2 = new Alumno("Luis", "Pérez", "2193034588");
+
+        Documento doc1 = new Documento("Modelo.pdf", "CURP", "documentos_subidos/Modelo.pdf", LocalDate.now());
+        alumno1.agregarDocumento(doc1);
 
         padre.addHijo(alumno1);
         padre.addHijo(alumno2);

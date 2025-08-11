@@ -1,8 +1,11 @@
 package mx.uam.ayd.proyecto.presentacion.administrativoPrincipal.BuscarDocumentos;
 
+import lombok.extern.slf4j.Slf4j;
 import mx.uam.ayd.proyecto.negocio.ServicioAlumno;
 import mx.uam.ayd.proyecto.negocio.ServicioDocumento;
+import mx.uam.ayd.proyecto.negocio.ServicioNotificacion;
 import mx.uam.ayd.proyecto.negocio.modelo.Alumno;
+import mx.uam.ayd.proyecto.negocio.modelo.Padre;
 import mx.uam.ayd.proyecto.presentacion.administrativoPrincipal.BuscarDocumentos.VentanaBuscarDocumentos.AlumnoDocumentoRow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Component
 public class ControlBuscarDocumentos {
 
@@ -18,6 +22,8 @@ public class ControlBuscarDocumentos {
 
     @Autowired
     private ServicioDocumento servicioDocumento;
+    @Autowired
+    private ServicioNotificacion servicioNotificacion;
 
     @Autowired
     private ServicioAlumno servicioAlumno; // <-- Se usa el servicio correcto
@@ -39,7 +45,8 @@ public class ControlBuscarDocumentos {
             boolean tieneDomicilio = !alumno.getDocumentosPorTipo("Domicilio").isEmpty();
 
             filasParaTabla.add(new AlumnoDocumentoRow(
-                    alumno.getNombreCompleto(),
+                    alumno.getNombre(),
+                    alumno.getApellido(),
                     tieneActa,
                     tieneCurp,
                     tieneCertificado,
@@ -55,9 +62,17 @@ public class ControlBuscarDocumentos {
         // Lógica para descargar...
     }
 
-    public void notificarAlumno(AlumnoDocumentoRow alumno) {
-        System.out.println("Enviando notificación a: " + alumno.nombreProperty().get());
-        // Lógica para notificar...
+    public void notificarPadre(String nombreAlumno, String apellidoAlumno) {
+
+        Alumno alumno = servicioAlumno.recuperarAlumnoPorNombreYApellido(nombreAlumno, apellidoAlumno);
+        log.info(apellidoAlumno);
+        log.info(nombreAlumno);
+        log.info("Alumno " + alumno);
+        Padre padre = alumno.getPadre();
+        log.info("Padre " + padre);
+        servicioNotificacion.notificarPadre(padre, alumno, "Se necesitan actualizar documentos");
+
+
     }
 
     // ✅ MÉTODO MODIFICADO PARA CERRAR LA VENTANA

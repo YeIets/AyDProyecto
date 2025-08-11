@@ -1,9 +1,6 @@
 package mx.uam.ayd.proyecto.negocio.modelo;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data; // <-- Import para @Data
 import java.time.LocalDate;
 
@@ -20,17 +17,20 @@ public class Documento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idDocumento;
 
+    @ManyToOne
+    @JoinColumn(name = "alumno_id")
+    private Alumno alumno;
     public Documento(){
 
     }
 
-    public Documento(Long id, String nombre, String tipo, String direccionArchivo, LocalDate fechaDeSubida) {
-        this.idDocumento = id;
+    public Documento(String nombre, String tipo, String direccionArchivo, LocalDate fechaDeSubida) {
         this.nombre = nombre;
         this.tipo = tipo;
         this.direccionArchivo = direccionArchivo;
         this.fechaDeSubida = fechaDeSubida;
     }
+
 
     @Override
     public String toString() {

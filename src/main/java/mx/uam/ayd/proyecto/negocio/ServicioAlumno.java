@@ -22,4 +22,9 @@ public class ServicioAlumno {
     public List<Alumno> buscarAlumnosPorNombre(String nombre) {
         return alumnoRepository.findByNombreContainingIgnoreCase(nombre);
     }
+
+    public Alumno recuperarAlumnoPorNombreYApellido(String nombre, String apellido){
+        return alumnoRepository.findByNombreAndApellido(nombre, apellido);
+    }
+
 }

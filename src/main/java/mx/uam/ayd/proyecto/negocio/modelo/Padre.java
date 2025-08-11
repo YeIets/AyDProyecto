@@ -66,4 +66,12 @@ public class Padre {
     public void agregaNotificacion(Notificacion noti) {
         notificaciones.add(noti);
     }
+
+    @Override
+    public String toString() {
+        String notificacionesInfo = (notificaciones != null) ? "Numero de Notificaciones: " + notificaciones.size() : "Numero de Notificaciones: 0";
+
+        return "Padre [id=" + idPadre + ", nombre=" + nombre + ", " + notificacionesInfo + "]";
+    }
+
 }

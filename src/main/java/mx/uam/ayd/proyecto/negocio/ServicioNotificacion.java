@@ -1,6 +1,8 @@
 package mx.uam.ayd.proyecto.negocio;
 
 import mx.uam.ayd.proyecto.datos.NotificacionRepository;
+import mx.uam.ayd.proyecto.datos.PadreRepository;
+import mx.uam.ayd.proyecto.negocio.modelo.Alumno;
 import mx.uam.ayd.proyecto.negocio.modelo.Notificacion;
 import mx.uam.ayd.proyecto.negocio.modelo.Padre;
 import mx.uam.ayd.proyecto.negocio.modelo.Pago;
@@ -8,6 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -19,11 +23,14 @@ public class ServicioNotificacion {
 
 	private static final Logger log = LoggerFactory.getLogger(ServicioNotificacion.class);
 	private final NotificacionRepository notificacionRepository;
-	
+
+	private final PadreRepository padreRepository;
+
 	@Autowired
-	public ServicioNotificacion(NotificacionRepository notificacionRepository) {
+	public ServicioNotificacion(NotificacionRepository notificacionRepository, PadreRepository padreRepository) {
 		this.notificacionRepository = notificacionRepository;
-	}
+        this.padreRepository = padreRepository;
+    }
 	
 	//Regresa notificaciones asociadas a un padre, si no tiene notificaciones asociadas regresa una lista vacia
 	public List <Notificacion> recuperaNotificaciones(Padre padre) {
@@ -55,4 +62,27 @@ public class ServicioNotificacion {
 		return !notificacionRepository.findByDestinatario(padre).isEmpty();
 	}
 
+    public boolean notificarPadre(Padre padre, Alumno alumno, String titulo) {
+
+		if (padre == null || alumno == null){
+			log.info("El padre o el alumno son invalidos");
+			return false;
+		}
+
+		if (padre.getCorreo().isBlank()) {
+			log.info("La direccion de correo es invalida");
+			return false;
+		}
+
+		Notificacion notificacion = new Notificacion(
+				titulo, LocalTime.now(), "Actualizacion de documentos", alumno.getMatricula(), padre);
+
+		log.info("Notificacion enviada: " + notificacion);
+		log.info("Destinatario: " + padre);
+
+		padre.agregaNotificacion(notificacion);
+		padreRepository.save(padre);
+
+		return true;
+    }
 }

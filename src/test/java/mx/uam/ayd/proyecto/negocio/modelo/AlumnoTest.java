@@ -13,7 +13,7 @@ class AlumnoTest {
 
     private Alumno alumno;
     private Menu menu = new Menu(1L, "Tacos", "Jamaica", "Limon", "Manzana", "Lunes");
-    private Documento documento = new Documento(1L, "Curp.pdf", "CURP", "Descargar/Curp.pdf", LocalDate.now());
+    private Documento documento = new Documento("Curp.pdf", "CURP", "Descargar/Curp.pdf", LocalDate.now());
 
     @BeforeEach
     void setUp() {

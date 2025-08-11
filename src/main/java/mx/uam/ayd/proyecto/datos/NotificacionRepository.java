@@ -18,6 +18,6 @@ public interface NotificacionRepository extends CrudRepository <Notificacion, Lo
 
 	public List <Notificacion> findByDestinatario(Padre destinatario);
 
-	public List <Notificacion> findByMatricula(int matricula);
+	public List <Notificacion> findByMatricula(String matricula);
 
 }

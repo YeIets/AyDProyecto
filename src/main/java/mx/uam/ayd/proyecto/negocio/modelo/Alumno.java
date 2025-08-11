@@ -24,7 +24,7 @@ public class Alumno {
     private String matricula;
 
     // ✅ RELACIÓN AÑADIDA: La contraparte de la relación. Muchos Alumnos tienen un Padre.
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "padre_id") // Define la columna de llave foránea en la tabla Alumno
     private Padre padre;
 
@@ -68,6 +68,7 @@ public class Alumno {
         if (documentos.contains(documento)) {
             return false;
         }
+        documento.setAlumno(this);
         return documentos.add(documento);
     }
 
@@ -79,5 +80,11 @@ public class Alumno {
             return false;
         }
         return menus.add(menu);
+    }
+
+    @Override
+    public String toString() {
+        String padreInfo = (padre != null) ? "Padre: " + padre.getNombre() : "Padre: (sin asignar)";
+        return "Alumno [id=" + idAlumno + ", nombre=" + nombre + ", " + padreInfo + "]";
     }
 }

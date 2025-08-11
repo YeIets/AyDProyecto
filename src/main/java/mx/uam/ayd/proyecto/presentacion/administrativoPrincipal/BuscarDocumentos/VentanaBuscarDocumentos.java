@@ -16,11 +16,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.List;
 
+@Slf4j
 @Component
 public class VentanaBuscarDocumentos {
 
@@ -68,7 +70,10 @@ public class VentanaBuscarDocumentos {
         // --- Configuración de la Tabla ---
 
         // 1. Conectar columnas con las propiedades del objeto AlumnoDocumentoRow
-        columnaEstudiante.setCellValueFactory(cellData -> cellData.getValue().nombreProperty());
+        columnaEstudiante.setCellValueFactory(cellData -> {
+                String nombreCompleto = cellData.getValue().getNombreCompleto();
+                return new SimpleStringProperty(nombreCompleto);
+        });
         columnaActa.setCellValueFactory(cellData -> cellData.getValue().tieneActaProperty());
         columnaCurp.setCellValueFactory(cellData -> cellData.getValue().tieneCurpProperty());
         columnaCertificado.setCellValueFactory(cellData -> cellData.getValue().tieneCertificadoProperty());
@@ -110,11 +115,11 @@ public class VentanaBuscarDocumentos {
         columna.setCellFactory(param -> new TableCell<>() {
             private final Button btn = new Button(textoBoton);
             {
-                btn.getStyleClass().add(estilo); // Para darle estilos CSS si quieres
                 btn.setOnAction(event -> {
                     AlumnoDocumentoRow alumno = getTableView().getItems().get(getIndex());
                     if ("Notificar".equals(textoBoton)) {
-                        control.notificarAlumno(alumno);
+                        log.info("nombre " + alumno.getNombre());
+                        control.notificarPadre(alumno.getNombre(), alumno.getApellido());
                     } else {
                         control.descargarDocumento(alumno);
                     }
@@ -140,13 +145,15 @@ public class VentanaBuscarDocumentos {
      */
     public static class AlumnoDocumentoRow {
         private final SimpleStringProperty nombre;
+        private final SimpleStringProperty apellido;
         private final SimpleBooleanProperty tieneActa;
         private final SimpleBooleanProperty tieneCurp;
         private final SimpleBooleanProperty tieneCertificado;
         private final SimpleBooleanProperty tieneDomicilio;
 
-        public AlumnoDocumentoRow(String nombre, boolean acta, boolean curp, boolean cert, boolean dom) {
+        public AlumnoDocumentoRow(String nombre, String apellido, boolean acta, boolean curp, boolean cert, boolean dom) {
             this.nombre = new SimpleStringProperty(nombre);
+            this.apellido = new SimpleStringProperty(apellido);
             this.tieneActa = new SimpleBooleanProperty(acta);
             this.tieneCurp = new SimpleBooleanProperty(curp);
             this.tieneCertificado = new SimpleBooleanProperty(cert);
@@ -154,9 +161,22 @@ public class VentanaBuscarDocumentos {
         }
 
         public SimpleStringProperty nombreProperty() { return nombre; }
+        public SimpleStringProperty apellidoProperty(){return apellido; }
         public SimpleBooleanProperty tieneActaProperty() { return tieneActa; }
         public SimpleBooleanProperty tieneCurpProperty() { return tieneCurp; }
         public SimpleBooleanProperty tieneCertificadoProperty() { return tieneCertificado; }
         public SimpleBooleanProperty tieneDomicilioProperty() { return tieneDomicilio; }
+
+        public String getNombreCompleto() {
+            return nombre.get() + " " + apellido.get();
+        }
+
+        public String getNombre(){
+            return nombre.get();
+        }
+
+        public String getApellido() {
+            return apellido.get();
+        }
     }
 }

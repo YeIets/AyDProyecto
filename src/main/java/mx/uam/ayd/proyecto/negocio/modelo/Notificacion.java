@@ -27,7 +27,7 @@ public class Notificacion {
 
     private String ventana;
 
-    private int matricula;
+    private String matricula;
 
     @ManyToOne
     @JoinColumn(name = "id_padre")
@@ -41,9 +41,17 @@ public class Notificacion {
         this.destinatario = destinatario;
     }
 
+    public Notificacion(String titulo, LocalTime hora, String mensaje, String matricula, Padre destinatario) {
+        this.titulo = titulo;
+        this.hora = hora;
+        this.mensaje = mensaje;
+        this.matricula = matricula;
+        this.destinatario = destinatario;
+    }
+
     @Override
     public String toString() {
         return "Notificacion [idNotificacion=" + idNotificacion + ", titulo=" + titulo 
-        + ", destinatario=" + destinatario + ", hora=" + hora + ", mensaje" + mensaje +"]";
+        + ", destinatarioID=" + destinatario.getIdPadre() + ", hora=" + hora + ", mensaje" + mensaje +"]";
     }
 }
