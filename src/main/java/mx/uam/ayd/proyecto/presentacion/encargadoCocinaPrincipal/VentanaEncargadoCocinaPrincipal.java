@@ -20,43 +20,43 @@ import java.io.IOException;
 @Component
 public class VentanaEncargadoCocinaPrincipal{
 
-	private static final Logger log = LoggerFactory.getLogger(VentanaEncargadoCocinaPrincipal.class);
+    private static final Logger log = LoggerFactory.getLogger(VentanaEncargadoCocinaPrincipal.class);
 
-	private Stage stage;
-	
-	private ControlEncargadoCocinaPrincipal control;
-	private boolean initialized = false;
+    private Stage stage;
 
-	private Scene scene;
+    private ControlEncargadoCocinaPrincipal control;
+    private boolean initialized = false;
 
-	/**
-	 * Constructor without UI initialization
-	 */
-	public VentanaEncargadoCocinaPrincipal() {
-		// Don't initialize JavaFX components in constructor
-	}
-	
-	/**
-	 * Initialize UI components on the JavaFX application thread
-	 */
-	private void initializeUI() {
-		if (initialized) {
-			return;
-		}
-		
-		// Create UI only if we're on JavaFX thread
-		if (!Platform.isFxApplicationThread()) {
-			Platform.runLater(this::initializeUI);
-			return;
-		}
-		
-		try {
-			stage = new Stage();
-			stage.setTitle("Ventana Encargado de Cocina Principal");
-			
-			// Load FXML
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/VentanasEncargadoDeCocina/EncargadoCocinaPrincipal.fxml"));
-			loader.setController(this);
+    private Scene scene;
+
+    /**
+     * Constructor without UI initialization
+     */
+    public VentanaEncargadoCocinaPrincipal() {
+        // Don't initialize JavaFX components in constructor
+    }
+
+    /**
+     * Initialize UI components on the JavaFX application thread
+     */
+    private void initializeUI() {
+        if (initialized) {
+            return;
+        }
+
+        // Create UI only if we're on JavaFX thread
+        if (!Platform.isFxApplicationThread()) {
+            Platform.runLater(this::initializeUI);
+            return;
+        }
+
+        try {
+            stage = new Stage();
+            stage.setTitle("Ventana Encargado de Cocina Principal");
+
+            // Load FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/VentanasEncargadoDeCocina/EncargadoCocinaPrincipal.fxml"));
+            loader.setController(this);
             Parent root = loader.load();
             Scene scene = new Scene(root);
             this.scene = scene;
@@ -67,48 +67,56 @@ public class VentanaEncargadoCocinaPrincipal{
             stage.setResizable(false);
 
             stage.show();
-			
-			initialized = true;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	/**
-	 * Establece el controlador asociado a esta ventana
-	 * 
-	 * @param control El controlador asociado
-	 */
-	public void setControlEncargadoCocinaPrincipal(ControlEncargadoCocinaPrincipal control) {
-		this.control = control;
-	}
-	
-	
-	//Muestra la ventana
-	public void muestra() {
-		if (!Platform.isFxApplicationThread()) {
-			Platform.runLater(() -> this.muestra());
-			return;
-		}
-		
-		initializeUI();
-		stage.show();
-	}
 
-	//Declara las funciones del boton VerPedidos
-	@FXML
-	private void handleVerPedidos() {
-		log.info("Se presiono Ver Pedidos");
-	}
+            initialized = true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-	//Declara las funciones del boton SubirMenu
-	@FXML
-	private void handleSubirMenu() {
-		log.info("Se presiono Subir Menu");
-	}
+    /**
+     * Establece el controlador asociado a esta ventana
+     * * @param control El controlador asociado
+     */
+    public void setControlEncargadoCocinaPrincipal(ControlEncargadoCocinaPrincipal control) {
+        this.control = control;
+    }
 
-		// FXML Handle Events
-	@FXML
+
+    //Muestra la ventana
+    public void muestra() {
+        if (!Platform.isFxApplicationThread()) {
+            Platform.runLater(() -> this.muestra());
+            return;
+        }
+
+        initializeUI();
+        stage.show();
+    }
+
+    // Método para ocultar la ventana
+    public void oculta() {
+        if (stage != null) {
+            stage.hide();
+        }
+    }
+
+    //Declara las funciones del boton VerPedidos
+    @FXML
+    private void handleVerPedidos() {
+        log.info("Se presiono Ver Pedidos");
+    }
+
+    //Declara las funciones del boton SubirMenu
+    @FXML
+    private void handleSubirMenu() {
+        log.info("Se presiono Subir Menu");
+        // Llama al método en el control para mostrar la ventana de Publicar Menu
+        control.muestraPublicarMenu();
+    }
+
+    // FXML Handle Events
+    @FXML
     private void handleCerrar() {
         if (stage != null) {
             stage.close();

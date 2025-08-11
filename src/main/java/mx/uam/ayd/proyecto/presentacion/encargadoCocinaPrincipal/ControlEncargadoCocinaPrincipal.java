@@ -6,9 +6,8 @@ import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-// Nota: El 'ServicioEncargadoCocina' ya no es necesario aquí si este controlador
-// no tiene lógica de negocio propia, pero se puede mantener por si se añade en el futuro.
 import mx.uam.ayd.proyecto.negocio.ServicioEncargadoCocina;
+import mx.uam.ayd.proyecto.presentacion.encargadoCocinaPrincipal.PublicarMenu.ControlPublicarMenu;
 
 @Component
 public class ControlEncargadoCocinaPrincipal {
@@ -20,6 +19,10 @@ public class ControlEncargadoCocinaPrincipal {
 
     @Autowired
     private ServicioEncargadoCocina servicioEncargadoCocina;
+
+    // Se agrega la inyección del control para la ventana de publicar menú
+    @Autowired
+    private ControlPublicarMenu controlPublicarMenu;
 
     /**
      * Se mantiene el constructor para la inyección de la ventana.
@@ -46,7 +49,13 @@ public class ControlEncargadoCocinaPrincipal {
         ventana.muestra();
     }
 
-    // Los métodos 'agregarEncargadoCocina' y 'verificarEncargadoDeCocinaRegistrado'
-    // han sido eliminados para resolver los errores de compilación y alinear
-    // la clase con su responsabilidad única de controlar la ventana principal.
+    /**
+     * Método para iniciar el flujo de publicación de menú.
+     * Cierra la ventana principal y abre la de Publicar Menú.
+     */
+    public void muestraPublicarMenu() {
+        log.info("Iniciando flujo para mostrar la ventana de Publicar Menu");
+        ventana.oculta();
+        controlPublicarMenu.inicia(this);
+    }
 }
