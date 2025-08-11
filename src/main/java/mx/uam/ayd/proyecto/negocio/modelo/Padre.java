@@ -63,8 +63,9 @@ public class Padre {
         hijo.setPadre(this);
     }
 
-    public void agregaNotificacion(Notificacion noti) {
-        notificaciones.add(noti);
+    public void agregaNotificacion(Notificacion notificacion) {
+        notificaciones.add(notificacion);
+        notificacion.setDestinatario(this);
     }
 
     @Override

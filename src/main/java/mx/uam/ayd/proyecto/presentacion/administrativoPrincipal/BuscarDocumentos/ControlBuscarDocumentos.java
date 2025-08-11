@@ -65,13 +65,8 @@ public class ControlBuscarDocumentos {
     public void notificarPadre(String nombreAlumno, String apellidoAlumno) {
 
         Alumno alumno = servicioAlumno.recuperarAlumnoPorNombreYApellido(nombreAlumno, apellidoAlumno);
-        log.info(apellidoAlumno);
-        log.info(nombreAlumno);
-        log.info("Alumno " + alumno);
         Padre padre = alumno.getPadre();
-        log.info("Padre " + padre);
         servicioNotificacion.notificarPadre(padre, alumno, "Se necesitan actualizar documentos");
-
 
     }
 

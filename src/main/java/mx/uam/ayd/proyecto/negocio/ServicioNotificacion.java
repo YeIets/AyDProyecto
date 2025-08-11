@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -78,10 +79,11 @@ public class ServicioNotificacion {
 				titulo, LocalTime.now(), "Actualizacion de documentos", alumno.getMatricula(), padre);
 
 		log.info("Notificacion enviada: " + notificacion);
-		log.info("Destinatario: " + padre);
 
 		padre.agregaNotificacion(notificacion);
 		padreRepository.save(padre);
+
+		log.info("Destinatario: " + padre);
 
 		return true;
     }
