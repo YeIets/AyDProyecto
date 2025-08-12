@@ -41,7 +41,7 @@ public class ServicioDocumento {
             Path uploadPath = Paths.get(UPLOAD_DIR);
             if (!Files.exists(uploadPath)) {
                 Files.createDirectory(uploadPath);
-                log.info("Directorio de subidas creado en: " + uploadPath.toAbsolutePath());
+                log.info("Directorio de subidas creado en: {}", uploadPath.toAbsolutePath());
             }
         } catch (IOException e) {
             throw new RuntimeException("No se pudo crear el directorio de subidas", e);
@@ -51,12 +51,15 @@ public class ServicioDocumento {
     public Documento subirDocumento(File archivo, String tipoDeDocumento) throws IOException {
         Path destino = Paths.get(UPLOAD_DIR).resolve(archivo.getName());
         Files.copy(archivo.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
-        log.info("Archivo copiado a: " + destino.toAbsolutePath());
+        log.info("Archivo copiado a: {}", destino.toAbsolutePath());
 
         Documento nuevoDocumento = new Documento();
         nuevoDocumento.setNombre(archivo.getName());
         nuevoDocumento.setTipo(tipoDeDocumento);
-        nuevoDocumento.setDireccionArchivo(destino.toString());
+
+        // CAMBIO AQUÍ: Se utiliza el nuevo método 'setRuta' en lugar de 'setDireccionArchivo'.
+        nuevoDocumento.setRuta(destino.toString());
+
         nuevoDocumento.setFechaDeSubida(LocalDate.now());
 
         return documentoRepository.save(nuevoDocumento);
@@ -76,11 +79,9 @@ public class ServicioDocumento {
         return (List<Documento>) documentoRepository.findAll();
     }
 
-
-
     public List <Alumno> validarDocumentos(List <Alumno> alumnos) {
         List <Alumno> alumnosConDocumentos = new ArrayList<>();
-        for(Alumno alumno : alumnos){
+        for (Alumno alumno : alumnos) {
             if (alumno.getDocumentos().size() == 5) {
                 alumnosConDocumentos.add(alumno);
             }
@@ -88,24 +89,17 @@ public class ServicioDocumento {
         return alumnosConDocumentos;
     }
 
-    public boolean validarDireccion(Documento documento){
-        if (documento.getDireccionArchivo() == null || documento.getDireccionArchivo().isBlank()) {
-            log.info("El documento tiene una direccion nula o vacia : " + documento.getDireccionArchivo());
+    public boolean validarDireccion(Documento documento) {
+        // CAMBIO AQUÍ: Se utiliza el nuevo método 'getRuta' en lugar de 'getDireccionArchivo'.
+        if (documento.getRuta() == null || documento.getRuta().isBlank()) {
+            log.info("El documento tiene una ruta nula o vacía.");
             return false;
         }
-        Path ruta = Paths.get(documento.getDireccionArchivo());
+        Path ruta = Paths.get(documento.getRuta());
         return Files.exists(ruta) && Files.isRegularFile(ruta);
     }
 
-
-    /**
-     * Busca alumnos cuyo nombre contenga el texto de búsqueda.
-     * No distingue entre mayúsculas y minúsculas.
-     * @param nombre El texto a buscar en el nombre del alumno.
-     * @return Una lista de alumnos que coinciden con la búsqueda.
-     */
     public List<Alumno> buscarAlumnosPorNombre(String nombre) {
-        // CORRECCIÓN: Se usa la variable "alumnoRepository" (con 'a' minúscula)
         return alumnoRepository.findByNombreContainingIgnoreCase(nombre);
     }
 }

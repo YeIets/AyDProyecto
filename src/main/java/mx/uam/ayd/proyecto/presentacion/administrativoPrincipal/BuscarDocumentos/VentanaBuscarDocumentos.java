@@ -1,12 +1,12 @@
 package mx.uam.ayd.proyecto.presentacion.administrativoPrincipal.BuscarDocumentos;
 
-
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -50,40 +50,28 @@ public class VentanaBuscarDocumentos {
             stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Gestión de Documentos");
-
             configurarVentana();
-
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("Error al cargar el FXML para VentanaBuscarDocumentos", e);
         }
     }
 
     private void configurarVentana() {
-        // Listener para que la búsqueda se active al escribir
-        textFieldBusqueda.textProperty().addListener((observable, oldValue, newValue) -> {
-            control.buscarAlumnos(newValue);
-        });
-
+        textFieldBusqueda.textProperty().addListener((observable, oldValue, newValue) -> control.buscarAlumnos(newValue));
         idvolver.setOnAction(e -> control.regresar());
 
-        // --- Configuración de la Tabla ---
-
-        // 1. Conectar columnas con las propiedades del objeto AlumnoDocumentoRow
-        columnaEstudiante.setCellValueFactory(cellData -> {
-                String nombreCompleto = cellData.getValue().getNombreCompleto();
-                return new SimpleStringProperty(nombreCompleto);
-        });
+        columnaEstudiante.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombreCompleto()));
         columnaActa.setCellValueFactory(cellData -> cellData.getValue().tieneActaProperty());
         columnaCurp.setCellValueFactory(cellData -> cellData.getValue().tieneCurpProperty());
         columnaCertificado.setCellValueFactory(cellData -> cellData.getValue().tieneCertificadoProperty());
         columnaDomicilio.setCellValueFactory(cellData -> cellData.getValue().tieneDomicilioProperty());
 
-        // 2. Personalizar celdas para mostrar íconos y botones
-        configurarCeldaConIcono(columnaActa);
-        configurarCeldaConIcono(columnaCurp);
-        configurarCeldaConIcono(columnaCertificado);
-        configurarCeldaConIcono(columnaDomicilio);
+        configurarCeldaConIcono(columnaActa, "Acta de Nacimiento");
+        configurarCeldaConIcono(columnaCurp, "CURP");
+        configurarCeldaConIcono(columnaCertificado, "Certificado Médico");
+        configurarCeldaConIcono(columnaDomicilio, "Domicilio");
+
         configurarCeldaConBoton(columnaDescargar, "⬇️", "button-descargar");
         configurarCeldaConBoton(columnaNotificar, "Notificar", "button-notificar");
     }
@@ -92,18 +80,32 @@ public class VentanaBuscarDocumentos {
         tablaEstudiantes.setItems(FXCollections.observableArrayList(alumnos));
     }
 
-    // --- Métodos de ayuda para personalizar la tabla ---
-
-    private void configurarCeldaConIcono(TableColumn<AlumnoDocumentoRow, Boolean> columna) {
+    private void configurarCeldaConIcono(TableColumn<AlumnoDocumentoRow, Boolean> columna, String tipoDocumento) {
         columna.setCellFactory(param -> new TableCell<>() {
             private final Label label = new Label();
+            {
+                label.setOnMouseClicked(event -> {
+                    if (!isEmpty() && getItem()) {
+                        AlumnoDocumentoRow alumno = getTableView().getItems().get(getIndex());
+                        control.previsualizarDocumento(alumno, tipoDocumento);
+                    }
+                });
+            }
+
             @Override
             protected void updateItem(Boolean item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty || item == null) {
                     setGraphic(null);
                 } else {
-                    label.setText(item ? "📄" : "❌"); // Muestra ícono si tiene el documento
+                    label.setText(item ? "📄" : "❌");
+                    if (item) {
+                        label.setCursor(Cursor.HAND);
+                        label.setStyle("-fx-underline: true; -fx-text-fill: blue;");
+                    } else {
+                        label.setCursor(Cursor.DEFAULT);
+                        label.setStyle("");
+                    }
                     setGraphic(label);
                     setAlignment(Pos.CENTER);
                 }
@@ -115,10 +117,10 @@ public class VentanaBuscarDocumentos {
         columna.setCellFactory(param -> new TableCell<>() {
             private final Button btn = new Button(textoBoton);
             {
+                btn.getStyleClass().add(estilo);
                 btn.setOnAction(event -> {
                     AlumnoDocumentoRow alumno = getTableView().getItems().get(getIndex());
                     if ("Notificar".equals(textoBoton)) {
-                        log.info("nombre " + alumno.getNombre());
                         control.notificarPadre(alumno.getNombre(), alumno.getApellido());
                     } else {
                         control.descargarDocumento(alumno);
@@ -134,10 +136,20 @@ public class VentanaBuscarDocumentos {
         });
     }
 
-
-    // Este método ya está correctamente implementado en tu archivo:
     public void cierra() {
-        stage.close();
+        if (stage != null) {
+            stage.close();
+        }
+    }
+
+    /**
+     * MÉTODO AÑADIDO: Permite que el controlador obtenga la referencia al Stage.
+     * Esto es necesario para que los diálogos (como FileChooser) sepan sobre
+     * qué ventana principal mostrarse.
+     * @return el Stage (ventana) actual.
+     */
+    public Stage getStage() {
+        return stage;
     }
 
     /**
@@ -161,22 +173,14 @@ public class VentanaBuscarDocumentos {
         }
 
         public SimpleStringProperty nombreProperty() { return nombre; }
-        public SimpleStringProperty apellidoProperty(){return apellido; }
+        public SimpleStringProperty apellidoProperty() { return apellido; }
         public SimpleBooleanProperty tieneActaProperty() { return tieneActa; }
         public SimpleBooleanProperty tieneCurpProperty() { return tieneCurp; }
         public SimpleBooleanProperty tieneCertificadoProperty() { return tieneCertificado; }
         public SimpleBooleanProperty tieneDomicilioProperty() { return tieneDomicilio; }
 
-        public String getNombreCompleto() {
-            return nombre.get() + " " + apellido.get();
-        }
-
-        public String getNombre(){
-            return nombre.get();
-        }
-
-        public String getApellido() {
-            return apellido.get();
-        }
+        public String getNombreCompleto() { return nombre.get() + " " + apellido.get(); }
+        public String getNombre() { return nombre.get(); }
+        public String getApellido() { return apellido.get(); }
     }
 }

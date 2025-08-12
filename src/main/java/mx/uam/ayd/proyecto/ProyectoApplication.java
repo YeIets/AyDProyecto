@@ -73,15 +73,13 @@ public class ProyectoApplication {
      * Inicializa la BD con los datos de ejemplo.
      */
     public void inicializaBD() {
-        // --- LÍNEAS CORREGIDAS ---
-        // Se utiliza el nuevo constructor de 4 argumentos para crear los usuarios.
+        // --- Creación de otros usuarios ---
         Administrativo admin = new Administrativo("Humberto", "Cervantes", "Humberto@uam.com", "Humberto123");
         EncargadoCocina encargado = new EncargadoCocina("Alberto", "Morales", "Alberto@uam.com", "Alberto123");
-
         administrativoRepository.save(admin);
         encargadoCocinaRepository.save(encargado);
 
-        // --- LÓGICA PARA CREAR Y VINCULAR PADRE CON ALUMNOS ---
+        // --- LÓGICA PARA CREAR Y VINCULAR PADRE, ALUMNOS Y DOCUMENTOS ---
         Padre padre = new Padre("Juan", "Pérez", "Juan@uam.com", "Juan123");
         Notificacion noti = new Notificacion(padre);
         padre.agregaNotificacion(noti);
@@ -89,12 +87,21 @@ public class ProyectoApplication {
         Alumno alumno1 = new Alumno("Sofia", "Pérez", "2193034567");
         Alumno alumno2 = new Alumno("Luis", "Pérez", "2193034588");
 
-        Documento doc1 = new Documento("Modelo.pdf", "CURP", "documentos_subidos/Modelo.pdf", LocalDate.now());
-        alumno1.agregarDocumento(doc1);
+        // --- Documentos para Alumno 1 (Sofía) ---
+        Documento curpSofia = new Documento("CURP de Sofia", "CURP", "documentos_subidos/CURP_Sofia.pdf", LocalDate.now());
+        Documento actaSofia = new Documento("Acta de Sofia", "Acta de Nacimiento", "documentos_subidos/Acta_Sofia.pdf", LocalDate.now());
+        alumno1.agregarDocumento(curpSofia);
+        alumno1.agregarDocumento(actaSofia);
 
+        // --- Documentos para Alumno 2 (Luis) ---
+        Documento actaLuis = new Documento("Acta de Luis", "Acta de Nacimiento", "documentos_subidos/Acta_Luis.pdf", LocalDate.now());
+        alumno2.agregarDocumento(actaLuis);
+
+        // Se vinculan los alumnos (ya con sus documentos) al padre
         padre.addHijo(alumno1);
         padre.addHijo(alumno2);
 
+        // Se guarda el padre, y en cascada se guardan sus hijos y los documentos de sus hijos.
         padreRepository.save(padre);
     }
 }
