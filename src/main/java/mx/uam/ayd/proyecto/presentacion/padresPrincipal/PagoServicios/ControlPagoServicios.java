@@ -1,6 +1,7 @@
 package mx.uam.ayd.proyecto.presentacion.padresPrincipal.PagoServicios;
 
 
+import mx.uam.ayd.proyecto.negocio.ServicioPadre;
 import mx.uam.ayd.proyecto.negocio.modelo.Padre;
 import mx.uam.ayd.proyecto.presentacion.padresPrincipal.MenuSemanal.SeleccionPagoMenu.ControlSeleccionPagoMenu;
 import mx.uam.ayd.proyecto.presentacion.padresPrincipal.PagoServicios.SeleccionPagoServicios.ControlSeleccionPagoServicios;
@@ -13,6 +14,8 @@ import java.util.List;
 public class ControlPagoServicios {
 
     private Padre padreSesion;
+    @Autowired
+    private ServicioPadre servicioPadre;
     @Autowired
     private VentanaPagoServicios ventana;
 
@@ -28,7 +31,11 @@ public class ControlPagoServicios {
      */
     public void inicia(Padre padre) {
         ventana.muestra(this);
-        this.padreSesion = padre;
+        this.padreSesion = recuperarPadre(padre.getCorreo());
+    }
+
+    public Padre recuperarPadre(String correo) {
+        return servicioPadre.recuperaPadrePorCorreo(correo);
     }
 
     /**

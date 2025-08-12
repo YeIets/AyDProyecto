@@ -3,6 +3,7 @@ package mx.uam.ayd.proyecto.presentacion.padresPrincipal.MenuSemanal;
 import java.util.HashMap;
 import java.util.Map;
 
+import mx.uam.ayd.proyecto.negocio.ServicioPadre;
 import mx.uam.ayd.proyecto.negocio.modelo.Padre;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,15 +18,21 @@ public class ControlMenuSemanal {
     private VentanaMenuSemanal ventana;
 
     @Autowired
+    private ServicioPadre servicioPadre;
+    @Autowired
     private ControlSeleccionMenu controlSeleccionMenu;
 
     /**
      * Método principal para iniciar la ventana del menú semanal
      */
     public void inicia(Padre padre) {
-        padreSesion = padre;
+        padreSesion = recuperarPadre(padre.getCorreo());
         Map<String, String[]> menuPorDia = obtenerMenuSemanal();
         ventana.muestra(this, menuPorDia);
+    }
+
+    public Padre recuperarPadre(String correo) {
+        return servicioPadre.recuperaPadrePorCorreo(correo);
     }
 
     /**

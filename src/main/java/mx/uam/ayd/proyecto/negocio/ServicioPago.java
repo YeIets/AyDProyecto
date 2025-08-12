@@ -56,6 +56,7 @@ public class ServicioPago {
 
 	//Genera el pago en caja para padre
 	public void crearPagoDeMenuCaja(int total, Padre padre, String diaElegido) {
+
 		Pago pago = new Pago(padre, total, diaElegido);
 		pago.setConceptoDePago("Menu Semanal");
 		pago.setMetodoDePago("Caja");
@@ -64,12 +65,33 @@ public class ServicioPago {
 		padreRepository.save(padre);
 	}
 
+	public void crearPagoDeMenuEnLinea(int total, Padre padre, String diaElegido) {
+
+		Pago pago = new Pago(padre, total, diaElegido);
+		pago.setConceptoDePago("Menu Semanal");
+		pago.setMetodoDePago("Pago En Linea");
+		pago.setEstado("Pagado");
+		padre.agregarPago(pago);
+		padreRepository.save(padre);
+	}
+
+
 	public void crearPagoDeServiciosCaja(int total, Padre padre, String servicios) {
 		Pago pago = new Pago(padre, total);
 		pago.setConceptoDePago("Pago De Servicios");
 		pago.setServicios(servicios);
 		pago.setMetodoDePago("Caja");
 		pago.setEstado("Pendiente");
+		padre.agregarPago(pago);
+		padreRepository.save(padre);
+	}
+	public void crearPagoDeServiciosEnLinea(int total, Padre padre, String servicios) {
+
+		Pago pago = new Pago(padre, total);
+		pago.setConceptoDePago("Pago De Servicios");
+		pago.setServicios(servicios);
+		pago.setMetodoDePago("Pago En Linea");
+		pago.setEstado("Pagado");
 		padre.agregarPago(pago);
 		padreRepository.save(padre);
 	}

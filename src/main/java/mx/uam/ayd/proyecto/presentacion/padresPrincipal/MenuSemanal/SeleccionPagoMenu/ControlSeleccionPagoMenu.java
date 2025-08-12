@@ -1,5 +1,6 @@
 package mx.uam.ayd.proyecto.presentacion.padresPrincipal.MenuSemanal.SeleccionPagoMenu;
 
+import mx.uam.ayd.proyecto.negocio.ServicioPadre;
 import mx.uam.ayd.proyecto.negocio.ServicioPago;
 import mx.uam.ayd.proyecto.negocio.modelo.Padre;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ public class ControlSeleccionPagoMenu {
     @Autowired
     private VentanaSeleccionPagoMenu ventana;
 
+    @Autowired
+    private ServicioPadre servicioPadre;
     @Autowired
     private ServicioPago servicioPago;
     // Corregido: El tipo y nombre coinciden con tu import
@@ -44,8 +47,12 @@ public class ControlSeleccionPagoMenu {
         this.total = total;
         this.controlSeleccionMenu = controlSeleccionMenu;
         this.diasSeleccionados = diasSeleccionados;
-        this.padreSesion = padre;
+        this.padreSesion = recuperarPadre(padre.getCorreo());
         ventana.muestra(this, total);
+    }
+
+    public Padre recuperarPadre(String correo) {
+        return servicioPadre.recuperaPadrePorCorreo(correo);
     }
 
     /**
@@ -55,6 +62,8 @@ public class ControlSeleccionPagoMenu {
     public void irAPagoLinea() {
         ventana.cerrar();
         controlDatosPagoEnLinea.inicia(total, () -> controlPagoEnLinea.inicia(total));
+        String diasAPagar = String.join(", ", diasSeleccionados);
+        servicioPago.crearPagoDeMenuEnLinea(total,padreSesion,diasAPagar);
     }
 
     public void irAPagoCaja() {

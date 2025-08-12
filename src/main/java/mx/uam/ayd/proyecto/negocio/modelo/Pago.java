@@ -51,11 +51,15 @@ public class Pago {
         this.titular = titular;
         this.monto = monto;
         this.diaMenu = diaMenu;
+        this.fechaPago = LocalDate.now();
+        this.fechaLimite = LocalDate.now().plusDays(7);
     }
 
     public Pago(Padre titular, float monto){
         this.titular = titular;
         this.monto = monto;
+        this.fechaPago = LocalDate.now();
+        this.fechaLimite = LocalDate.now().plusDays(7);
     }
 
     @Override

@@ -53,6 +53,8 @@ public class ControlSeleccionPagoServicios {
     public void irAPagoLinea() {
         ventana.cerrar();
         controlDatosPagoEnLinea.inicia(total, () -> controlPagoEnLinea.inicia(total));
+        String servicios = String.join(", ", serviciosSeleccionados);
+        servicioPago.crearPagoDeServiciosEnLinea(total,padreSesion,servicios);
     }
 
     public void irAPagoCaja() {
