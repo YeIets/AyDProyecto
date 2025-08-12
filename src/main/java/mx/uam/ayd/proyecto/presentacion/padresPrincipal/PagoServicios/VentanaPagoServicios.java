@@ -10,7 +10,10 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
+
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class VentanaPagoServicios {
@@ -69,7 +72,7 @@ public class VentanaPagoServicios {
         idCheckLibros.setOnAction(e -> actualizarTotal());
 
         // El botón "Pagar" le pasa el total acumulado al controlador
-        btnPagar.setOnAction(e -> control.procederAlPago(totalAcumulado));
+        btnPagar.setOnAction(e -> control.procederAlPago(totalAcumulado, getServiciosSeleccionados()));
     }
 
     /**
@@ -91,6 +94,17 @@ public class VentanaPagoServicios {
             totalAcumulado += 950;
         }
         idTotal.setText("$" + totalAcumulado);
+    }
+
+    public List<String> getServiciosSeleccionados() {
+        List<String> serviciosSeleccionados = new ArrayList<>();
+
+        if (idCheckColegiatura.isSelected()) serviciosSeleccionados.add("Colegiatura");
+        if (idCheckInscripcion.isSelected()) serviciosSeleccionados.add("Inscripcion");
+        if (idCheckLibros.isSelected()) serviciosSeleccionados.add("Libros");
+        if (idCheckUniforme.isSelected()) serviciosSeleccionados.add("Uniforme");
+
+        return serviciosSeleccionados;
     }
 
     public void cerrar() {

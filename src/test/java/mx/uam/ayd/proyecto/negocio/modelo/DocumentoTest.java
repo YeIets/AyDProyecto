@@ -18,7 +18,7 @@ class DocumentoTest {
         documento.setIdDocumento(1L);
         documento.setNombre("Curp.pdf");
         documento.setTipo("CURP");
-        documento.setDireccionArchivo("Descargas/Curp.pdf");
+        documento.setRuta("Descargas/Curp.pdf");
         documento.setFechaDeSubida(fecha);
     }
 

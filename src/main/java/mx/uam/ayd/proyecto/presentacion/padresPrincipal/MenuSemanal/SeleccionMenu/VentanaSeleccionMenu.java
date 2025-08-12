@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class VentanaSeleccionMenu {
@@ -129,7 +131,19 @@ public class VentanaSeleccionMenu {
         if (calcularTotal() == 0) {
             mostrarMensajeError("Seleccione al menos un dia del menu");
         }
-        else control.irAVentanaPagos(calcularTotal());
+        else control.irAVentanaPagos(calcularTotal(), getDiasSeleccionados());
+    }
+
+    public List<String> getDiasSeleccionados() {
+        List<String> diasSeleccionados = new ArrayList<>();
+
+        if (idLunesCheck.isSelected()) diasSeleccionados.add("Lunes");
+        if (idMartesCheck.isSelected()) diasSeleccionados.add("Martes");
+        if (idMiercolesCheck.isSelected()) diasSeleccionados.add("Miércoles");
+        if (idJuvesCheck.isSelected()) diasSeleccionados.add("Jueves");
+        if (idViernesCheck.isSelected()) diasSeleccionados.add("Viernes");
+
+        return diasSeleccionados;
     }
 
     @FXML

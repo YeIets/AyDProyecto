@@ -84,7 +84,7 @@ public class VentanaMenuSemanal {
             // Eventos
             idAceptar.setOnAction(e -> {
                 cerrar();
-                controlSeleccionMenu.inicia(); // ← abre la siguiente ventana
+                control.elegirDias(); // ← abre la siguiente ventana
             });
 
             idRegresar.setOnAction(e -> stage.close());

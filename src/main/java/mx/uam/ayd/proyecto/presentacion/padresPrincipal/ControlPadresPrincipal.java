@@ -62,12 +62,12 @@ public class ControlPadresPrincipal {
 
     //Abre la ventana de Menu Semanal
     public void irAMenuSemanal() {
-        controlMenuSemanal.inicia();
+        controlMenuSemanal.inicia(padreSesion);
     }
 
     //Abre la ventana de Hacer Pagos
     public void irAHacerPagos() {
-        controlPagoServicios.inicia();
+        controlPagoServicios.inicia(padreSesion);
     }
 
     public Padre recuperarPadre(String correo) {

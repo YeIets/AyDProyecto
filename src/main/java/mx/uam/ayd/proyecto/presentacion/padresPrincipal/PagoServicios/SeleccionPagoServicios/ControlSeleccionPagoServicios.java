@@ -1,25 +1,23 @@
-package mx.uam.ayd.proyecto.presentacion.padresPrincipal.MenuSemanal.SeleccionPagoMenu;
+package mx.uam.ayd.proyecto.presentacion.padresPrincipal.PagoServicios.SeleccionPagoServicios;
 
 import mx.uam.ayd.proyecto.negocio.ServicioPago;
 import mx.uam.ayd.proyecto.negocio.modelo.Padre;
+import mx.uam.ayd.proyecto.presentacion.padresPrincipal.MenuSemanal.SeleccionMenu.ControlSeleccionMenu;
+import mx.uam.ayd.proyecto.presentacion.padresPrincipal.Pagos.DatosPagoEnLinea.ControlDatosPagoEnLinea;
+import mx.uam.ayd.proyecto.presentacion.padresPrincipal.Pagos.PagoCaja.ControlPagoCaja;
+import mx.uam.ayd.proyecto.presentacion.padresPrincipal.Pagos.PagoEnLinea.ControlPagoEnLinea;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-// --- Estos son los imports correctos que me diste ---
-import mx.uam.ayd.proyecto.presentacion.padresPrincipal.Pagos.PagoCaja.ControlPagoCaja;
-import mx.uam.ayd.proyecto.presentacion.padresPrincipal.Pagos.DatosPagoEnLinea.ControlDatosPagoEnLinea;
-import mx.uam.ayd.proyecto.presentacion.padresPrincipal.Pagos.PagoEnLinea.ControlPagoEnLinea;
-import mx.uam.ayd.proyecto.presentacion.padresPrincipal.MenuSemanal.SeleccionMenu.ControlSeleccionMenu;
-
 import java.util.List;
 
 @Component
-public class ControlSeleccionPagoMenu {
+public class ControlSeleccionPagoServicios {
 
     private Padre padreSesion;
     @Autowired
-    private VentanaSeleccionPagoMenu ventana;
+    private VentanaSeleccionPagoServicios ventana;
 
     @Autowired
     private ServicioPago servicioPago;
@@ -36,14 +34,14 @@ public class ControlSeleccionPagoMenu {
     @Autowired
     private ControlDatosPagoEnLinea controlDatosPagoEnLinea; // Este es el del formulario de tarjeta
 
-    private ControlSeleccionMenu controlSeleccionMenu;
-    private List<String> diasSeleccionados;
+    private ControlSeleccionPagoServicios controlSeleccionPagoServicios;
+    private List<String> serviciosSeleccionados;
     private int total;
 
-    public void inicia(int total, ControlSeleccionMenu controlSeleccionMenu, List<String> diasSeleccionados, Padre padre) {
+    public void inicia(int total, ControlSeleccionPagoServicios controlSeleccionPagoServicios, List<String> serviciosSeleccionados, Padre padre) {
         this.total = total;
-        this.controlSeleccionMenu = controlSeleccionMenu;
-        this.diasSeleccionados = diasSeleccionados;
+        this.controlSeleccionPagoServicios = controlSeleccionPagoServicios;
+        this.serviciosSeleccionados = serviciosSeleccionados;
         this.padreSesion = padre;
         ventana.muestra(this, total);
     }
@@ -59,8 +57,8 @@ public class ControlSeleccionPagoMenu {
 
     public void irAPagoCaja() {
         ventana.cerrar();
-        String diasAPagar = String.join(", ", diasSeleccionados);
-        servicioPago.crearPagoDeMenuCaja(total,padreSesion,diasAPagar);
+        String servicios = String.join(", ", serviciosSeleccionados);
+        servicioPago.crearPagoDeServiciosCaja(total,padreSesion,servicios);
         controlPagoCaja.inicia(total);
     }
 
