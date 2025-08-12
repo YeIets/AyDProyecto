@@ -35,7 +35,7 @@
       <Button id="botonSubirMenu" layoutY="53.0" mnemonicParsing="false" onAction="#handleSubirMenu" prefHeight="26.0" prefWidth="200.0" text="Subir Menu" />
       <ImageView fitHeight="251.0" fitWidth="303.0" layoutX="283.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../../media/laura/KINGSTON1/ESCUDOS/ESCUDO%20%232%201.png" />
+            <Image url="@../../Image/LogoInstitucional.png" />
          </image>
       </ImageView>
       <Label layoutX="254.0" layoutY="300.0" text="&quot;Educar para la vida, guiar para el éxito&quot;">

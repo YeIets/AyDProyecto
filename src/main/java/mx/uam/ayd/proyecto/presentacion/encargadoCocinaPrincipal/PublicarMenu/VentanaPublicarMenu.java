@@ -3,6 +3,7 @@ package mx.uam.ayd.proyecto.presentacion.encargadoCocinaPrincipal.PublicarMenu;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
@@ -43,9 +44,15 @@ public class VentanaPublicarMenu {
             // Se corrige la ruta del FXML para que coincida con la estructura de tu proyecto
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/VentanasEncargadoDeCocina/Ventanapublicarmenu.fxml"));
             loader.setController(this);
+            Parent root = loader.load();
+
+
             stage = new Stage();
             stage.setTitle("Publicar Menú Semanal");
-            stage.setScene(new Scene(loader.load()));
+            stage.setScene(new Scene(root));
+            stage.setResizable(false); 
+            stage.setWidth(600);       
+            stage.setHeight(420);      
             stage.show();
 
             // Configurar los manejadores de eventos para los botones

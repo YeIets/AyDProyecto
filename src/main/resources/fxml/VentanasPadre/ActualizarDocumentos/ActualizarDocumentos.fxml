@@ -32,7 +32,7 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <Label layoutX="325.0" layoutY="72.0" text="Actualización De Datos.">
+      <Label layoutX="300.0" layoutY="81.0" text="Actualiza tus documentos">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Label>
@@ -52,10 +52,10 @@
       <Button fx:id="CURP" layoutX="431.0" layoutY="165.0" mnemonicParsing="false" onAction="#handleSubirDocumento" text="Subir Archivo" />
       <Button fx:id="ComprobanteDeDomicilio" layoutX="431.0" layoutY="201.0" mnemonicParsing="false" onAction="#handleSubirDocumento" text="Subir Archivo" />
       <Button fx:id="CertificadoMedico" layoutX="431.0" layoutY="241.0" mnemonicParsing="false" onAction="#handleSubirDocumento" text="Subir Archivo" />
-      <Button fx:id="idVolver" layoutX="64.0" layoutY="323.0" mnemonicParsing="false" onAction="#handleCerrar" text="Volver" />
+      <Button fx:id="idVolver" layoutX="38.0" layoutY="346.0" mnemonicParsing="false" onAction="#handleCerrar" text="Volver" />
       <ImageView fitHeight="209.0" fitWidth="224.0" layoutX="11.0" layoutY="74.0" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../../../media/laura/KINGSTON1/ESCUDOS/ESCUDO%20%232%201.png" />
+            <Image url="@../../../Image/LogoInstitucional.png" />
          </image>
       </ImageView>
       <Label layoutX="146.0" layoutY="21.0" text="&quot;Educar para la vida, guiar para el éxito&quot;">

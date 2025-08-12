@@ -33,12 +33,12 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <ImageView fitHeight="205.0" fitWidth="228.0" layoutX="198.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="205.0" fitWidth="228.0" layoutX="198.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../media/laura/KINGSTON1/ESCUDOS/ESCUDO%20%232%201.png" />
+            <Image url="@../Image/LogoInstitucional.png" />
          </image>
       </ImageView>
-      <Button fx:id="idAceptar" layoutX="250.0" layoutY="339.0" mnemonicParsing="false" onAction="#handleIniciarSesion" text="Iniciar Sesion" />
+      <Button fx:id="idAceptar" layoutX="251.0" layoutY="325.0" mnemonicParsing="false" onAction="#handleIniciarSesion" text="Iniciar Sesion" />
       <Label layoutX="177.0" layoutY="201.0" text="Usuario:" />
       <TextField fx:id="idUsuario" layoutX="244.0" layoutY="197.0" prefHeight="26.0" prefWidth="170.0" />
       <PasswordField fx:id="idPassword" layoutX="244.0" layoutY="232.0" prefHeight="26.0" prefWidth="170.0" />

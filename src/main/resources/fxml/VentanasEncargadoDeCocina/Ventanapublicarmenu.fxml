@@ -7,49 +7,107 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="685.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Button fx:id="btnPublicar" layoutX="317.0" layoutY="474.0" mnemonicParsing="false" style="-fx-background-color: green;" text="publicar">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="407.0" layoutX="-3.0" layoutY="-5.0" stroke="TRANSPARENT" strokeType="INSIDE" width="608.0">
+         <fill>
+            <LinearGradient endX="0.6142857142857143" endY="1.0" startX="0.32857142857142857" startY="0.5857142857142856">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" opacity="0.8500000238418579" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.9882352948188782" green="0.9176470637321472" blue="0.7019608020782471" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <ImageView fitHeight="136.0" fitWidth="133.0" layoutX="3.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Image/LogoInstitucional.png" />
+         </image>
+      </ImageView>
+        <Button fx:id="btnPublicar" layoutX="512.0" layoutY="338.0" mnemonicParsing="false" style="-fx-background-color: #90EE90;" text="Publicar">
             <effect>
                 <ColorAdjust />
             </effect>
         </Button>
-        <Button fx:id="btnRegresar" layoutX="28.0" layoutY="499.0" mnemonicParsing="false" text="regrear" />
-        <Label fx:id="lblc" layoutX="21.0" layoutY="201.0" text="comida" />
-        <Label fx:id="lbla" layoutX="15.0" layoutY="252.0" text="agua" />
-        <Label fx:id="lblf" layoutX="16.0" layoutY="301.0" text="fruta" />
-        <Label fx:id="lblg" layoutX="17.0" layoutY="354.0" text="gelatina " />
-        <Label fx:id="lbll" layoutX="114.0" layoutY="162.0" text="lunes" />
-        <Label fx:id="lblm" layoutX="248.0" layoutY="162.0" text="martes" />
-        <Label fx:id="lblmi" layoutX="351.0" layoutY="162.0" text="miercoles" />
-        <Label fx:id="lblj" layoutX="485.0" layoutY="162.0" text="jueves " />
-        <Label fx:id="lblv" layoutX="615.0" layoutY="162.0" text="viernes" />
-        <Label fx:id="lblme" layoutX="250.0" layoutY="72.0" prefHeight="17.0" prefWidth="88.0" text="menú semanal" />
-        <ImageView fx:id="imglogo" fitHeight="138.0" fitWidth="161.0" layoutX="14.0" layoutY="6.0">
-            <image>
-                <Image url="@../../Image/LogoInstitucional.jpg" />
-            </image>
-        </ImageView>
-        <TextField fx:id="idlunescomida" layoutX="83.0" layoutY="197.0" prefHeight="25.0" prefWidth="96.0" />
-        <TextField fx:id="idmartescomida" layoutX="223.0" layoutY="197.0" prefHeight="25.0" prefWidth="88.0" />
-        <TextField fx:id="idmiercolescomida" layoutX="342.0" layoutY="197.0" prefHeight="25.0" prefWidth="80.0" />
-        <TextField fx:id="idjuevescomida" layoutX="456.0" layoutY="197.0" prefHeight="25.0" prefWidth="96.0" />
-        <TextField fx:id="idviernescomida" layoutX="583.0" layoutY="197.0" prefHeight="25.0" prefWidth="88.0" />
-        <TextField fx:id="idagualunes" layoutX="83.0" layoutY="248.0" prefHeight="25.0" prefWidth="96.0" />
-        <TextField fx:id="idmartesagua" layoutX="224.0" layoutY="248.0" prefHeight="25.0" prefWidth="88.0" />
-        <TextField fx:id="idmiercolesagua" layoutX="341.0" layoutY="248.0" prefHeight="25.0" prefWidth="80.0" />
-        <TextField fx:id="idjuevesagua" layoutX="460.0" layoutY="248.0" prefHeight="25.0" prefWidth="96.0" />
-        <TextField fx:id="idviernesagua" layoutX="588.0" layoutY="248.0" prefHeight="25.0" prefWidth="88.0" />
-        <TextField fx:id="idluensfruta" layoutX="80.0" layoutY="297.0" prefHeight="25.0" prefWidth="96.0" />
-        <TextField fx:id="idmartesfruta" layoutX="225.0" layoutY="297.0" prefHeight="25.0" prefWidth="88.0" />
-        <TextField fx:id="idmiercolesfruta" layoutX="343.0" layoutY="297.0" prefHeight="25.0" prefWidth="80.0" />
-        <TextField fx:id="idjuevesfruta" layoutX="461.0" layoutY="297.0" prefHeight="25.0" prefWidth="96.0" />
-        <TextField fx:id="idviernesfruta" layoutX="594.0" layoutY="297.0" prefHeight="25.0" prefWidth="80.0" />
-        <TextField fx:id="idluenesgelatina" layoutX="82.0" layoutY="350.0" prefHeight="25.0" prefWidth="96.0" />
-        <TextField fx:id="idmartesgelatina" layoutX="226.0" layoutY="350.0" prefHeight="25.0" prefWidth="88.0" />
-        <TextField fx:id="idmiercolesgelatina" layoutX="347.0" layoutY="350.0" prefHeight="25.0" prefWidth="80.0" />
-        <TextField fx:id="idjuevesgelatina" layoutX="466.0" layoutY="350.0" prefHeight="25.0" prefWidth="96.0" />
-        <TextField fx:id="idviernesgelatina" layoutX="595.0" layoutY="350.0" prefHeight="25.0" prefWidth="80.0" />
+        <Button fx:id="btnRegresar" layoutX="23.0" layoutY="338.0" mnemonicParsing="false" text="Volver" />
+        <Label fx:id="lblc" alignment="CENTER_RIGHT" layoutX="14.0" layoutY="175.0" prefHeight="18.0" prefWidth="63.0" text="Comida">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
+        <Label fx:id="lbla" alignment="CENTER_RIGHT" layoutX="14.0" layoutY="216.0" prefHeight="18.0" prefWidth="63.0" text="Agua">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
+        <Label fx:id="lblf" alignment="CENTER_RIGHT" layoutX="13.0" layoutY="257.0" prefHeight="18.0" prefWidth="63.0" text="Fruta">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
+        <Label fx:id="lblg" alignment="CENTER_RIGHT" layoutX="13.0" layoutY="298.0" prefHeight="18.0" prefWidth="63.0" text="Gelatina">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
+        <Label fx:id="lbll" layoutX="122.0" layoutY="135.0" text="Lunes">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
+        <Label fx:id="lblm" layoutX="226.0" layoutY="135.0" text="Martes">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
+        <Label fx:id="lblmi" layoutX="310.0" layoutY="135.0" text="Miércoles">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
+        <Label fx:id="lblj" layoutX="419.0" layoutY="135.0" text="Jueves ">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
+        <Label fx:id="lblv" layoutX="521.0" layoutY="135.0" text="Viernes">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
+        <Label fx:id="lblme" layoutX="261.0" layoutY="77.0" prefHeight="35.0" prefWidth="181.0" text="Menú Semanal">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Label>
+        <TextField fx:id="idlunescomida" layoutX="94.0" layoutY="171.0" prefHeight="25.0" prefWidth="96.0" />
+        <TextField fx:id="idmartescomida" layoutX="201.0" layoutY="171.0" prefHeight="25.0" prefWidth="88.0" />
+        <TextField fx:id="idmiercolescomida" layoutX="300.0" layoutY="171.0" prefHeight="25.0" prefWidth="80.0" />
+        <TextField fx:id="idjuevescomida" layoutX="390.0" layoutY="171.0" prefHeight="25.0" prefWidth="96.0" />
+        <TextField fx:id="idviernescomida" layoutX="496.0" layoutY="171.0" prefHeight="25.0" prefWidth="88.0" />
+        <TextField fx:id="idagualunes" layoutX="94.0" layoutY="212.0" prefHeight="25.0" prefWidth="96.0" />
+        <TextField fx:id="idmartesagua" layoutX="201.0" layoutY="212.0" prefHeight="25.0" prefWidth="88.0" />
+        <TextField fx:id="idmiercolesagua" layoutX="300.0" layoutY="212.0" prefHeight="25.0" prefWidth="80.0" />
+        <TextField fx:id="idjuevesagua" layoutX="390.0" layoutY="212.0" prefHeight="25.0" prefWidth="96.0" />
+        <TextField fx:id="idviernesagua" layoutX="496.0" layoutY="212.0" prefHeight="25.0" prefWidth="88.0" />
+        <TextField fx:id="idluensfruta" layoutX="94.0" layoutY="253.0" prefHeight="25.0" prefWidth="96.0" />
+        <TextField fx:id="idmartesfruta" layoutX="201.0" layoutY="253.0" prefHeight="25.0" prefWidth="88.0" />
+        <TextField fx:id="idmiercolesfruta" layoutX="300.0" layoutY="253.0" prefHeight="25.0" prefWidth="80.0" />
+        <TextField fx:id="idjuevesfruta" layoutX="390.0" layoutY="253.0" prefHeight="25.0" prefWidth="96.0" />
+        <TextField fx:id="idviernesfruta" layoutX="496.0" layoutY="253.0" prefHeight="26.0" prefWidth="88.0" />
+        <TextField fx:id="idluenesgelatina" layoutX="94.0" layoutY="294.0" prefHeight="25.0" prefWidth="96.0" />
+        <TextField fx:id="idmartesgelatina" layoutX="201.0" layoutY="294.0" prefHeight="25.0" prefWidth="88.0" />
+        <TextField fx:id="idmiercolesgelatina" layoutX="301.0" layoutY="294.0" prefHeight="25.0" prefWidth="80.0" />
+        <TextField fx:id="idjuevesgelatina" layoutX="390.0" layoutY="294.0" prefHeight="25.0" prefWidth="96.0" />
+        <TextField fx:id="idviernesgelatina" layoutX="496.0" layoutY="294.0" prefHeight="26.0" prefWidth="88.0" />
+      <Label layoutX="197.0" layoutY="21.0" text="&quot;Educar para la vida, guiar para el éxito&quot;">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>
