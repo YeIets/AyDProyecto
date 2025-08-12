@@ -3,6 +3,7 @@ package mx.uam.ayd.proyecto.negocio;
 import java.util.ArrayList;
 import java.util.List;
 
+import mx.uam.ayd.proyecto.datos.PadreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +20,13 @@ import mx.uam.ayd.proyecto.negocio.modelo.Padre;
 public class ServicioPago {
 	
 	private final PagoRepository pagoRepository;
+	private final PadreRepository padreRepository;
 	
 	@Autowired
-	public ServicioPago(PagoRepository pagoRepository) {
+	public ServicioPago(PagoRepository pagoRepository, PadreRepository padreRepository) {
 		this.pagoRepository = pagoRepository;
-	}
+        this.padreRepository = padreRepository;
+    }
 	
 
 	//Recupera los pagos con concepto "Menu Semanal" de un padre
@@ -51,17 +54,45 @@ public class ServicioPago {
 		return pagoRepository.findByDiaMenuAndEstado(dia, estado);
 	}
 
-	//Genera una linea de captura para el pago en caja
-	public Pago crearPagoCaja(float total, Padre padre, String diaElegido) {
-		Pago pago = new Pago(padre, total, diaElegido);
-		
-		Pago persistido = pagoRepository.save(pago);
+	//Genera el pago en caja para padre
+	public void crearPagoDeMenuCaja(int total, Padre padre, String diaElegido) {
 
-		if (persistido != null && persistido.getIdPago() != 0) {
-			return persistido;
-		} else return null;
+		Pago pago = new Pago(padre, total, diaElegido);
+		pago.setConceptoDePago("Menu Semanal");
+		pago.setMetodoDePago("Caja");
+		pago.setEstado("Pendiente");
+		padre.agregarPago(pago);
+		padreRepository.save(padre);
+	}
+
+	public void crearPagoDeMenuEnLinea(int total, Padre padre, String diaElegido) {
+
+		Pago pago = new Pago(padre, total, diaElegido);
+		pago.setConceptoDePago("Menu Semanal");
+		pago.setMetodoDePago("Pago En Linea");
+		pago.setEstado("Pagado");
+		padre.agregarPago(pago);
+		padreRepository.save(padre);
 	}
 
 
+	public void crearPagoDeServiciosCaja(int total, Padre padre, String servicios) {
+		Pago pago = new Pago(padre, total);
+		pago.setConceptoDePago("Pago De Servicios");
+		pago.setServicios(servicios);
+		pago.setMetodoDePago("Caja");
+		pago.setEstado("Pendiente");
+		padre.agregarPago(pago);
+		padreRepository.save(padre);
+	}
+	public void crearPagoDeServiciosEnLinea(int total, Padre padre, String servicios) {
 
+		Pago pago = new Pago(padre, total);
+		pago.setConceptoDePago("Pago De Servicios");
+		pago.setServicios(servicios);
+		pago.setMetodoDePago("Pago En Linea");
+		pago.setEstado("Pagado");
+		padre.agregarPago(pago);
+		padreRepository.save(padre);
+	}
 }

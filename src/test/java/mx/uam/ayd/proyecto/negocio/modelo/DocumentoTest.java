@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 class DocumentoTest {
 
     private Documento documento;
-    private final LocalDate fecha = LocalDate.now();
+    private LocalDate fecha = LocalDate.now();
 
     @BeforeEach
     void setUp() {
@@ -18,20 +18,15 @@ class DocumentoTest {
         documento.setIdDocumento(1L);
         documento.setNombre("Curp.pdf");
         documento.setTipo("CURP");
-
-        // CAMBIO: Se usa el nuevo método setRuta() en lugar de setDireccionArchivo()
-        documento.setRuta("Descargas/Curp.pdf");
-
+        documento.setDireccionArchivo("Descargas/Curp.pdf");
         documento.setFechaDeSubida(fecha);
     }
 
     @Test
     @DisplayName("ToString debería devolver la representación correcta en texto")
     void testToString() {
-        // CAMBIO: El texto esperado ahora coincide con el formato generado por @Data de Lombok,
-        // usando el nuevo nombre de campo 'ruta' y los demás campos de la clase.
-        String esperado = "Documento(idDocumento=1, nombre=Curp.pdf, tipo=CURP, ruta=Descargas/Curp.pdf, fechaDeSubida=" + fecha + ", alumno=null)";
-
+        String esperado = "Documento [idDocumento=1, Nombre=Curp.pdf, tipo=CURP, Direccion=Descargas/Curp.pdf, Fecha=" + fecha.toString() + "]";
         assertEquals(esperado, documento.toString());
     }
+
 }

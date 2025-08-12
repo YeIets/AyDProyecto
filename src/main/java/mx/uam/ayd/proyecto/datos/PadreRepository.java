@@ -18,5 +18,4 @@ public interface PadreRepository extends CrudRepository<Padre, Long> {
      */
     Padre findByCorreo(String correo);
     Padre findByCorreoAndPassword(String correo, String password);
-
 }

@@ -10,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
-import mx.uam.ayd.proyecto.negocio.modelo.Alumno; // Se importa la entidad Alumno
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -32,26 +31,19 @@ public class VentanaSeleccionMenu {
     private static final int PRECIO_POR_DIA = 35;
 
     /**
-     * CAMBIO: Muestra la ventana para un alumno específico.
-     * @param control El controlador asociado.
-     * @param alumno El alumno para el cual se selecciona el menú.
+     * Muestra la ventana con su controlador asociado.
      */
-    public void muestra(ControlSeleccionMenu control, Alumno alumno) {
+    public void muestra(ControlSeleccionMenu control) {
         this.control = control;
 
         if (!Platform.isFxApplicationThread()) {
-            // CAMBIO: Se pasa el alumno en la llamada recursiva.
-            Platform.runLater(() -> muestra(control, alumno));
+            Platform.runLater(() -> muestra(control));
             return;
         }
 
-        // Se inicializa la UI solo la primera vez para no crear ventanas duplicadas
         if (stage == null) {
             inicializaUI();
         }
-
-        // Se puede usar el objeto 'alumno' para personalizar la ventana si se desea.
-        // Por ejemplo: stage.setTitle("Selección de menú para " + alumno.getNombre());
 
         stage.show();
     }
@@ -68,12 +60,13 @@ public class VentanaSeleccionMenu {
             stage = new Stage();
             stage.setTitle("Seleccionar días del menú");
             stage.setScene(new Scene(root));
-            stage.setResizable(false);
-            stage.setWidth(600);
-
-            stage.setHeight(420);
-
+            stage.setResizable(false); 
+            stage.setWidth(600);       
+            stage.setHeight(420);      
+            stage.show();
+            
             actualizarTotal();
+
             configurarEventos();
 
         } catch (IOException e) {
@@ -83,7 +76,7 @@ public class VentanaSeleccionMenu {
     }
 
     /**
-     * Configura los eventos de los checkboxes.
+     * Configura eventos de botones y checkboxes.
      */
     private void configurarEventos() {
         idLunesCheck.setOnAction(event -> actualizarTotal());
@@ -107,7 +100,7 @@ public class VentanaSeleccionMenu {
     }
 
     /**
-     * Actualiza la etiqueta del total en la interfaz.
+     * Actualiza el label del total.
      */
     private void actualizarTotal() {
         int total = calcularTotal();
@@ -126,22 +119,22 @@ public class VentanaSeleccionMenu {
     public void mostrarMensajeError(String mensaje) {
         Alert alerta = new Alert(AlertType.ERROR);
         alerta.setTitle("Error");
-        alerta.setHeaderText("Acción no válida");
+        alerta.setHeaderText("Error al pagar"); // puedes poner un encabezado si quieres
         alerta.setContentText(mensaje);
         alerta.showAndWait();
     }
 
     @FXML
-    public void handlePagar() {
+    public void handlePagar(){
         if (calcularTotal() == 0) {
-            mostrarMensajeError("Seleccione al menos un día del menú.");
-        } else {
-            control.irAVentanaPagos(calcularTotal());
+            mostrarMensajeError("Seleccione al menos un dia del menu");
         }
+        else control.irAVentanaPagos(calcularTotal());
     }
 
     @FXML
-    public void handleVolver() {
+    public void handleVolver(){
         cerrar();
     }
+
 }

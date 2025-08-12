@@ -2,6 +2,7 @@ package mx.uam.ayd.proyecto.negocio.modelo;
 
 import jakarta.persistence.*;
 import lombok.Data;
+
 import java.time.LocalDate;
 
 
@@ -34,22 +35,31 @@ public class Pago {
 
     private String diaMenu;
 
+    private String servicios;
+
     @ManyToOne
     @JoinColumn(name = "id_padre")
     private Padre titular;
 
+    public Pago(){
+
+    }
 
     //Crea un Pago  con atributos "ConceptoDePago", "Estado" y "MetodoDePago" ya definidos
     //Usado para crear pagos en caja
     public Pago(Padre titular, float monto, String diaMenu){
-
         this.titular = titular;
         this.monto = monto;
-        this.metodoDePago = "Caja";
-        this.conceptoDePago = "Menu Semanal";
-        this.estado = "Pendiente";
         this.diaMenu = diaMenu;
+        this.fechaPago = LocalDate.now();
+        this.fechaLimite = LocalDate.now().plusDays(7);
+    }
 
+    public Pago(Padre titular, float monto){
+        this.titular = titular;
+        this.monto = monto;
+        this.fechaPago = LocalDate.now();
+        this.fechaLimite = LocalDate.now().plusDays(7);
     }
 
     @Override
@@ -58,4 +68,5 @@ public class Pago {
         + ", monto=" + monto + ", metodo=" + metodoDePago + ", fechaPago=" + fechaPago
         + ", fechaLimite=" + fechaLimite + ", concepto=" + conceptoDePago + ", estado" + estado +"]";
     }
+
 }
