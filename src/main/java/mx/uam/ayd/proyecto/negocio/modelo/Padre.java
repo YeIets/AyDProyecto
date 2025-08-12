@@ -23,9 +23,8 @@ public class Padre {
     private String password;
     private String correo;
 
-    // ✅ RELACIÓN CORREGIDA: Se añadió mappedBy para la correcta vinculación
     @OneToMany(
-            mappedBy = "padre", // Indica que el campo "padre" en Alumno gestiona esta relación
+            mappedBy = "padre",
             fetch = FetchType.EAGER,
             cascade = CascadeType.ALL,
             orphanRemoval = true
@@ -49,7 +48,6 @@ public class Padre {
     private List<Pago> pagos = new ArrayList<>();
 
 
-    // ✅ CONSTRUCTOR MEJORADO: Para crear un padre con todos sus datos
     public Padre(String nombre, String apellido, String correo, String password) {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -57,7 +55,6 @@ public class Padre {
         this.password = password;
     }
 
-    // ✅ MÉTODO DE AYUDA AÑADIDO: Para sincronizar la relación en ambos extremos
     public void addHijo(Alumno hijo) {
         this.hijos.add(hijo);
         hijo.setPadre(this);
@@ -71,7 +68,6 @@ public class Padre {
     @Override
     public String toString() {
         String notificacionesInfo = (notificaciones != null) ? "Numero de Notificaciones: " + notificaciones.size() : "Numero de Notificaciones: 0";
-
         return "Padre [id=" + idPadre + ", nombre=" + nombre + ", " + notificacionesInfo + "]";
     }
 
@@ -81,5 +77,19 @@ public class Padre {
         }
         pago.setTitular(this);
         pagos.add(pago);
+    }
+
+    // ✅ NUEVO MÉTODO: Añadido para obtener un alumno para los flujos de pago.
+    /**
+     * Devuelve el primer alumno de la lista de hijos.
+     * Este método sirve como puente para los flujos que operan con un solo alumno.
+     *
+     * @return El primer Alumno en la lista, o null si la lista está vacía.
+     */
+    public Alumno getAlumno() {
+        if (this.hijos != null && !this.hijos.isEmpty()) {
+            return this.hijos.get(0); // Devuelve el primer hijo
+        }
+        return null; // No hay hijos para devolver
     }
 }

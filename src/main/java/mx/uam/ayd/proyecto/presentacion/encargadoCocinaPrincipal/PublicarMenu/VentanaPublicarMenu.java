@@ -1,6 +1,5 @@
 package mx.uam.ayd.proyecto.presentacion.encargadoCocinaPrincipal.PublicarMenu;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,13 +8,11 @@ import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
 import java.io.IOException;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
-import javafx.scene.control.Alert; // Importar la clase Alert para la ventana de confirmación
-import javafx.scene.control.Alert.AlertType; // Importar AlertType
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 @Component
 public class VentanaPublicarMenu {
@@ -25,69 +22,71 @@ public class VentanaPublicarMenu {
     private Stage stage;
     private ControlPublicarMenu control;
 
-    @FXML
-    private Button btnPublicar;
-    @FXML
-    private Button btnRegresar;
-    @FXML
-    private Label lblMensaje;
+    @FXML private TextField lunesPlatillo;
+    @FXML private TextField lunesBebida;
+    @FXML private TextField lunesFruta;
+    @FXML private TextField lunesPostre;
+
+    @FXML private TextField martesPlatillo;
+    @FXML private TextField martesBebida;
+    @FXML private TextField martesFruta;
+    @FXML private TextField martesPostre;
+
+    @FXML private TextField miercolesPlatillo;
+    @FXML private TextField miercolesBebida;
+    @FXML private TextField miercolesFruta;
+    @FXML private TextField miercolesPostre;
+
+    @FXML private TextField juevesPlatillo;
+    @FXML private TextField juevesBebida;
+    @FXML private TextField juevesFruta;
+    @FXML private TextField juevesPostre;
+
+    @FXML private TextField viernesPlatillo;
+    @FXML private TextField viernesBebida;
+    @FXML private TextField viernesFruta;
+    @FXML private TextField viernesPostre;
+
+    @FXML private Button btnPublicar;
+    @FXML private Button btnRegresar;
 
     public void muestra(ControlPublicarMenu control) {
         this.control = control;
-
-        if (!Platform.isFxApplicationThread()) {
-            Platform.runLater(() -> this.muestra(control));
-            return;
-        }
-
         try {
-            // Se corrige la ruta del FXML para que coincida con la estructura de tu proyecto
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/VentanasEncargadoDeCocina/Ventanapublicarmenu.fxml"));
             loader.setController(this);
             Parent root = loader.load();
 
-
             stage = new Stage();
             stage.setTitle("Publicar Menú Semanal");
             stage.setScene(new Scene(root));
-            stage.setResizable(false); 
-            stage.setWidth(600);       
-            stage.setHeight(420);      
             stage.show();
 
-            // Configurar los manejadores de eventos para los botones
+            // ✅ CORRECCIÓN DEFINITIVA: Se añaden estas líneas para forzar la activación de los botones,
+            // sin importar si el 'onAction' está en el FXML. Esto solucionará el problema.
             btnPublicar.setOnAction(event -> handlePublicar());
             btnRegresar.setOnAction(event -> handleRegresar());
 
         } catch (IOException e) {
-            log.error("Error loading FXML for VentanaPublicarMenu", e);
-            e.printStackTrace();
+            log.error("Error al cargar FXML", e);
         }
     }
 
     @FXML
     private void handlePublicar() {
         log.info("Se presionó el botón Publicar");
-        // Lógica para publicar el menú
 
-        // Llamar al método para mostrar la ventana de confirmación
-        mostrarMensajeConfirmacion("¡Éxito!", "El menú ha sido publicado correctamente.");
-    }
+        control.publicarMenu("Lunes", lunesPlatillo.getText(), lunesBebida.getText(), lunesFruta.getText(), lunesPostre.getText());
+        control.publicarMenu("Martes", martesPlatillo.getText(), martesBebida.getText(), martesFruta.getText(), martesPostre.getText());
+        control.publicarMenu("Miércoles", miercolesPlatillo.getText(), miercolesBebida.getText(), miercolesFruta.getText(), miercolesPostre.getText());
+        control.publicarMenu("Jueves", juevesPlatillo.getText(), juevesBebida.getText(), juevesFruta.getText(), juevesPostre.getText());
+        control.publicarMenu("Viernes", viernesPlatillo.getText(), viernesBebida.getText(), viernesFruta.getText(), viernesPostre.getText());
 
-    private void mostrarMensajeConfirmacion(String titulo, String mensaje) {
-        // Se crea una ventana de alerta de tipo INFORMATION
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle(titulo);
-        alert.setHeaderText(null); // No queremos un header text
-        alert.setContentText(mensaje);
-
-        // Mostrar la ventana y esperar a que el usuario la cierre
-        alert.showAndWait();
+        mostrarMensajeConfirmacion("¡Éxito!", "El menú ha sido actualizado correctamente.");
     }
 
     @FXML
     private void handleRegresar() {
-        log.info("Se presionó el botón Regresar");
         control.regresar();
     }
 
@@ -95,5 +94,13 @@ public class VentanaPublicarMenu {
         if (stage != null) {
             stage.close();
         }
+    }
+
+    private void mostrarMensajeConfirmacion(String titulo, String mensaje) {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 }

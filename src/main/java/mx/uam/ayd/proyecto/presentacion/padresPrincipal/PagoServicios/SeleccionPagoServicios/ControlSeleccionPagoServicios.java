@@ -1,8 +1,8 @@
 package mx.uam.ayd.proyecto.presentacion.padresPrincipal.PagoServicios.SeleccionPagoServicios;
 
 import mx.uam.ayd.proyecto.negocio.ServicioPago;
+import mx.uam.ayd.proyecto.negocio.modelo.Alumno; // CAMBIO: Se importa la clase Alumno
 import mx.uam.ayd.proyecto.negocio.modelo.Padre;
-import mx.uam.ayd.proyecto.presentacion.padresPrincipal.MenuSemanal.SeleccionMenu.ControlSeleccionMenu;
 import mx.uam.ayd.proyecto.presentacion.padresPrincipal.Pagos.DatosPagoEnLinea.ControlDatosPagoEnLinea;
 import mx.uam.ayd.proyecto.presentacion.padresPrincipal.Pagos.PagoCaja.ControlPagoCaja;
 import mx.uam.ayd.proyecto.presentacion.padresPrincipal.Pagos.PagoEnLinea.ControlPagoEnLinea;
@@ -21,47 +21,55 @@ public class ControlSeleccionPagoServicios {
 
     @Autowired
     private ServicioPago servicioPago;
-    // Corregido: El tipo y nombre coinciden con tu import
     @Autowired
     @Lazy
-    private ControlPagoEnLinea controlPagoEnLinea; // Este es el del "ticket" final
+    private ControlPagoEnLinea controlPagoEnLinea;
 
     @Autowired
     @Lazy
     private ControlPagoCaja controlPagoCaja;
 
-    // Corregido: El tipo y nombre coinciden con tu import
     @Autowired
-    private ControlDatosPagoEnLinea controlDatosPagoEnLinea; // Este es el del formulario de tarjeta
+    private ControlDatosPagoEnLinea controlDatosPagoEnLinea;
 
-    private ControlSeleccionPagoServicios controlSeleccionPagoServicios;
     private List<String> serviciosSeleccionados;
     private int total;
 
-    public void inicia(int total, ControlSeleccionPagoServicios controlSeleccionPagoServicios, List<String> serviciosSeleccionados, Padre padre) {
+    // Se eliminó la variable sin usar 'controlSeleccionPagoServicios' de la firma
+    public void inicia(int total, List<String> serviciosSeleccionados, Padre padre) {
         this.total = total;
-        this.controlSeleccionPagoServicios = controlSeleccionPagoServicios;
         this.serviciosSeleccionados = serviciosSeleccionados;
         this.padreSesion = padre;
         ventana.muestra(this, total);
     }
 
     /**
-     * MÉTODO CLAVE:
-     * Ahora llama a los controladores con los nombres correctos.
+     * Inicia el flujo de pago en línea, ahora pasando el Alumno.
      */
     public void irAPagoLinea() {
         ventana.cerrar();
-        controlDatosPagoEnLinea.inicia(total, () -> controlPagoEnLinea.inicia(total));
+        // CAMBIO: Se obtiene el alumno desde el padre y se pasa como tercer argumento.
+        // También se corrige la llamada DENTRO de la lambda.
+        Alumno alumno = padreSesion.getAlumno();
+        controlDatosPagoEnLinea.inicia(
+                total,
+                () -> controlPagoEnLinea.inicia(total, alumno),
+                alumno
+        );
         String servicios = String.join(", ", serviciosSeleccionados);
-        servicioPago.crearPagoDeServiciosEnLinea(total,padreSesion,servicios);
+        servicioPago.crearPagoDeServiciosEnLinea(total, padreSesion, servicios);
     }
 
+    /**
+     * Inicia el flujo de pago en caja, ahora pasando el Alumno.
+     */
     public void irAPagoCaja() {
         ventana.cerrar();
+        // CAMBIO: Se obtiene el alumno y se pasa al controlador de pago en caja.
+        Alumno alumno = padreSesion.getAlumno();
+        controlPagoCaja.inicia(total, alumno);
         String servicios = String.join(", ", serviciosSeleccionados);
-        servicioPago.crearPagoDeServiciosCaja(total,padreSesion,servicios);
-        controlPagoCaja.inicia(total);
+        servicioPago.crearPagoDeServiciosCaja(total, padreSesion, servicios);
     }
 
     public void regresar() {

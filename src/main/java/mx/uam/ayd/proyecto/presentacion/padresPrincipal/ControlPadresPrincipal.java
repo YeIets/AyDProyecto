@@ -9,12 +9,11 @@ import org.slf4j.LoggerFactory;
 
 import mx.uam.ayd.proyecto.negocio.ServicioPadre;
 import mx.uam.ayd.proyecto.negocio.ServicioNotificacion;
+import mx.uam.ayd.proyecto.negocio.modelo.Alumno; // CAMBIO: Se importa la clase Alumno
 import mx.uam.ayd.proyecto.negocio.modelo.Padre;
 import mx.uam.ayd.proyecto.presentacion.padresPrincipal.MenuSemanal.ControlMenuSemanal;
 import mx.uam.ayd.proyecto.presentacion.padresPrincipal.ActualizarDocumentos.ControlActualizarDocumentos;
 import mx.uam.ayd.proyecto.presentacion.padresPrincipal.PagoServicios.ControlPagoServicios;
-
-import java.util.Optional;
 
 
 @Component
@@ -55,19 +54,40 @@ public class ControlPadresPrincipal {
         ventana.muestra();
     }
 
-    //Abre la ventana de Actualizar Documentos
+    /**
+     * CAMBIO: Se obtiene el alumno del padre en sesión y se pasa al siguiente controlador.
+     */
     public void irAActualizarDocumentos() {
-        controlActualizarDocumentos.inicia();
+        if (padreSesion == null || padreSesion.getAlumno() == null) {
+            ventana.muestraDialogoDeError("No se ha podido identificar al alumno. Por favor, inicie sesión nuevamente.");
+            return;
+        }
+        Alumno alumno = padreSesion.getAlumno();
+        controlActualizarDocumentos.inicia(alumno);
     }
 
-    //Abre la ventana de Menu Semanal
+    /**
+     * CAMBIO: Se obtiene el alumno del padre en sesión y se pasa al siguiente controlador.
+     */
     public void irAMenuSemanal() {
-        controlMenuSemanal.inicia();
+        if (padreSesion == null || padreSesion.getAlumno() == null) {
+            ventana.muestraDialogoDeError("No se ha podido identificar al alumno. Por favor, inicie sesión nuevamente.");
+            return;
+        }
+        Alumno alumno = padreSesion.getAlumno();
+        controlMenuSemanal.inicia(alumno);
     }
 
-    //Abre la ventana de Hacer Pagos
+    /**
+     * CAMBIO: Se obtiene el alumno del padre en sesión y se pasa al siguiente controlador.
+     */
     public void irAHacerPagos() {
-        controlPagoServicios.inicia();
+        if (padreSesion == null || padreSesion.getAlumno() == null) {
+            ventana.muestraDialogoDeError("No se ha podido identificar al alumno. Por favor, inicie sesión nuevamente.");
+            return;
+        }
+        Alumno alumno = padreSesion.getAlumno();
+        controlPagoServicios.inicia(alumno);
     }
 
     public Padre recuperarPadre(String correo) {
@@ -75,7 +95,7 @@ public class ControlPadresPrincipal {
     }
 
     public boolean padreTieneNotificaciones() {
-    if (padreSesion == null) {
+        if (padreSesion == null) {
             return false;
         }
         return servicioNotificacion.tieneNotificaciones(padreSesion);

@@ -1,10 +1,18 @@
 package mx.uam.ayd.proyecto.presentacion.padresPrincipal.PagoServicios;
 
-
+import mx.uam.ayd.proyecto.negocio.modelo.Alumno;
 import mx.uam.ayd.proyecto.presentacion.padresPrincipal.MenuSemanal.SeleccionPagoMenu.ControlSeleccionPagoMenu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
+/**
+ * @author      Nombre del autor(es)
+ * @since       1.2
+ *
+ * Módulo de control para la gestión del pago de servicios.
+ */
 @Component
 public class ControlPagoServicios {
 
@@ -14,27 +22,31 @@ public class ControlPagoServicios {
     @Autowired
     private ControlSeleccionPagoMenu controlSeleccionPagoMenu;
 
+    // CAMBIO: Se añade una variable para almacenar el alumno del contexto.
+    private Alumno alumno;
+
     /**
-     * Muestra la ventana para seleccionar los pagos a realizar.
+     * CAMBIO: El método 'inicia' ahora requiere el alumno para el cual se realiza el pago.
+     * @param alumno El alumno asociado a la sesión de pago.
      */
-    public void inicia() {
+    public void inicia(Alumno alumno) {
+        this.alumno = alumno;
         ventana.muestra(this);
     }
 
     /**
-     * Es llamado por la ventana cuando el usuario da clic en "Pagar".
-     * Inicia el siguiente flujo: la elección del método de pago.
-     * @param total El total calculado de los checkboxes seleccionados.
+     * Procede al siguiente paso del flujo de pago.
+     *
+     * @param total El monto total calculado.
+     * @param conceptos La lista de nombres de los servicios seleccionados.
      */
-    public void procederAlPago(int total) {
+    public void procederAlPago(int total, List<String> conceptos) {
         if (total > 0) {
             ventana.cerrar();
-            // Inicia la siguiente ventana, pasándole el total calculado.
-            // El segundo parámetro es null porque desde este flujo no venimos del menú semanal.
-            controlSeleccionPagoMenu.inicia(total, null);
+            // CAMBIO: Se pasa el objeto 'alumno' al siguiente controlador.
+            controlSeleccionPagoMenu.inicia(total, conceptos, this.alumno);
         } else {
-            // Aquí se podría mostrar una alerta si el total es cero.
-            System.out.println("Por favor, seleccione al menos un concepto a pagar.");
+            ventana.muestraDialogoDeAdvertencia("Por favor, seleccione al menos un concepto a pagar.");
         }
     }
 }

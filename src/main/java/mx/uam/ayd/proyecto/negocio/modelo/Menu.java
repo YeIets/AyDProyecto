@@ -1,8 +1,8 @@
 package mx.uam.ayd.proyecto.negocio.modelo;
 
 import jakarta.persistence.*;
-import java.util.List;
 import lombok.Data;
+import lombok.NoArgsConstructor; // CAMBIO: Se importa la anotación
 
 /**
  *
@@ -11,6 +11,7 @@ import lombok.Data;
  */
 @Data
 @Entity
+@NoArgsConstructor // ✅ CAMBIO: Se añade esta anotación. ¡Esta es la solución!
 public class Menu {
 
     @Id // Esto le dice a Spring que este es el identificador
@@ -27,6 +28,7 @@ public class Menu {
 
     private String dia;
 
+    // Este constructor con argumentos está bien, puedes conservarlo.
     public Menu(Long idMenu, String comida, String agua, String gelatina, String fruta, String dia) {
         this.idMenu = idMenu;
         this.comida = comida;
@@ -39,8 +41,8 @@ public class Menu {
     @Override
     public String toString() {
         return "Menu [idMenu=" + idMenu
-        + ", comida=" + comida + ", agua=" + agua + ", gelatina=" + gelatina 
-        + ", fruta=" + fruta + ", dia=" + dia +"]";
+                + ", comida=" + comida + ", agua=" + agua + ", gelatina=" + gelatina
+                + ", fruta=" + fruta + ", dia=" + dia +"]";
     }
 
 }

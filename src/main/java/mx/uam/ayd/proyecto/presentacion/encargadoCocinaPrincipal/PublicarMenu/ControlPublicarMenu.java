@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import mx.uam.ayd.proyecto.negocio.ServicioMenu; // CAMBIO: Se importa el servicio
 import mx.uam.ayd.proyecto.presentacion.encargadoCocinaPrincipal.ControlEncargadoCocinaPrincipal;
 
 @Component
@@ -14,12 +15,13 @@ public class ControlPublicarMenu {
 
     @Autowired
     private VentanaPublicarMenu ventana;
+
+    // CAMBIO: Se inyecta el servicio para poder usarlo
+    @Autowired
+    private ServicioMenu servicioMenu;
+
     private ControlEncargadoCocinaPrincipal controlEncargadoCocinaPrincipal;
 
-    /**
-     * Inicia el flujo para mostrar la ventana de publicación de menú
-     * @param controlPrincipal El control de la ventana principal para poder regresar a ella.
-     */
     public void inicia(ControlEncargadoCocinaPrincipal controlPrincipal) {
         log.info("Iniciando ControlPublicarMenu");
         this.controlEncargadoCocinaPrincipal = controlPrincipal;
@@ -27,15 +29,23 @@ public class ControlPublicarMenu {
     }
 
     /**
-     * Cierra la ventana actual y regresa al menú principal del encargado de cocina.
+     * ✅ NUEVO MÉTODO: Recibe los datos de la ventana y los pasa al servicio para actualizarlos.
      */
+    public void publicarMenu(String dia, String platillo, String bebida, String fruta, String postre) {
+        // Validación básica para no guardar datos vacíos
+        if (!platillo.isEmpty() && !bebida.isEmpty() && !fruta.isEmpty() && !postre.isEmpty()) {
+            log.info("Publicando menú para {}: {}, {}, {}, {}", dia, platillo, bebida, fruta, postre);
+            servicioMenu.actualizarPlatilloDelDia(dia, platillo, bebida, fruta, postre);
+        } else {
+            log.warn("Se intentó publicar un menú incompleto para el día {}", dia);
+        }
+    }
+
     public void regresar() {
         log.info("Regresando desde la ventana de Publicar Menú");
         ventana.cerrar();
-        // Lógica para regresar a la ventana principal.
         if (controlEncargadoCocinaPrincipal != null) {
             controlEncargadoCocinaPrincipal.inicia();
         }
     }
 }
-

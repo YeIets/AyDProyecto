@@ -1,71 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mx.uam.ayd.proyecto.presentacion.encargadoCocinaPrincipal.PublicarMenu.VentanaPublicarMenu">
     <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" height="400.0" stroke="TRANSPARENT" strokeType="INSIDE" width="600.0">
-            <fill>
-                <LinearGradient endX="0.6142857142857143" endY="1.0" startX="0.32857142857142857" startY="0.5857142857142856">
-                    <stops>
-                        <Stop>
-                            <color>
-                                <Color red="1.0" green="1.0" blue="1.0" opacity="0.8500000238418579" />
-                            </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                            <color>
-                                <Color red="0.9882352948188782" green="0.9176470637321472" blue="0.7019608020782471" />
-                            </color>
-                        </Stop>
-                    </stops>
-                </LinearGradient>
-            </fill>
-        </Rectangle>
-        <Label layoutX="146.0" layoutY="21.0" text="&quot;Educar para la vida, guiar para el éxito&quot;">
-            <font>
-                <Font name="System Bold Italic" size="16.0" />
-            </font>
-        </Label>
-        <ImageView fitHeight="225.0" fitWidth="238.0" layoutX="25.0" layoutY="85.0" preserveRatio="true">
-            <image>
-                <Image url="@../../../Image/LogoInstitucional.png" />
-            </image>
-        </ImageView>
-
-        <Label fx:id="idNombreAlumno" layoutX="248.0" layoutY="50.0" style="-fx-font-weight: bold;" text="Seleccionando para:" />
-        <Label layoutX="248.0" layoutY="75.0" text="Seleccione los días que desea el menú:">
-            <font>
-                <Font size="14.0" />
-            </font>
-        </Label>
-        <VBox layoutX="325.0" layoutY="104.0" prefHeight="95.0" prefWidth="100.0">
+        <VBox spacing="10.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
             <children>
-                <CheckBox fx:id="idLunesCheck" mnemonicParsing="false" text="Lunes" />
-                <Label />
-                <CheckBox fx:id="idMartesCheck" mnemonicParsing="false" text="Martes" />
-                <Label />
-                <CheckBox fx:id="idMiercolesCheck" mnemonicParsing="false" text="Miercoles" />
-                <Label />
-                <CheckBox fx:id="idJuvesCheck" mnemonicParsing="false" text="Jueves" />
-                <Label />
-                <CheckBox fx:id="idViernesCheck" mnemonicParsing="false" text="Viernes" />
+                <ImageView fitHeight="66.0" fitWidth="115.0">
+                    <image><Image url="@../../../Image/LogoInstitucional.jpg" /></image>
+                </ImageView>
+                <Label text="Actualización del menú semanal" />
+                <GridPane gridLinesVisible="true">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Label text="Lunes" GridPane.columnIndex="1" />
+                        <Label text="Martes" GridPane.columnIndex="2" />
+                        <Label text="Miércoles" GridPane.columnIndex="3" />
+                        <Label text="Jueves" GridPane.columnIndex="4" />
+                        <Label text="Viernes" GridPane.columnIndex="5" />
+                        <Label text="Comida" GridPane.rowIndex="1" />
+                        <Label text="Agua" GridPane.rowIndex="2" />
+                        <Label text="Fruta" GridPane.rowIndex="3" />
+                        <Label text="Postre" GridPane.rowIndex="4" />
+                        <TextField fx:id="lunesPlatillo" promptText="Platillo..." GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="lunesBebida" promptText="Bebida..." GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="lunesFruta" promptText="Fruta..." GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField fx:id="lunesPostre" promptText="Postre..." GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <TextField fx:id="martesPlatillo" promptText="Platillo..." GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <TextField fx:id="martesBebida" promptText="Bebida..." GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <TextField fx:id="martesFruta" promptText="Fruta..." GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                        <TextField fx:id="martesPostre" promptText="Postre..." GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                        <TextField fx:id="miercolesPlatillo" promptText="Platillo..." GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <TextField fx:id="miercolesBebida" promptText="Bebida..." GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                        <TextField fx:id="miercolesFruta" promptText="Fruta..." GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                        <TextField fx:id="miercolesPostre" promptText="Postre..." GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                        <TextField fx:id="juevesPlatillo" promptText="Platillo..." GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                        <TextField fx:id="juevesBebida" promptText="Bebida..." GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                        <TextField fx:id="juevesFruta" promptText="Fruta..." GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                        <TextField fx:id="juevesPostre" promptText="Postre..." GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                        <TextField fx:id="viernesPlatillo" promptText="Platillo..." GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                        <TextField fx:id="viernesBebida" promptText="Bebida..." GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                        <TextField fx:id="viernesFruta" promptText="Fruta..." GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                        <TextField fx:id="viernesPostre" promptText="Postre..." GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                    </children>
+                </GridPane>
+                <HBox alignment="CENTER_RIGHT" spacing="20.0">
+                    <children>
+                        <Button fx:id="btnRegresar" mnemonicParsing="false" onAction="#handleRegresar" text="Regresar" />
+                        <Button fx:id="btnPublicar" mnemonicParsing="false" onAction="#handlePublicar" text="Publicar Cambios" />
+                    </children>
+                    <padding><Insets top="10.0" /></padding>
+                </HBox>
             </children>
         </VBox>
-        <Label layoutX="325.0" layoutY="282.0" text="Total:" />
-        <Label fx:id="idTotal" layoutX="421.0" layoutY="282.0" text="" />
-        <Button fx:id="idPago" layoutX="491.0" layoutY="346.0" mnemonicParsing="false" onAction="#handlePagar" text="Pagar" />
-        <Button fx:id="idVolver" layoutX="38.0" layoutY="346.0" mnemonicParsing="false" onAction="#handleVolver" text="Volver al menú" />
     </children>
 </AnchorPane>

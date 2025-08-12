@@ -1,11 +1,15 @@
 package mx.uam.ayd.proyecto.presentacion.padresPrincipal.MenuSemanal;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import mx.uam.ayd.proyecto.negocio.modelo.Alumno;
+import mx.uam.ayd.proyecto.negocio.modelo.Menu; // CAMBIO: Se usa tu entidad Menu
+import mx.uam.ayd.proyecto.negocio.ServicioMenu; // CAMBIO: Se usa tu ServicioMenu
 import mx.uam.ayd.proyecto.presentacion.padresPrincipal.MenuSemanal.SeleccionMenu.ControlSeleccionMenu;
 
 @Component
@@ -17,42 +21,44 @@ public class ControlMenuSemanal {
     @Autowired
     private ControlSeleccionMenu controlSeleccionMenu;
 
-    /**
-     * Método principal para iniciar la ventana del menú semanal
-     */
-    public void inicia() {
-        Map<String, String[]> menuPorDia = obtenerMenuSemanal();
+    // CAMBIO: Se inyecta tu servicio existente
+    @Autowired
+    private ServicioMenu servicioMenu;
+
+    private Alumno alumno;
+
+    public void inicia(Alumno alumno) {
+        this.alumno = alumno;
+        Map<String, String[]> menuPorDia = obtenerMenuSemanalDesdeServicio();
         ventana.muestra(this, menuPorDia);
     }
 
     /**
-     * Simulación de obtener el menú semanal (puedes reemplazarlo con llamadas a servicio o repositorio)
+     * CAMBIO: Este método ahora usa tu servicio y se adapta a los nombres de
+     * los campos de tu entidad 'Menu' (comida, agua, etc.).
      */
-    private Map<String, String[]> obtenerMenuSemanal() {
-        Map<String, String[]> menu = new HashMap<>();
+    private Map<String, String[]> obtenerMenuSemanalDesdeServicio() {
+        Map<String, String[]> menuTransformado = new HashMap<>();
+        List<Menu> menus = servicioMenu.recuperaMenus();
 
-        menu.put("Lunes", new String[]{"Tacos", "Agua de Jamaica", "Manzana", "Gelatina de Fresa"});
-        menu.put("Martes", new String[]{"Pasta", "Agua de Limón", "Plátano", "Gelatina de Mango"});
-        menu.put("Miercoles", new String[]{"Arroz con Pollo", "Agua Natural", "Naranja", "Gelatina de Uva"});
-        menu.put("Jueves", new String[]{"Enchiladas", "Agua de Horchata", "Papaya", "Gelatina de Limón"});
-        menu.put("Viernes", new String[]{"Hamburguesa", "Agua de Tamarindo", "Pera", "Gelatina de Fresa"});
+        for (Menu menu : menus) {
+            menuTransformado.put(menu.getDia(), new String[]{
+                    menu.getComida(),
+                    menu.getAgua(),
+                    menu.getFruta(),
+                    menu.getGelatina() // El orden debe coincidir con como lo usa la ventana
+            });
+        }
 
-        return menu;
+        return menuTransformado;
     }
 
-    /**
-     * Método que se ejecuta cuando se presiona el botón "Aceptar"
-     */
     public void elegirDias() {
         ventana.cerrar();
-        controlSeleccionMenu.inicia();
+        controlSeleccionMenu.inicia(this.alumno);
     }
 
-    /**
-     * Método que se ejecuta cuando se presiona el botón "Regresar"
-     */
     public void regresar() {
         ventana.cerrar();
-        // Aquí podrías enlazar con una ventana anterior (como ControlPadresPrincipal)
     }
 }

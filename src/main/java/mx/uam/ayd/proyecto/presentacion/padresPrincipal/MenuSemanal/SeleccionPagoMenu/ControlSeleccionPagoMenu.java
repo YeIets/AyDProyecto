@@ -1,61 +1,96 @@
 package mx.uam.ayd.proyecto.presentacion.padresPrincipal.MenuSemanal.SeleccionPagoMenu;
 
+import mx.uam.ayd.proyecto.negocio.modelo.Alumno;
+import mx.uam.ayd.proyecto.presentacion.padresPrincipal.MenuSemanal.SeleccionMenu.ControlSeleccionMenu;
+import mx.uam.ayd.proyecto.presentacion.padresPrincipal.Pagos.PagoCaja.ControlPagoCaja;
+import mx.uam.ayd.proyecto.presentacion.padresPrincipal.Pagos.DatosPagoEnLinea.ControlDatosPagoEnLinea;
+import mx.uam.ayd.proyecto.presentacion.padresPrincipal.Pagos.PagoEnLinea.ControlPagoEnLinea;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-// --- Estos son los imports correctos que me diste ---
-import mx.uam.ayd.proyecto.presentacion.padresPrincipal.Pagos.PagoCaja.ControlPagoCaja;
-import mx.uam.ayd.proyecto.presentacion.padresPrincipal.Pagos.DatosPagoEnLinea.ControlDatosPagoEnLinea;
-import mx.uam.ayd.proyecto.presentacion.padresPrincipal.Pagos.PagoEnLinea.ControlPagoEnLinea;
-import mx.uam.ayd.proyecto.presentacion.padresPrincipal.MenuSemanal.SeleccionMenu.ControlSeleccionMenu;
+import java.util.List;
 
+/**
+ * @author      Nombre del autor(es)
+ * @since       1.4
+ *
+ * Módulo de control que gestiona la selección del método de pago.
+ */
 @Component
 public class ControlSeleccionPagoMenu {
 
     @Autowired
     private VentanaSeleccionPagoMenu ventana;
 
-    // Corregido: El tipo y nombre coinciden con tu import
     @Autowired
     @Lazy
-    private ControlPagoEnLinea controlPagoEnLinea; // Este es el del "ticket" final
+    private ControlPagoEnLinea controlPagoEnLinea;
 
     @Autowired
     @Lazy
     private ControlPagoCaja controlPagoCaja;
 
-    // Corregido: El tipo y nombre coinciden con tu import
     @Autowired
-    private ControlDatosPagoEnLinea controlDatosPagoEnLinea; // Este es el del formulario de tarjeta
+    private ControlDatosPagoEnLinea controlDatosPagoEnLinea;
 
-    private ControlSeleccionMenu controlSeleccionMenu;
+    private List<String> conceptosAPagar;
     private int total;
+    private ControlSeleccionMenu controlSeleccionMenu;
+    private Alumno alumno;
 
-    public void inicia(int total, ControlSeleccionMenu controlSeleccionMenu) {
-        this.total = total;
+    /**
+     * Inicia el flujo para el pago del Menú Semanal (flujo original).
+     * @param total El monto a pagar.
+     * @param controlSeleccionMenu El controlador del flujo de menú.
+     * @param alumno El alumno asociado a la transacción.
+     */
+    public void inicia(int total, ControlSeleccionMenu controlSeleccionMenu, Alumno alumno) {
         this.controlSeleccionMenu = controlSeleccionMenu;
-        ventana.muestra(this, total);
+        inicia(total, List.of("Menú Semanal"), alumno);
     }
 
     /**
-     * MÉTODO CLAVE:
-     * Ahora llama a los controladores con los nombres correctos.
+     * Método genérico que maneja la lógica principal.
+     * @param total El monto total a pagar.
+     * @param conceptos La lista de conceptos que se están pagando.
+     * @param alumno El alumno para quien es el pago.
+     */
+    public void inicia(int total, List<String> conceptos, Alumno alumno) {
+        this.total = total;
+        this.conceptosAPagar = conceptos;
+        this.alumno = alumno;
+        ventana.muestra(this, total, conceptosAPagar);
+    }
+
+    /**
+     * Inicia el flujo de pago en línea.
      */
     public void irAPagoLinea() {
         ventana.cerrar();
 
-        // Corregido: Se usan las variables correctas
-        controlDatosPagoEnLinea.inicia(total, () -> controlPagoEnLinea.inicia(total));
+        controlDatosPagoEnLinea.inicia(
+                total,
+                () -> controlPagoEnLinea.inicia(total, this.alumno),
+                this.alumno
+        );
     }
 
+    /**
+     * Inicia el flujo de pago en caja.
+     */
     public void irAPagoCaja() {
         ventana.cerrar();
-        controlPagoCaja.inicia(total);
+        // CORRECCIÓN: Se añade 'this.alumno' como segundo argumento para que coincida
+        // con la firma del método 'inicia' en ControlPagoCaja.
+        controlPagoCaja.inicia(total, this.alumno);
     }
 
     public void regresar() {
         ventana.cerrar();
+        if (controlSeleccionMenu != null) {
+            // Suponiendo que el control tiene un método para mostrarse de nuevo
+            // controlSeleccionMenu.muestra();
+        }
     }
-
 }

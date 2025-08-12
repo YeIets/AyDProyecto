@@ -12,10 +12,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import mx.uam.ayd.proyecto.presentacion.padresPrincipal.MenuSemanal.SeleccionMenu.ControlSeleccionMenu;
 
 @Component
 public class VentanaMenuSemanal {
@@ -51,15 +48,13 @@ public class VentanaMenuSemanal {
     @FXML private Button idAceptar;
     @FXML private Button idRegresar;
 
-    @Autowired
-    private ControlSeleccionMenu controlSeleccionMenu; // ← se inyecta el controlador de la siguiente ventana
-
     /**
      * Muestra la ventana y carga los menús
      */
     public void muestra(ControlMenuSemanal control, Map<String, String[]> menuPorDia) {
         this.control = control;
 
+        // El código de Platform.runLater es para asegurar la compatibilidad con JavaFX
         if (!Platform.isFxApplicationThread()) {
             Platform.runLater(() -> muestra(control, menuPorDia));
             return;
@@ -73,21 +68,18 @@ public class VentanaMenuSemanal {
             stage = new Stage();
             stage.setTitle("Menú Semanal");
             stage.setScene(new Scene(root));
-            stage.setResizable(false); 
-            stage.setWidth(600);       
-            stage.setHeight(420);      
+            stage.setResizable(false);
+            stage.setWidth(600);
+            stage.setHeight(420);
             stage.show();
 
-            // Asignar menú recibido
             actualizarMenu(menuPorDia);
 
-            // Eventos
-            idAceptar.setOnAction(e -> {
-                cerrar();
-                controlSeleccionMenu.inicia(); // ← abre la siguiente ventana
-            });
+            // CAMBIO: El botón Aceptar ahora llama a un método en su propio controlador.
+            // Es el controlador (ControlMenuSemanal) quien debe decidir qué hacer después.
+            idAceptar.setOnAction(e -> control.elegirDias());
 
-            idRegresar.setOnAction(e -> stage.close());
+            idRegresar.setOnAction(e -> control.regresar());
 
         } catch (IOException e) {
             System.err.println("Error al cargar PadreMenuSemanal.fxml: " + e.getMessage());
@@ -106,7 +98,7 @@ public class VentanaMenuSemanal {
             idLunesFruta.setText(items[2]);
             idLunesGelatina.setText(items[3]);
         }
-
+        // ... El resto del código para Martes, Miércoles, etc. se mantiene igual ...
         if (menuPorDia.containsKey("Martes")) {
             String[] items = menuPorDia.get("Martes");
             idMartesComida.setText(items[0]);

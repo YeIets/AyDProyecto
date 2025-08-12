@@ -3,6 +3,7 @@ package mx.uam.ayd.proyecto.presentacion.padresPrincipal.MenuSemanal.SeleccionMe
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import mx.uam.ayd.proyecto.negocio.modelo.Alumno;
 import mx.uam.ayd.proyecto.presentacion.padresPrincipal.MenuSemanal.SeleccionPagoMenu.ControlSeleccionPagoMenu;
 
 @Component
@@ -14,25 +15,27 @@ public class ControlSeleccionMenu {
     @Autowired
     private ControlSeleccionPagoMenu controlSeleccionPagoMenu;
 
-    /**
-     * Inicia la ventana de selección de menú
-     */
-    public void inicia() {
-        ventana.muestra(this);
+    private Alumno alumno;
+
+    public void inicia(Alumno alumno) {
+        this.alumno = alumno;
+        ventana.muestra(this, this.alumno);
     }
 
-    /**
-     * Llama a la ventana de pagos, pasando el total y referencia a este controlador
-     */
     public void irAVentanaPagos(int total) {
         ventana.cerrar();
-        controlSeleccionPagoMenu.inicia(total, this);
+        controlSeleccionPagoMenu.inicia(total, this, this.alumno);
     }
 
     /**
-     * Método para volver a mostrar esta ventana (por ejemplo, desde la de pago)
+     * Este método se encarga de la lógica de "regresar".
+     * Vuelve a iniciar esta misma ventana.
      */
     public void regresar() {
-        inicia();
+        // Podrías cerrar la ventana actual antes si es necesario
+        // ventana.cerrar();
+        // Por ahora, simplemente vuelve a mostrar la ventana, lo que la trae al frente
+        // o la recrea si fue cerrada.
+        inicia(this.alumno);
     }
 }
