@@ -31,23 +31,33 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <Label layoutX="287.0" layoutY="93.0" text="Pago del Menú">
+      <Label layoutX="387.0" layoutY="77.0" text="Pagos">
          <font>
-            <Font size="24.0" />
+            <Font name="System Bold" size="18.0" />
          </font></Label>
-      <Label layoutX="242.0" layoutY="142.0" text="Total:" />
-      <Label fx:id="idTotal" layoutX="457.0" layoutY="142.0" text="0.00" />
-      <Button fx:id="idPagoCaja" layoutX="226.0" layoutY="229.0" mnemonicParsing="false" text="Pagar en caja" />
-      <Button fx:id="idPagoLinea" layoutX="430.0" layoutY="229.0" mnemonicParsing="false" text="Pagar en linea" />
+      <Label layoutX="320.0" layoutY="167.0" text="Total:" />
+      <Label fx:id="idTotal" layoutX="441.0" layoutY="167.0" text="0.00" />
+      <Button fx:id="idPagoCaja" layoutX="286.0" layoutY="229.0" mnemonicParsing="false" text="Pagar en caja" />
+      <Button fx:id="idPagoLinea" layoutX="454.0" layoutY="229.0" mnemonicParsing="false" text="Pagar en linea" />
       <Button fx:id="idVolver" layoutX="28.0" layoutY="332.0" mnemonicParsing="false" text="Volver" />
-      <ImageView fitHeight="165.0" fitWidth="178.0" layoutX="28.0" layoutY="78.0" preserveRatio="true">
+      <ImageView fitHeight="237.0" fitWidth="251.0" layoutX="14.0" layoutY="57.0" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../../../media/laura/KINGSTON1/ESCUDOS/ESCUDO%20%232%201.png" />
+            <Image url="@../../../Image/LogoInstitucional.png" />
          </image>
       </ImageView>
-      <Label layoutX="146.0" layoutY="14.0" text="&quot;Educar para la vida, guiar para el éxito&quot;">
+      <Label layoutX="146.0" layoutY="21.0" text="&quot;Educar para la vida, guiar para el éxito&quot;">
          <font>
             <Font name="System Bold Italic" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="286.0" layoutY="117.0" text="Selecciona tu método de pago:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="405.0" layoutY="335.0" text="*Verifique siempre su total">
+         <font>
+            <Font size="14.0" />
          </font>
       </Label>
    </children>

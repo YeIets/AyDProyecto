@@ -33,19 +33,19 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <Label layoutX="129.0" layoutY="21.0" text="&quot;Educar para la vida, guiar para el éxito&quot;">
+      <Label layoutX="146.0" layoutY="21.0" text="&quot;Educar para la vida, guiar para el éxito&quot;">
          <font>
             <Font name="System Bold Italic" size="16.0" />
          </font>
       </Label>
       <ImageView fitHeight="225.0" fitWidth="238.0" layoutX="25.0" layoutY="85.0" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../../../media/laura/KINGSTON1/ESCUDOS/ESCUDO%20%232%201.png" />
+            <Image url="@../../../Image/LogoInstitucional.png" />
          </image>
       </ImageView>
-      <Label layoutX="235.0" layoutY="60.0" text="Seleccione los días que desea el menú">
+      <Label layoutX="248.0" layoutY="75.0" text="Seleccione los días que desea el menú:">
          <font>
-            <Font size="18.0" />
+            <Font size="14.0" />
          </font></Label>
       <VBox layoutX="325.0" layoutY="104.0" prefHeight="95.0" prefWidth="100.0">
          <children>
@@ -60,7 +60,7 @@
             <CheckBox fx:id="idViernesCheck" mnemonicParsing="false" text="Viernes" />
          </children>
       </VBox>
-      <Label layoutX="283.0" layoutY="282.0" text="Total:" />
+      <Label layoutX="325.0" layoutY="282.0" text="Total:" />
       <Label fx:id="idTotal" layoutX="421.0" layoutY="282.0" text="" />
       <Button fx:id="idPago" layoutX="491.0" layoutY="346.0" mnemonicParsing="false" onAction="#handlePagar" text="Pagar" />
       <Button fx:id="idVolver" layoutX="38.0" layoutY="346.0" mnemonicParsing="false" onAction="#handleVolver" text="Volver al menú" />

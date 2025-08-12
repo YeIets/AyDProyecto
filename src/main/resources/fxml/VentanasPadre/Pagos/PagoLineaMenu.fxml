@@ -31,27 +31,27 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <ImageView fitHeight="225.0" fitWidth="238.0" layoutX="23.0" layoutY="80.0" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../../../../media/laura/KINGSTON1/ESCUDOS/ESCUDO%20%232%201.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="369.0" layoutY="89.0" text="Menú semanal">
+      <Label layoutX="369.0" layoutY="89.0" text="Comprobante">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Label>
-      <Label fx:id="idTotal" layoutX="509.0" layoutY="160.0" text="\$0.0" />
-      <Label fx:id="idLinea" layoutX="488.0" layoutY="201.0" text="684621648" />
-      <Label layoutX="334.0" layoutY="243.0" text="Fecha:" />
-      <Label fx:id="idFecha" layoutX="494.0" layoutY="243.0" text="00/00/00" />
-      <Label layoutX="268.0" layoutY="201.0" text="Linea de captura:" />
-      <Label layoutX="337.0" layoutY="160.0" text="Total:" />
+      <Label fx:id="idTotal" layoutX="452.0" layoutY="154.0" prefHeight="18.0" prefWidth="67.0" text="\$0.0" />
+      <Label fx:id="idLinea" layoutX="452.0" layoutY="192.0" text="684621648" />
+      <Label alignment="CENTER_RIGHT" layoutX="302.0" layoutY="234.0" prefHeight="18.0" prefWidth="106.0" text="Fecha:" />
+      <Label fx:id="idFecha" layoutX="455.0" layoutY="234.0" prefHeight="18.0" prefWidth="100.0" text="00/00/00" />
+      <Label layoutX="269.0" layoutY="192.0" text="Numero de referencia:" />
+      <Label alignment="CENTER_RIGHT" layoutX="302.0" layoutY="154.0" prefHeight="18.0" prefWidth="106.0" text="Total:" />
       <Button fx:id="idCancelar" layoutX="33.0" layoutY="341.0" mnemonicParsing="false" text="Volver" />
-      <Label layoutX="412.0" layoutY="274.0" text="Pagado" />
+      <Label layoutX="455.0" layoutY="278.0" text="Pagado" />
       <Label layoutX="146.0" layoutY="21.0" text="&quot;Educar para la vida, guiar para el éxito&quot;">
          <font>
             <Font name="System Bold Italic" size="16.0" />
          </font>
       </Label>
+      <ImageView fitHeight="249.0" fitWidth="252.0" layoutX="14.0" layoutY="64.0" preserveRatio="true">
+         <image>
+            <Image url="@../../../Image/LogoInstitucional.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

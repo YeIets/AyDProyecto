@@ -58,23 +58,23 @@
       <Label fx:id="idTotal" layoutX="355.0" layoutY="309.0" text="\$00.00" />
       <ImageView fitHeight="33.0" fitWidth="34.0" layoutX="435.0" layoutY="184.0">
          <image>
-            <Image url="@../../../../../../../Descargas/02.png" />
+            <Image url="@../../../Image/Colegiatura.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="33.0" fitWidth="34.0" layoutX="435.0" layoutY="223.0">
          <image>
-            <Image url="@../../../../../../../Descargas/03.png" />
+            <Image url="@../../../Image/Uniforme.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="26.0" fitWidth="27.0" layoutX="438.0" layoutY="265.0">
          <image>
-            <Image url="@../../../../../../../Descargas/04.png" />
+            <Image url="@../../../Image/Libros.png" />
          </image>
       </ImageView>
       <Button fx:id="btnPagar" layoutX="504.0" layoutY="348.0" mnemonicParsing="false" text="Pagar" />
       <ImageView fitHeight="160.0" fitWidth="186.0" layoutX="14.0" layoutY="137.0" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../../../media/laura/KINGSTON1/ESCUDOS/ESCUDO%20%232%201.png" />
+            <Image url="@../../../Image/LogoInstitucional.png" />
          </image>
       </ImageView>
       <Label layoutX="142.0" layoutY="17.0" text="&quot;Educar para la vida, guiar para el éxito&quot;">
