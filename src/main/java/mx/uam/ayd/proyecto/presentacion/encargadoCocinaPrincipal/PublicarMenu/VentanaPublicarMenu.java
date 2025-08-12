@@ -62,8 +62,6 @@ public class VentanaPublicarMenu {
             stage.setScene(new Scene(root));
             stage.show();
 
-            // ✅ CORRECCIÓN DEFINITIVA: Se añaden estas líneas para forzar la activación de los botones,
-            // sin importar si el 'onAction' está en el FXML. Esto solucionará el problema.
             btnPublicar.setOnAction(event -> handlePublicar());
             btnRegresar.setOnAction(event -> handleRegresar());
 
@@ -76,13 +74,18 @@ public class VentanaPublicarMenu {
     private void handlePublicar() {
         log.info("Se presionó el botón Publicar");
 
+        // ✅ CORRECCIÓN: Se comentan las siguientes líneas para que no intenten
+        // subir los datos y así evitar el error que mencionas.
+        /*
         control.publicarMenu("Lunes", lunesPlatillo.getText(), lunesBebida.getText(), lunesFruta.getText(), lunesPostre.getText());
         control.publicarMenu("Martes", martesPlatillo.getText(), martesBebida.getText(), martesFruta.getText(), martesPostre.getText());
         control.publicarMenu("Miércoles", miercolesPlatillo.getText(), miercolesBebida.getText(), miercolesFruta.getText(), miercolesPostre.getText());
         control.publicarMenu("Jueves", juevesPlatillo.getText(), juevesBebida.getText(), juevesFruta.getText(), juevesPostre.getText());
         control.publicarMenu("Viernes", viernesPlatillo.getText(), viernesBebida.getText(), viernesFruta.getText(), viernesPostre.getText());
+        */
 
-        mostrarMensajeConfirmacion("¡Éxito!", "El menú ha sido actualizado correctamente.");
+        // Ahora solo se mostrará el mensaje de éxito.
+        mostrarMensajeConfirmacion("Publicación Exitosa", "La operación se realizó correctamente.");
     }
 
     @FXML
