@@ -1,5 +1,6 @@
 package mx.uam.ayd.proyecto.presentacion.padresPrincipal.Pagos.PagoEnLinea;
 
+import mx.uam.ayd.proyecto.negocio.modelo.Alumno; // Se importa Alumno
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -9,14 +10,15 @@ public class ControlPagoEnLinea {
     @Autowired
     private VentanaPagoEnLinea ventana;
 
-    /**
-     * Este es el controlador del "ticket" final. Su única función
-     * es recibir el total y decirle a la ventana que se muestre.
-     * @param total El total a mostrar en el ticket.
-     */
-    public void inicia(int total) {
-        ventana.muestra(this, total);
-    }
+    private Alumno alumno; // Campo para el alumno
 
-    // El método procesarPago() se elimina porque esta ventana no procesa pagos, solo los muestra.
+    /**
+     * CAMBIO: Muestra el ticket de pago para un alumno específico.
+     * @param total El total pagado.
+     * @param alumno El alumno que realizó el pago.
+     */
+    public void inicia(int total, Alumno alumno) {
+        this.alumno = alumno; // Se guarda el alumno
+        ventana.muestra(this, total, this.alumno);
+    }
 }

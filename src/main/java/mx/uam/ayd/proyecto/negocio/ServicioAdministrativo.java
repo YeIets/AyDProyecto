@@ -22,8 +22,8 @@ public class ServicioAdministrativo {
      * @param password La contraseña del administrador.
      * @return La entidad Administrativo si la autenticación es exitosa; de lo contrario, retorna null.
      */
-    public Administrativo verificarAdministrativoRegistrado(String correo, String password) {
-        // Se asume que tienes un `AdministrativoRepository` con el método findByCorreo
+    // CAMBIO: Se corrigió el nombre del método de "...vo" a "...dor" para ser consistente.
+    public Administrativo verificarAdministradorRegistrado(String correo, String password) {
         Optional<Administrativo> adminOpt = administrativoRepository.findByCorreo(correo);
 
         if (adminOpt.isPresent()) {

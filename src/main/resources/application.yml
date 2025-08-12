@@ -1,7 +1,8 @@
 spring:
-
   datasource:
-    url: jdbc:h2:mem:testdb
+    # CAMBIO: Se cambia 'mem' por 'file'. Ahora la base de datos se guardará
+    # en un archivo físico llamado 'datosDB' en la raíz de tu proyecto.
+    url: jdbc:h2:file:./datosDB
     driver-class-name: org.h2.Driver
   jpa:
     database: h2
@@ -9,10 +10,12 @@ spring:
     generate-ddl: true
     show-sql: false
     hibernate:
-      ddl-auto: create-drop
+      # CAMBIO: 'create-drop' borra todo al final. 'update' mantiene los datos
+      # y solo actualiza la estructura si es necesario.
+      ddl-auto: update
   h2:
     console:
       enabled: true
-      
+
 server:
   port: 8080

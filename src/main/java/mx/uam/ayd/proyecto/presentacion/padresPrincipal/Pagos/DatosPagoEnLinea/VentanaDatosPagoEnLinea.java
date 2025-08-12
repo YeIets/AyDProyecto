@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import mx.uam.ayd.proyecto.negocio.modelo.Alumno; // Se importa la entidad Alumno
 import org.springframework.stereotype.Component;
 import java.io.IOException;
 
@@ -27,14 +28,20 @@ public class VentanaDatosPagoEnLinea {
     @FXML private Button idPagar;
     @FXML private Button idRegresar;
 
-    public void muestra(ControlDatosPagoEnLinea control, int total) {
+    /**
+     * CAMBIO: El método ahora acepta un Alumno.
+     * @param control El controlador de esta ventana.
+     * @param total El monto a pagar.
+     * @param alumno El alumno para el cual se realiza la operación.
+     */
+    public void muestra(ControlDatosPagoEnLinea control, int total, Alumno alumno) {
         this.control = control;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/VentanasPadre/Pagos/PagoLineaTarjeta.fxml"));
             loader.setController(this);
             Parent root = loader.load();
             stage = new Stage();
-            stage.setTitle("Datos de Pago");
+            stage.setTitle("Datos de Pago para " + alumno.getNombreCompleto()); // Se puede usar para personalizar el título
 
             stage.setScene(new Scene(root));
             stage.setResizable(false);
@@ -74,7 +81,6 @@ public class VentanaDatosPagoEnLinea {
         alert.showAndWait();
     }
 
-    // MÉTODO AÑADIDO para mostrar los errores de validación
     public void muestraDialogoDeError(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error de Validación");

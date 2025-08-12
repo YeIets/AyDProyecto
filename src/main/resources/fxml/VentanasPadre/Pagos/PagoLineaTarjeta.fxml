@@ -14,48 +14,51 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="400.0" stroke="TRANSPARENT" strokeType="INSIDE" width="600.0">
-         <fill>
-            <LinearGradient endX="0.6142857142857143" endY="1.0" startX="0.32857142857142857" startY="0.5857142857142856">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color red="1.0" green="1.0" blue="1.0" opacity="0.8500000238418579" />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="0.9882352948188782" green="0.9176470637321472" blue="0.7019608020782471" />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </fill>
-      </Rectangle>
-      <ImageView fitHeight="193.0" fitWidth="203.0" layoutY="82.0" preserveRatio="true">
-         <image>
-            <Image url="@../../../Image/LogoInstitucional.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="146.0" layoutY="21.0" text="&quot;Educar para la vida, guiar para el éxito&quot;">
-         <font>
-            <Font name="System Bold Italic" size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="313.0" layoutY="70.0" text="Pago en linea">
-         <font>
-            <Font size="18.0" />
-         </font></Label>
-      <Label layoutX="193.0" layoutY="143.0" text="Número de tarjeta:" />
-      <TextField fx:id="idNoTarjeta" layoutX="190.0" layoutY="169.0" prefHeight="25.0" prefWidth="353.0" />
-      <Label layoutX="196.0" layoutY="217.0" text="Fecha de vencimiento:" />
-      <TextField fx:id="idFecha" layoutX="345.0" layoutY="213.0" prefHeight="25.0" prefWidth="50.0" />
-      <Label layoutX="444.0" layoutY="217.0" text="CVV:" />
-      <PasswordField fx:id="idCVV" layoutX="481.0" layoutY="213.0" prefHeight="25.0" prefWidth="41.0" />
-      <Label layoutX="190.0" layoutY="106.0" text="Total:" />
-      <Label fx:id="idTotal" layoutX="269.0" layoutY="106.0" text="\$00.00" />
-      <Button fx:id="idPagar" layoutX="481.0" layoutY="341.0" mnemonicParsing="false" text="Pagar" />
-      <Button fx:id="idRegresar" layoutX="33.0" layoutY="341.0" mnemonicParsing="false" text="Volver" />
-   </children>
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="400.0" stroke="TRANSPARENT" strokeType="INSIDE" width="600.0">
+            <fill>
+                <LinearGradient endX="0.6142857142857143" endY="1.0" startX="0.32857142857142857" startY="0.5857142857142856">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="1.0" green="1.0" blue="1.0" opacity="0.8500000238418579" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.9882352948188782" green="0.91764706373221472" blue="0.7019608020782471" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Rectangle>
+        <ImageView fitHeight="193.0" fitWidth="203.0" layoutY="82.0" preserveRatio="true">
+            <image>
+                <Image url="@../../../Image/LogoInstitucional.png" />
+            </image>
+        </ImageView>
+        <Label layoutX="146.0" layoutY="21.0" text="&quot;Educar para la vida, guiar para el éxito&quot;">
+            <font>
+                <Font name="System Bold Italic" size="16.0" />
+            </font>
+        </Label>
+        <Label layoutX="313.0" layoutY="70.0" text="Pago en linea">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+
+        <Label fx:id="idNombreAlumno" layoutX="190.0" layoutY="85.0" style="-fx-font-weight: bold;" text="Pagando para:" />
+        <Label layoutX="193.0" layoutY="143.0" text="Número de tarjeta:" />
+        <TextField fx:id="idNoTarjeta" layoutX="190.0" layoutY="169.0" prefHeight="25.0" prefWidth="353.0" />
+        <Label layoutX="196.0" layoutY="217.0" text="Fecha de vencimiento:" />
+        <TextField fx:id="idFecha" layoutX="345.0" layoutY="213.0" prefHeight="25.0" prefWidth="50.0" />
+        <Label layoutX="444.0" layoutY="217.0" text="CVV:" />
+        <PasswordField fx:id="idCVV" layoutX="481.0" layoutY="213.0" prefHeight="25.0" prefWidth="41.0" />
+        <Label layoutX="190.0" layoutY="106.0" text="Total:" />
+        <Label fx:id="idTotal" layoutX="269.0" layoutY="106.0" text="\$00.00" />
+        <Button fx:id="idPagar" layoutX="481.0" layoutY="341.0" mnemonicParsing="false" text="Pagar" />
+        <Button fx:id="idRegresar" layoutX="33.0" layoutY="341.0" mnemonicParsing="false" text="Volver" />
+    </children>
 </AnchorPane>

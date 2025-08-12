@@ -48,21 +48,38 @@ public class ServicioDocumento {
         }
     }
 
-    public Documento subirDocumento(File archivo, String tipoDeDocumento) throws IOException {
+    /**
+     * CAMBIO: El método ahora recibe el Alumno al que pertenece el documento.
+     * Sube un archivo, crea la entidad Documento y la vincula con el Alumno.
+     *
+     * @param archivo El archivo seleccionado por el usuario.
+     * @param tipoDeDocumento El tipo de documento (ej. "CURP").
+     * @param alumno El alumno al que se le asociará el documento.
+     * @return El documento creado y guardado.
+     * @throws IOException Si ocurre un error al copiar el archivo.
+     */
+    public Documento subirDocumento(File archivo, String tipoDeDocumento, Alumno alumno) throws IOException {
+        // 1. Copia el archivo físico al directorio de subidas
         Path destino = Paths.get(UPLOAD_DIR).resolve(archivo.getName());
         Files.copy(archivo.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
         log.info("Archivo copiado a: {}", destino.toAbsolutePath());
 
-        Documento nuevoDocumento = new Documento();
-        nuevoDocumento.setNombre(archivo.getName());
-        nuevoDocumento.setTipo(tipoDeDocumento);
+        // 2. Crea la nueva entidad Documento
+        Documento nuevoDocumento = new Documento(
+                archivo.getName(),
+                tipoDeDocumento,
+                destino.toString(),
+                LocalDate.now()
+        );
 
-        // CAMBIO AQUÍ: Se utiliza el nuevo método 'setRuta' en lugar de 'setDireccionArchivo'.
-        nuevoDocumento.setRuta(destino.toString());
+        // 3. Vincula el nuevo documento con el alumno
+        alumno.agregarDocumento(nuevoDocumento);
 
-        nuevoDocumento.setFechaDeSubida(LocalDate.now());
+        // 4. Guarda el alumno. Gracias a la relación en cascada,
+        //    el nuevo documento se guardará y vinculará automáticamente.
+        alumnoRepository.save(alumno);
 
-        return documentoRepository.save(nuevoDocumento);
+        return nuevoDocumento;
     }
 
     public List<String> recuperarNombresDeDocumentos() {
@@ -89,8 +106,9 @@ public class ServicioDocumento {
         return alumnosConDocumentos;
     }
 
+
+
     public boolean validarDireccion(Documento documento) {
-        // CAMBIO AQUÍ: Se utiliza el nuevo método 'getRuta' en lugar de 'getDireccionArchivo'.
         if (documento.getRuta() == null || documento.getRuta().isBlank()) {
             log.info("El documento tiene una ruta nula o vacía.");
             return false;

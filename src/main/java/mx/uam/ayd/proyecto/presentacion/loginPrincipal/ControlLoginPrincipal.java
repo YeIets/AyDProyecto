@@ -12,8 +12,6 @@ import mx.uam.ayd.proyecto.presentacion.padresPrincipal.ControlPadresPrincipal;
 import mx.uam.ayd.proyecto.presentacion.administrativoPrincipal.ControlAdministrativoPrincipal;
 import mx.uam.ayd.proyecto.presentacion.encargadoCocinaPrincipal.ControlEncargadoCocinaPrincipal;
 
-import java.util.Optional;
-
 @Component
 public class ControlLoginPrincipal {
 
@@ -23,7 +21,7 @@ public class ControlLoginPrincipal {
     private final ControlEncargadoCocinaPrincipal controlEncargadoCocinaPrincipal;
     private final VentanaLoginPrincipal ventana;
 
-    // Se inyectan los servicios necesarios para la lógica de negocio de autenticación
+    // Se inyectan los servicios necesarios para la lógica de negocio
     private final ServicioPadre servicioPadre;
     private final ServicioAdministrativo servicioAdministrativo;
     private final ServicioEncargadoCocina servicioEncargadoCocina;
@@ -60,7 +58,10 @@ public class ControlLoginPrincipal {
 
     public void padresPrincipal(String correo) {
         ventana.cerrar();
-        Padre padre = controlPadresPrincipal.recuperarPadre(correo);
+        // CAMBIO AQUÍ: Se utiliza el servicio 'servicioPadre' para recuperar al padre.
+        // Se asume que en ServicioPadre existe un método como 'recuperaPadrePorCorreo'.
+        Padre padre = servicioPadre.recuperaPadrePorCorreo(correo);
+
         controlPadresPrincipal.setPadreSesion(padre);
         controlPadresPrincipal.inicia();
     }
@@ -75,36 +76,15 @@ public class ControlLoginPrincipal {
         controlEncargadoCocinaPrincipal.inicia();
     }
 
-    /**
-     * Verifica las credenciales de un Padre directamente a través del ServicioPadre.
-     * @param correo El correo del padre a verificar.
-     * @param password La contraseña a verificar.
-     * @return true si las credenciales son válidas, false en caso contrario.
-     */
     public boolean verificarPadreRegistrado(String correo, String password) {
-        // Se invoca directamente al servicio para la verificación.
         return servicioPadre.verificarPadreRegistrado(correo, password) != null;
     }
 
-    /**
-     * Verifica las credenciales de un Administrador directamente a través del ServicioAdministrativo.
-     * @param correo El correo del administrador a verificar.
-     * @param password La contraseña a verificar.
-     * @return true si las credenciales son válidas, false en caso contrario.
-     */
     public boolean verificarAdministradorRegistrado(String correo, String password) {
-        // Se invoca directamente al servicio para la verificación.
-        return servicioAdministrativo.verificarAdministrativoRegistrado(correo, password) != null;
+        return servicioAdministrativo.verificarAdministradorRegistrado(correo, password) != null;
     }
 
-    /**
-     * Verifica las credenciales de un Encargado de Cocina directamente a través del ServicioEncargadoCocina.
-     * @param correo El correo del encargado a verificar.
-     * @param password La contraseña a verificar.
-     * @return true si las credenciales son válidas, false en caso contrario.
-     */
     public boolean verificarEncargadoDeCocinaRegistrado(String correo, String password) {
-        // Se invoca directamente al servicio para la verificación.
         return servicioEncargadoCocina.verificarEncargadoDeCocinaRegistrado(correo, password) != null;
     }
 }

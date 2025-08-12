@@ -13,9 +13,11 @@ import org.springframework.context.ConfigurableApplicationContext;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
 
+@Slf4j
 @SpringBootApplication
 public class ProyectoApplication {
 
@@ -70,38 +72,68 @@ public class ProyectoApplication {
     }
 
     /**
-     * Inicializa la BD con los datos de ejemplo.
+     * Inicializa la BD. Este método ahora está vacío porque los datos
+     * ya existen en la base de datos persistente.
      */
     public void inicializaBD() {
-        // --- Creación de otros usuarios ---
-        Administrativo admin = new Administrativo("Humberto", "Cervantes", "Humberto@uam.com", "Humberto123");
-        EncargadoCocina encargado = new EncargadoCocina("Alberto", "Morales", "Alberto@uam.com", "Alberto123");
-        administrativoRepository.save(admin);
-        encargadoCocinaRepository.save(encargado);
-
-        // --- LÓGICA PARA CREAR Y VINCULAR PADRE, ALUMNOS Y DOCUMENTOS ---
-        Padre padre = new Padre("Juan", "Pérez", "Juan@uam.com", "Juan123");
-        Notificacion noti = new Notificacion(padre);
-        padre.agregaNotificacion(noti);
-
-        Alumno alumno1 = new Alumno("Sofia", "Pérez", "2193034567");
-        Alumno alumno2 = new Alumno("Luis", "Pérez", "2193034588");
-
-        // --- Documentos para Alumno 1 (Sofía) ---
-        Documento curpSofia = new Documento("CURP de Sofia", "CURP", "documentos_subidos/CURP_Sofia.pdf", LocalDate.now());
-        Documento actaSofia = new Documento("Acta de Sofia", "Acta de Nacimiento", "documentos_subidos/Acta_Sofia.pdf", LocalDate.now());
-        alumno1.agregarDocumento(curpSofia);
-        alumno1.agregarDocumento(actaSofia);
-
-        // --- Documentos para Alumno 2 (Luis) ---
-        Documento actaLuis = new Documento("Acta de Luis", "Acta de Nacimiento", "documentos_subidos/Acta_Luis.pdf", LocalDate.now());
-        alumno2.agregarDocumento(actaLuis);
-
-        // Se vinculan los alumnos (ya con sus documentos) al padre
-        padre.addHijo(alumno1);
-        padre.addHijo(alumno2);
-
-        // Se guarda el padre, y en cascada se guardan sus hijos y los documentos de sus hijos.
-        padreRepository.save(padre);
+        log.info("Verificando la inicialización de la base de datos. Si los datos ya existen, no se añadirán nuevos.");
+        // Este método se deja vacío intencionalmente para no crear datos duplicados.
     }
+
+    /*
+     * ===================================================================
+     * EJEMPLOS DE CÓDIGO PARA AÑADIR NUEVOS USUARIOS DE PRUEBA
+     * ===================================================================
+     *
+     * Si en el futuro borras tu base de datos (el archivo datosDB.mv.db)
+     * y necesitas volver a crear los datos de prueba, puedes llamar a este
+     * método desde inicia() y quitar los comentarios.
+     *
+
+    @SuppressWarnings("unused")
+    private void _ejemplosDeCreacionDeDatos() {
+
+        // Ejemplo para crear un Administrador
+        String correoAdmin = "Humberto@uam.com";
+        if (administrativoRepository.findByCorreo(correoAdmin).isEmpty()) {
+            log.info("Creando administrador de prueba: {}", correoAdmin);
+            Administrativo admin = new Administrativo("Humberto", "Cervantes", correoAdmin, "Humberto123");
+            administrativoRepository.save(admin);
+        }
+
+        // Ejemplo para crear un Encargado de Cocina
+        String correoCocinero = "Alberto@uam.com";
+        if (encargadoCocinaRepository.findByCorreo(correoCocinero).isEmpty()) {
+            log.info("Creando encargado de cocina de prueba: {}", correoCocinero);
+            EncargadoCocina encargado = new EncargadoCocina("Alberto", "Morales", correoCocinero, "Alberto123");
+            encargadoCocinaRepository.save(encargado);
+        }
+
+        // Ejemplo para crear un Padre con Alumnos y Documentos
+        String correoPadre = "Juan@uam.com";
+        if (padreRepository.findByCorreo(correoPadre).isEmpty()) {
+            log.info("Creando padre, alumnos y documentos de prueba para: {}", correoPadre);
+            Padre padre = new Padre("Juan", "Pérez", correoPadre, "Juan123");
+
+            Notificacion noti = new Notificacion(padre);
+            padre.agregaNotificacion(noti);
+
+            Alumno alumno1 = new Alumno("Sofia", "Pérez", "2193034567");
+            Alumno alumno2 = new Alumno("Luis", "Pérez", "2193034588");
+
+            Documento curpSofia = new Documento("CURP de Sofia", "CURP", "documentos_subidos/CURP_Sofia.pdf", LocalDate.now());
+            Documento actaSofia = new Documento("Acta de Sofia", "Acta de Nacimiento", "documentos_subidos/Acta_Sofia.pdf", LocalDate.now());
+            alumno1.agregarDocumento(curpSofia);
+            alumno1.agregarDocumento(actaSofia);
+
+            Documento actaLuis = new Documento("Acta de Luis", "Acta de Nacimiento", "documentos_subidos/Acta_Luis.pdf", LocalDate.now());
+            alumno2.agregarDocumento(actaLuis);
+
+            padre.addHijo(alumno1);
+            padre.addHijo(alumno2);
+
+            padreRepository.save(padre);
+        }
+    }
+    */
 }

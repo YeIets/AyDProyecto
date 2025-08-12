@@ -2,9 +2,9 @@ package mx.uam.ayd.proyecto.presentacion.padresPrincipal.ActualizarDocumentos;
 
 import javafx.stage.FileChooser;
 import mx.uam.ayd.proyecto.negocio.ServicioDocumento;
+import mx.uam.ayd.proyecto.negocio.modelo.Alumno;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -17,38 +17,36 @@ public class ControlActualizarDocumentos {
     @Autowired
     private ServicioDocumento servicioDocumento;
 
+    private Alumno alumnoSeleccionado;
+
     /**
-     * Método principal para iniciar la HU-05.
-     * Muestra la ventana de actualización de documentos.
+     * Guarda el alumno y se lo pasa a la ventana para mostrarlo.
+     * @param alumno El alumno cuyos documentos se van a actualizar.
      */
-    public void inicia() {
-        ventana.muestra(this);
+    public void inicia(Alumno alumno) {
+        this.alumnoSeleccionado = alumno;
+        // CAMBIO: Ahora pasamos el alumno a la ventana.
+        ventana.muestra(this, alumno);
     }
 
     /**
      * Inicia el proceso de subida de un archivo.
-     * Es llamado por los botones en la ventana.
-     * @param tipoDeDocumento Una cadena que identifica el tipo de documento.
+     * @param tipoDeDocumento El tipo de documento a subir.
      */
     public void subirDocumento(String tipoDeDocumento) {
-        System.out.println("Iniciando subida para: " + tipoDeDocumento);
-
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Selecciona tu " + tipoDeDocumento);
-
-        // Filtro para que solo se puedan seleccionar archivos PDF
         FileChooser.ExtensionFilter pdfFilter = new FileChooser.ExtensionFilter("Archivos PDF (*.pdf)", "*.pdf");
         fileChooser.getExtensionFilters().add(pdfFilter);
 
         File archivoSeleccionado = fileChooser.showOpenDialog(ventana.getStage());
 
         if (archivoSeleccionado != null) {
-            // Si el usuario seleccionó un archivo, intentamos subirlo
             try {
-                servicioDocumento.subirDocumento(archivoSeleccionado, tipoDeDocumento);
+                servicioDocumento.subirDocumento(archivoSeleccionado, tipoDeDocumento, this.alumnoSeleccionado);
                 ventana.muestraMensajeExito(archivoSeleccionado.getName());
             } catch (IOException e) {
-                ventana.muestraMensajeError(archivoSeleccionado.getName());
+                ventana.muestraMensajeError("Ocurrió un error al guardar el archivo.");
                 e.printStackTrace();
             }
         }

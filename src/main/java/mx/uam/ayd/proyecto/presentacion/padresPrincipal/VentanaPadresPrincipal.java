@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
 import org.slf4j.Logger;
@@ -19,7 +21,6 @@ public class VentanaPadresPrincipal {
     private static final Logger log = LoggerFactory.getLogger(VentanaPadresPrincipal.class);
 
     private Stage stage;
-
     private ControlPadresPrincipal control;
     private boolean initialized = false;
 
@@ -28,8 +29,6 @@ public class VentanaPadresPrincipal {
 
     @FXML
     private ImageView iconoNotificacionActiva;
-
-    private Scene scene;
 
     public VentanaPadresPrincipal() {
         // Constructor vacío
@@ -47,20 +46,17 @@ public class VentanaPadresPrincipal {
 
         try {
             stage = new Stage();
-            stage.setTitle("Ventana Padres Principal");
+            stage.setTitle("Ventana Principal de Padres");
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/VentanasPadre/PadresPrincipal.fxml"));
             loader.setController(this);
             Parent root = loader.load();
             Scene scene = new Scene(root);
-            this.scene = scene;
 
             stage.setScene(scene);
             stage.setWidth(600);
             stage.setHeight(420);
             stage.setResizable(false);
-
-            stage.show();
 
             initialized = true;
         } catch (IOException e) {
@@ -74,10 +70,10 @@ public class VentanaPadresPrincipal {
 
     public void muestra() {
         if (!Platform.isFxApplicationThread()) {
-            Platform.runLater(() -> this.muestra());
+            Platform.runLater(this::muestra);
             return;
         }
-        
+
         initializeUI();
 
         boolean hayNotificacion = control.padreTieneNotificaciones();
@@ -91,9 +87,22 @@ public class VentanaPadresPrincipal {
             if (iconoNotificacion != null && iconoNotificacionActiva != null) {
                 iconoNotificacionActiva.setVisible(tieneNotificaciones);
                 iconoNotificacion.setVisible(!tieneNotificaciones);
-                log.info("Tiene notificaciones es = " + tieneNotificaciones);
+                log.info("Tiene notificaciones es = {}", tieneNotificaciones);
             }
         });
+    }
+
+    /**
+     * MÉTODO AÑADIDO: Muestra un diálogo de error genérico.
+     * Útil para que el controlador pueda notificar al usuario de problemas.
+     * @param mensaje El contenido del mensaje de error.
+     */
+    public void muestraDialogoDeError(String mensaje) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Ha ocurrido un problema");
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 
     // FXML Handle Events

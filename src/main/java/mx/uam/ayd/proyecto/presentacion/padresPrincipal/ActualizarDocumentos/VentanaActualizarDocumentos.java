@@ -10,8 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import mx.uam.ayd.proyecto.negocio.modelo.Alumno;
 import org.springframework.stereotype.Component;
-
 import java.io.IOException;
 
 @Component
@@ -20,15 +20,10 @@ public class VentanaActualizarDocumentos {
     private Stage stage;
     private ControlActualizarDocumentos control;
 
-    // NOTA: Agrega un Label en tu FXML con este fx:id para mostrar mensajes
     @FXML
-    private Label lblEstado;
+    private Label idNombreAlumno;
 
-    /**
-     * Muestra la ventana. Este método es llamado por el controlador.
-     * @param control El controlador de esta ventana.
-     */
-    public void muestra(ControlActualizarDocumentos control) {
+    public void muestra(ControlActualizarDocumentos control, Alumno alumno) {
         this.control = control;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/VentanasPadre/ActualizarDocumentos/ActualizarDocumentos.fxml"));
@@ -38,9 +33,14 @@ public class VentanaActualizarDocumentos {
             stage.setTitle("Actualización de Documentos");
 
             stage.setScene(new Scene(root));
-            stage.setResizable(false); 
-            stage.setWidth(600);       
-            stage.setHeight(420);      
+            stage.setResizable(false);
+            stage.setWidth(600);
+            stage.setHeight(420);
+
+            if (idNombreAlumno != null) {
+                idNombreAlumno.setText("Actualizando documentos para: " + alumno.getNombreCompleto());
+            }
+
             stage.show();
 
         } catch (IOException e) {
@@ -48,49 +48,47 @@ public class VentanaActualizarDocumentos {
         }
     }
 
-    /**
-     * Muestra un mensaje de éxito en la etiqueta de estado.
-     * @param nombreArchivo El nombre del archivo que se subió.
-     */
-    public void muestraDialogoExito(String nombreArchivo) {
-        if(lblEstado != null) {
-            lblEstado.setText("¡Éxito! Se subió el archivo: " + nombreArchivo);
-        }
-    }
-
-    /**
-     * Muestra un mensaje de error en la etiqueta de estado.
-     * @param mensaje El error que ocurrió.
-     */
     public void muestraMensajeError(String mensaje) {
         Alert alerta = new Alert(AlertType.ERROR);
-        alerta.setTitle("Error al subir archivo");
-        alerta.setHeaderText("El archivo " + " no se pudo subir"); // puedes poner un encabezado si quieres
+        alerta.setTitle("Error al Subir Archivo");
+        alerta.setHeaderText("Ocurrió un problema al intentar subir el archivo.");
         alerta.setContentText(mensaje);
         alerta.showAndWait();
     }
 
-    public void muestraMensajeExito(String mensaje) {
+    public void muestraMensajeExito(String nombreArchivo) {
         Alert alerta = new Alert(AlertType.INFORMATION);
-        alerta.setTitle("Archivo subido Exitosamente");
-        alerta.setHeaderText("Archivo subido Exitosamente"); // opcional, puedes agregar un encabezado si lo deseas
-        alerta.setContentText("Se subio el archivo " + mensaje);
+        alerta.setTitle("Éxito");
+        alerta.setHeaderText("Archivo Subido Exitosamente");
+        alerta.setContentText("Se subió el archivo: " + nombreArchivo);
         alerta.showAndWait();
     }
-
 
     public Stage getStage() {
         return stage;
     }
 
+    // CAMBIO: Se reemplaza el método genérico por métodos específicos para cada botón.
+    // Esto asegura que siempre se envíe el tipo de documento correcto y consistente.
+
     @FXML
-    public void handleSubirDocumento(ActionEvent event){
+    private void handleSubirActa() {
+        control.subirDocumento("Acta de Nacimiento");
+    }
 
-        Button boton = (Button) event.getSource();
-        String documento = boton.getId();
+    @FXML
+    private void handleSubirCURP() {
+        control.subirDocumento("CURP");
+    }
 
-        control.subirDocumento(documento);
+    @FXML
+    private void handleSubirDomicilio() {
+        control.subirDocumento("Domicilio");
+    }
 
+    @FXML
+    private void handleSubirCertificado() {
+        control.subirDocumento("Certificado Médico");
     }
 
     @FXML

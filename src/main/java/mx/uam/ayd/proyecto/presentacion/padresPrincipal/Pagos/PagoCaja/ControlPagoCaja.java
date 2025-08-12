@@ -1,5 +1,6 @@
 package mx.uam.ayd.proyecto.presentacion.padresPrincipal.Pagos.PagoCaja;
 
+import mx.uam.ayd.proyecto.negocio.modelo.Alumno; // Se importa Alumno
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -9,14 +10,15 @@ public class ControlPagoCaja {
     @Autowired
     private VentanaPagoCaja ventana;
 
+    private Alumno alumno; // Campo para el alumno
+
     /**
-     * Inicia la visualización de la ventana de pago en caja.
-     *
-     * @param total el monto total a pagar que se mostrará en la ventana.
+     * CAMBIO: Inicia la ventana de pago en caja para un alumno específico.
+     * @param total El monto a pagar.
+     * @param alumno El alumno que realiza el pago.
      */
-    public void inicia(int total) {
-        // Le pasa el control a la ventana para que se muestre,
-        // enviando una referencia a sí mismo (this) y el total a pagar.
-        ventana.muestra(this, total);
+    public void inicia(int total, Alumno alumno) {
+        this.alumno = alumno; // Se guarda el alumno
+        ventana.muestra(this, total, this.alumno);
     }
 }

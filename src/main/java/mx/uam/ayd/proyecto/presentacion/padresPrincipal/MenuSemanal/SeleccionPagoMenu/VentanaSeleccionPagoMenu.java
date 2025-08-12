@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import mx.uam.ayd.proyecto.negocio.modelo.Alumno; // Se importa la entidad Alumno
 import org.springframework.stereotype.Component;
 import java.io.IOException;
 
@@ -22,10 +23,15 @@ public class VentanaSeleccionPagoMenu {
     @FXML private Button idPagoLinea;
     @FXML private Button idVolver;
 
-    public void muestra(ControlSeleccionPagoMenu control, int total) {
+    /**
+     * CAMBIO: El método ahora acepta un Alumno como tercer argumento.
+     * @param control El controlador de esta ventana.
+     * @param total El monto total a pagar.
+     * @param alumno El alumno para el cual se realiza la operación.
+     */
+    public void muestra(ControlSeleccionPagoMenu control, int total, Alumno alumno) {
         this.control = control;
         try {
-            // Asegúrate de que este es el nombre de tu FXML para esta ventana
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/VentanasPadre/MenuSemanal/SeleccionPagoMenu.fxml"));
             loader.setController(this);
             Parent root = loader.load();
@@ -33,14 +39,12 @@ public class VentanaSeleccionPagoMenu {
             stage = new Stage();
             stage.setTitle("Elegir Método de Pago");
             stage.setScene(new Scene(root));
-            stage.setResizable(false); 
-            stage.setWidth(600);       
-            stage.setHeight(420);      
-            stage.show();
+            stage.setResizable(false);
+            stage.setWidth(600);
+            stage.setHeight(420);
 
             idTotal.setText("$" + total);
 
-            // Conectamos los botones a los métodos del controlador
             configurarBotones();
 
             stage.show();

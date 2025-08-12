@@ -2,20 +2,16 @@ package mx.uam.ayd.proyecto.presentacion.padresPrincipal.MenuSemanal;
 
 import java.io.IOException;
 import java.util.Map;
-
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.Button;
-import javafx.stage.Stage;
 import javafx.scene.Parent;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+import mx.uam.ayd.proyecto.negocio.modelo.Alumno;
 import org.springframework.stereotype.Component;
-
-import mx.uam.ayd.proyecto.presentacion.padresPrincipal.MenuSemanal.SeleccionMenu.ControlSeleccionMenu;
 
 @Component
 public class VentanaMenuSemanal {
@@ -23,45 +19,27 @@ public class VentanaMenuSemanal {
     private Stage stage;
     private ControlMenuSemanal control;
 
-    @FXML private Label idLunesComida;
-    @FXML private Label idLunesAgua;
-    @FXML private Label idLunesFruta;
-    @FXML private Label idLunesGelatina;
+    @FXML private Label idLunesComida, idLunesAgua, idLunesFruta, idLunesGelatina;
+    @FXML private Label idMartesComida, idMartesAgua, idMartesFruta, idMartesGelatina;
+    @FXML private Label idMiercolesComida, idMiercolesAgua, idMiercolesFruta, idMiercolesGelatina;
+    @FXML private Label idJuevesComida, idJuevesAgua, idJuevesFruta, idJuevesGelatina;
+    @FXML private Label idViernesComida, idViernesAgua, idViernesFruta, idViernesGelatina;
+    @FXML private Button idAceptar, idRegresar;
 
-    @FXML private Label idMartesComida;
-    @FXML private Label idMartesAgua;
-    @FXML private Label idMartesFruta;
-    @FXML private Label idMartesGelatina;
-
-    @FXML private Label idMiercolesComida;
-    @FXML private Label idMiercolesAgua;
-    @FXML private Label idMiercolesFruta;
-    @FXML private Label idMiercolesGelatina;
-
-    @FXML private Label idJuevesComida;
-    @FXML private Label idJuevesAgua;
-    @FXML private Label idJuevesFruta;
-    @FXML private Label idJuevesGelatina;
-
-    @FXML private Label idViernesComida;
-    @FXML private Label idViernesAgua;
-    @FXML private Label idViernesFruta;
-    @FXML private Label idViernesGelatina;
-
-    @FXML private Button idAceptar;
-    @FXML private Button idRegresar;
-
-    @Autowired
-    private ControlSeleccionMenu controlSeleccionMenu; // ← se inyecta el controlador de la siguiente ventana
+    // Campo para el Label del nombre del alumno (se configurará en el FXML al final)
+    @FXML private Label idNombreAlumno;
 
     /**
-     * Muestra la ventana y carga los menús
+     * Muestra la ventana y carga los menús para un alumno específico.
+     * @param control El controlador de esta ventana.
+     * @param menuPorDia El mapa con la información del menú.
+     * @param alumno El alumno para el cual se muestra el menú.
      */
-    public void muestra(ControlMenuSemanal control, Map<String, String[]> menuPorDia) {
+    public void muestra(ControlMenuSemanal control, Map<String, String[]> menuPorDia, Alumno alumno) {
         this.control = control;
 
         if (!Platform.isFxApplicationThread()) {
-            Platform.runLater(() -> muestra(control, menuPorDia));
+            Platform.runLater(() -> muestra(control, menuPorDia, alumno));
             return;
         }
 
@@ -73,21 +51,23 @@ public class VentanaMenuSemanal {
             stage = new Stage();
             stage.setTitle("Menú Semanal");
             stage.setScene(new Scene(root));
-            stage.setResizable(false); 
-            stage.setWidth(600);       
-            stage.setHeight(420);      
-            stage.show();
+            stage.setResizable(false);
+            stage.setWidth(600);
+            stage.setHeight(420);
+
+            // Se actualiza el nombre del alumno en la interfaz
+            if (idNombreAlumno != null) {
+                idNombreAlumno.setText("Menú para: " + alumno.getNombreCompleto());
+            }
 
             // Asignar menú recibido
             actualizarMenu(menuPorDia);
 
-            // Eventos
-            idAceptar.setOnAction(e -> {
-                cerrar();
-                controlSeleccionMenu.inicia(); // ← abre la siguiente ventana
-            });
+            // Eventos de los botones
+            idAceptar.setOnAction(e -> control.elegirDias());
+            idRegresar.setOnAction(e -> control.regresar());
 
-            idRegresar.setOnAction(e -> stage.close());
+            stage.show();
 
         } catch (IOException e) {
             System.err.println("Error al cargar PadreMenuSemanal.fxml: " + e.getMessage());
@@ -96,7 +76,7 @@ public class VentanaMenuSemanal {
     }
 
     /**
-     * Llena los labels del menú con los datos recibidos
+     * Llena los labels del menú con los datos recibidos del controlador.
      */
     private void actualizarMenu(Map<String, String[]> menuPorDia) {
         if (menuPorDia.containsKey("Lunes")) {

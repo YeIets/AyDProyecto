@@ -12,33 +12,35 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="649.0" prefWidth="958.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Label layoutX="376.0" layoutY="72.0" text="Gestión de Documentos">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <TextField fx:id="textFieldBusqueda" layoutX="108.0" layoutY="124.0" prefHeight="25.0" prefWidth="805.0" promptText="🔍 Buscar Estudiante por nombre o matrícula..." />
-      <TableView fx:id="tablaEstudiantes" layoutX="108.0" layoutY="168.0" prefHeight="420.0" prefWidth="805.0">
-        <columns>
-          <TableColumn fx:id="columnaEstudiante" prefWidth="175.0" text="Estudiante" />
-          <TableColumn fx:id="columnaActa" prefWidth="120.0" text="Acta de Nacimiento" />
-            <TableColumn fx:id="columnaCurp" prefWidth="120.0" text="CURP" />
-            <TableColumn fx:id="columnaCertificado" prefWidth="120.0" text="Certificado Médico" />
-            <TableColumn fx:id="columnaDomicilio" prefWidth="120.0" text="Domicilio" />
-            <TableColumn fx:id="columnaDescargar" prefWidth="50.0" text="" />
-            <TableColumn fx:id="columnaNotificar" prefWidth="100.0" text="" />
-        </columns>
-      </TableView>
-      <VBox layoutY="8.0" prefHeight="110.0" prefWidth="105.0">
-         <children>
-            <ImageView fitHeight="110.0" fitWidth="125.0">
-               <image>
-                  <Image url="@../../Image/LogoInstitucional.jpg" />
-               </image>
-            </ImageView>
-         </children>
-      </VBox>
-      <Button fx:id="idvolver" layoutX="25.0" layoutY="596.0" mnemonicParsing="false" text="Volver" />
-   </children>
+    <children>
+        <Label layoutX="376.0" layoutY="72.0" text="Gestión de Documentos">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+        </Label>
+        <TextField fx:id="textFieldBusqueda" layoutX="108.0" layoutY="124.0" prefHeight="25.0" prefWidth="710.0" promptText="🔍 Buscar Estudiante por nombre o matrícula..." />
+        <TableView fx:id="tablaEstudiantes" layoutX="108.0" layoutY="168.0" prefHeight="420.0" prefWidth="805.0">
+            <columns>
+                <TableColumn fx:id="columnaEstudiante" prefWidth="175.0" text="Estudiante" />
+                <TableColumn fx:id="columnaActa" prefWidth="120.0" text="Acta de Nacimiento" />
+                <TableColumn fx:id="columnaCurp" prefWidth="120.0" text="CURP" />
+                <TableColumn fx:id="columnaCertificado" prefWidth="120.0" text="Certificado Médico" />
+                <TableColumn fx:id="columnaDomicilio" prefWidth="120.0" text="Domicilio" />
+                <TableColumn fx:id="columnaDescargar" prefWidth="50.0" text="" />
+                <TableColumn fx:id="columnaNotificar" prefWidth="100.0" text="" />
+            </columns>
+        </TableView>
+        <VBox layoutY="8.0" prefHeight="110.0" prefWidth="105.0">
+            <children>
+                <ImageView fitHeight="110.0" fitWidth="125.0">
+                    <image>
+                        <Image url="@../../Image/LogoInstitucional.jpg" />
+                    </image>
+                </ImageView>
+            </children>
+        </VBox>
+        <Button fx:id="idvolver" layoutX="25.0" layoutY="596.0" mnemonicParsing="false" text="Volver" />
+
+        <Button fx:id="btnRefrescar" layoutX="825.0" layoutY="124.0" mnemonicParsing="false" onAction="#handleRefrescar" text="Refrescar 🔄" />
+    </children>
 </AnchorPane>

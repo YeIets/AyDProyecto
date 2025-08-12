@@ -5,8 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label; // <-- Se usan solo Labels
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import mx.uam.ayd.proyecto.negocio.modelo.Alumno; // CAMBIO: Se importa la entidad Alumno
 import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -19,34 +20,37 @@ public class VentanaPagoEnLinea {
     private Stage stage;
     private ControlPagoEnLinea control;
 
-    // CORREGIDO: Los campos @FXML ahora coinciden con tu FXML (solo Labels y un Button)
     @FXML private Label idTotal;
     @FXML private Label idLinea;
     @FXML private Label idFecha;
-    @FXML private Button idCancelar; // El botón "Volver" de tu FXML
+    @FXML private Button idCancelar;
 
-    public void muestra(ControlPagoEnLinea control, int total) {
+    /**
+     * CAMBIO: Muestra el recibo de pago para un alumno específico.
+     * @param control El controlador de esta ventana.
+     * @param total El monto total pagado.
+     * @param alumno El alumno para el cual se generó el pago.
+     */
+    public void muestra(ControlPagoEnLinea control, int total, Alumno alumno) {
         this.control = control;
         try {
-            // Carga el FXML del ticket, que es el que estaba dando el error
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/VentanasPadre/Pagos/PagoLineaMenu.fxml"));
             loader.setController(this);
             Parent root = loader.load();
             stage = new Stage();
-            stage.setTitle("Recibo de Pago");
+
+            // CAMBIO: Se personaliza el título de la ventana con el nombre del alumno.
+            stage.setTitle("Recibo de Pago para " + alumno.getNombreCompleto());
 
             stage.setScene(new Scene(root));
-            stage.setResizable(false); 
-            stage.setWidth(600);       
-            stage.setHeight(420);      
-            stage.show();
+            stage.setResizable(false);
+            stage.setWidth(600);
+            stage.setHeight(420);
 
-            // CORREGIDO: La lógica ahora llena los Labels del ticket
             idTotal.setText("$" + total);
             idLinea.setText(generarLineaCaptura());
             idFecha.setText(obtenerFechaActual());
 
-            // Conecta el botón "Volver" del FXML (idCancelar) a la acción de cerrar
             idCancelar.setOnAction(e -> cerrar());
 
             stage.show();
@@ -60,8 +64,6 @@ public class VentanaPagoEnLinea {
             stage.close();
         }
     }
-
-    // --- MÉTODOS DE AYUDA PARA GENERAR LOS DATOS DEL TICKET ---
 
     private String generarLineaCaptura() {
         Random random = new Random();
@@ -77,7 +79,4 @@ public class VentanaPagoEnLinea {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         return formato.format(hoy);
     }
-
-    // ELIMINADO: Se quitaron los getters (getNumeroTarjeta, etc.) y el diálogo de éxito,
-    // ya que no pertenecen a esta ventana de "ticket".
 }

@@ -12,46 +12,49 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="400.0" layoutY="1.0" stroke="TRANSPARENT" strokeType="INSIDE" width="600.0">
-         <fill>
-            <LinearGradient endX="0.6142857142857143" endY="1.0" startX="0.32857142857142857" startY="0.5857142857142856">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color red="1.0" green="1.0" blue="1.0" opacity="0.8500000238418579" />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="0.9882352948188782" green="0.9176470637321472" blue="0.7019608020782471" />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </fill>
-      </Rectangle>
-      <Label layoutX="369.0" layoutY="89.0" text="Comprobante">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font></Label>
-      <Label fx:id="idTotal" layoutX="452.0" layoutY="154.0" prefHeight="18.0" prefWidth="67.0" text="\$0.0" />
-      <Label fx:id="idLinea" layoutX="452.0" layoutY="192.0" text="684621648" />
-      <Label alignment="CENTER_RIGHT" layoutX="302.0" layoutY="234.0" prefHeight="18.0" prefWidth="106.0" text="Fecha:" />
-      <Label fx:id="idFecha" layoutX="455.0" layoutY="234.0" prefHeight="18.0" prefWidth="100.0" text="00/00/00" />
-      <Label layoutX="269.0" layoutY="192.0" text="Numero de referencia:" />
-      <Label alignment="CENTER_RIGHT" layoutX="302.0" layoutY="154.0" prefHeight="18.0" prefWidth="106.0" text="Total:" />
-      <Button fx:id="idCancelar" layoutX="33.0" layoutY="341.0" mnemonicParsing="false" text="Volver" />
-      <Label layoutX="455.0" layoutY="278.0" text="Pagado" />
-      <Label layoutX="146.0" layoutY="21.0" text="&quot;Educar para la vida, guiar para el éxito&quot;">
-         <font>
-            <Font name="System Bold Italic" size="16.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="249.0" fitWidth="252.0" layoutX="14.0" layoutY="64.0" preserveRatio="true">
-         <image>
-            <Image url="@../../../Image/LogoInstitucional.png" />
-         </image>
-      </ImageView>
-   </children>
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="400.0" layoutY="1.0" stroke="TRANSPARENT" strokeType="INSIDE" width="600.0">
+            <fill>
+                <LinearGradient endX="0.6142857142857143" endY="1.0" startX="0.32857142857142857" startY="0.5857142857142856">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="1.0" green="1.0" blue="1.0" opacity="0.8500000238418579" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.9882352948188782" green="0.9176470637321472" blue="0.7019608020782471" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Rectangle>
+        <Label layoutX="369.0" layoutY="89.0" text="Comprobante">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+
+        <Label fx:id="idNombreAlumno" layoutX="269.0" layoutY="115.0" style="-fx-font-weight: bold;" prefWidth="250.0" text="Recibo para:" />
+        <Label fx:id="idTotal" layoutX="452.0" layoutY="154.0" prefHeight="18.0" prefWidth="67.0" text="\$0.0" />
+        <Label fx:id="idLinea" layoutX="452.0" layoutY="192.0" text="684621648" />
+        <Label alignment="CENTER_RIGHT" layoutX="302.0" layoutY="234.0" prefHeight="18.0" prefWidth="106.0" text="Fecha:" />
+        <Label fx:id="idFecha" layoutX="455.0" layoutY="234.0" prefHeight="18.0" prefWidth="100.0" text="00/00/00" />
+        <Label layoutX="269.0" layoutY="192.0" text="Numero de referencia:" />
+        <Label alignment="CENTER_RIGHT" layoutX="302.0" layoutY="154.0" prefHeight="18.0" prefWidth="106.0" text="Total:" />
+        <Button fx:id="idCancelar" layoutX="33.0" layoutY="341.0" mnemonicParsing="false" text="Volver" />
+        <Label layoutX="455.0" layoutY="278.0" text="Pagado" />
+        <Label layoutX="146.0" layoutY="21.0" text="&quot;Educar para la vida, guiar para el éxito&quot;">
+            <font>
+                <Font name="System Bold Italic" size="16.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="249.0" fitWidth="252.0" layoutX="14.0" layoutY="64.0" preserveRatio="true">
+            <image>
+                <Image url="@../../../Image/LogoInstitucional.png" />
+            </image>
+        </ImageView>
+    </children>
 </AnchorPane>

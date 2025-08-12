@@ -1,10 +1,9 @@
 package mx.uam.ayd.proyecto.presentacion.padresPrincipal.MenuSemanal.SeleccionPagoMenu;
 
+import mx.uam.ayd.proyecto.negocio.modelo.Alumno;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-
-// --- Estos son los imports correctos que me diste ---
 import mx.uam.ayd.proyecto.presentacion.padresPrincipal.Pagos.PagoCaja.ControlPagoCaja;
 import mx.uam.ayd.proyecto.presentacion.padresPrincipal.Pagos.DatosPagoEnLinea.ControlDatosPagoEnLinea;
 import mx.uam.ayd.proyecto.presentacion.padresPrincipal.Pagos.PagoEnLinea.ControlPagoEnLinea;
@@ -16,46 +15,59 @@ public class ControlSeleccionPagoMenu {
     @Autowired
     private VentanaSeleccionPagoMenu ventana;
 
-    // Corregido: El tipo y nombre coinciden con tu import
     @Autowired
     @Lazy
-    private ControlPagoEnLinea controlPagoEnLinea; // Este es el del "ticket" final
+    private ControlPagoEnLinea controlPagoEnLinea;
 
     @Autowired
     @Lazy
     private ControlPagoCaja controlPagoCaja;
 
-    // Corregido: El tipo y nombre coinciden con tu import
     @Autowired
-    private ControlDatosPagoEnLinea controlDatosPagoEnLinea; // Este es el del formulario de tarjeta
+    private ControlDatosPagoEnLinea controlDatosPagoEnLinea;
 
     private ControlSeleccionMenu controlSeleccionMenu;
     private int total;
+    private Alumno alumno;
 
-    public void inicia(int total, ControlSeleccionMenu controlSeleccionMenu) {
+    /**
+     * Inicia el flujo para seleccionar el método de pago.
+     * @param total El monto a pagar.
+     * @param controlSeleccionMenu El controlador anterior, para poder regresar.
+     * @param alumno El alumno para el cual se realiza el pago.
+     */
+    public void inicia(int total, ControlSeleccionMenu controlSeleccionMenu, Alumno alumno) {
         this.total = total;
         this.controlSeleccionMenu = controlSeleccionMenu;
-        ventana.muestra(this, total);
+        this.alumno = alumno;
+        ventana.muestra(this, total, this.alumno);
     }
 
     /**
-     * MÉTODO CLAVE:
-     * Ahora llama a los controladores con los nombres correctos.
+     * Inicia el flujo de pago en línea.
      */
     public void irAPagoLinea() {
         ventana.cerrar();
 
-        // Corregido: Se usan las variables correctas
-        controlDatosPagoEnLinea.inicia(total, () -> controlPagoEnLinea.inicia(total));
+        // CAMBIO AQUÍ: Se añade 'this.alumno' como tercer argumento a la llamada.
+        controlDatosPagoEnLinea.inicia(total, () -> controlPagoEnLinea.inicia(total, this.alumno), this.alumno);
     }
 
+    /**
+     * Inicia el flujo de pago en caja.
+     */
     public void irAPagoCaja() {
         ventana.cerrar();
-        controlPagoCaja.inicia(total);
+        controlPagoCaja.inicia(total, this.alumno);
     }
 
+    /**
+     * Regresa a la ventana anterior.
+     */
     public void regresar() {
         ventana.cerrar();
+        if (this.controlSeleccionMenu != null) {
+            this.controlSeleccionMenu.regresar();
+        }
     }
-
 }

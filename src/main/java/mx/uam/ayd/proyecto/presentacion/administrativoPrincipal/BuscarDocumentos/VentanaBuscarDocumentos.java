@@ -41,6 +41,9 @@ public class VentanaBuscarDocumentos {
     @FXML private TableColumn<AlumnoDocumentoRow, Void> columnaNotificar;
     @FXML private Button idvolver;
 
+    // CAMBIO: Se añade la referencia al nuevo botón de refresco
+    @FXML private Button btnRefrescar;
+
     public void muestra(ControlBuscarDocumentos control) {
         this.control = control;
         try {
@@ -78,6 +81,19 @@ public class VentanaBuscarDocumentos {
 
     public void llenaTabla(List<AlumnoDocumentoRow> alumnos) {
         tablaEstudiantes.setItems(FXCollections.observableArrayList(alumnos));
+    }
+
+    public String getBusquedaActual() {
+        return textFieldBusqueda.getText();
+    }
+
+    /**
+     * CAMBIO: Se añade el método que se ejecuta al presionar el botón de refresco.
+     * Este método simplemente le pide al controlador que ejecute la lógica de refresco.
+     */
+    @FXML
+    private void handleRefrescar() {
+        control.refrescarTabla();
     }
 
     private void configurarCeldaConIcono(TableColumn<AlumnoDocumentoRow, Boolean> columna, String tipoDocumento) {
@@ -142,19 +158,10 @@ public class VentanaBuscarDocumentos {
         }
     }
 
-    /**
-     * MÉTODO AÑADIDO: Permite que el controlador obtenga la referencia al Stage.
-     * Esto es necesario para que los diálogos (como FileChooser) sepan sobre
-     * qué ventana principal mostrarse.
-     * @return el Stage (ventana) actual.
-     */
     public Stage getStage() {
         return stage;
     }
 
-    /**
-     * Clase interna para representar los datos de una fila en la tabla.
-     */
     public static class AlumnoDocumentoRow {
         private final SimpleStringProperty nombre;
         private final SimpleStringProperty apellido;

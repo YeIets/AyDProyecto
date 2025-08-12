@@ -41,9 +41,22 @@ public class ControlBuscarDocumentos {
     @Autowired
     private ServicioAlumno servicioAlumno;
 
+    /**
+     * Inicia la ventana de búsqueda de documentos.
+     */
     public void inicia() {
         ventana.muestra(this);
         buscarAlumnos("");
+    }
+
+    /**
+     * Lógica para refrescar la tabla. Es llamado por la ventana
+     * cuando se presiona el botón "Refrescar".
+     */
+    public void refrescarTabla() {
+        log.info("Refrescando la tabla de documentos...");
+        // Vuelve a buscar usando el último texto que el usuario haya escrito.
+        buscarAlumnos(ventana.getBusquedaActual());
     }
 
     public void buscarAlumnos(String nombre) {
@@ -90,14 +103,9 @@ public class ControlBuscarDocumentos {
         }
     }
 
-    /**
-     * Lógica completa para la descarga de documentos.
-     * @param alumno El alumno seleccionado en la tabla.
-     */
     public void descargarDocumento(AlumnoDocumentoRow alumno) {
         log.info("Iniciando proceso de descarga para: {}", alumno.getNombreCompleto());
 
-        // 1. Recuperar el alumno completo y sus documentos
         Alumno alumnoCompleto = servicioAlumno.recuperarAlumnoPorNombreYApellido(alumno.getNombre(), alumno.getApellido());
         if (alumnoCompleto == null || alumnoCompleto.getDocumentos().isEmpty()) {
             log.warn("El alumno no tiene documentos para descargar.");
@@ -105,13 +113,11 @@ public class ControlBuscarDocumentos {
             return;
         }
 
-        // 2. Crear una lista de los tipos de documentos disponibles para que el usuario elija
         List<String> tiposDeDocumentos = alumnoCompleto.getDocumentos()
                 .stream()
                 .map(Documento::getTipo)
                 .collect(Collectors.toList());
 
-        // 3. Mostrar un diálogo para que el usuario elija qué documento descargar
         ChoiceDialog<String> dialogo = new ChoiceDialog<>(tiposDeDocumentos.get(0), tiposDeDocumentos);
         dialogo.setTitle("Seleccionar Documento");
         dialogo.setHeaderText("Elige el documento que deseas descargar para " + alumno.getNombreCompleto());
@@ -119,21 +125,16 @@ public class ControlBuscarDocumentos {
 
         Optional<String> resultado = dialogo.showAndWait();
 
-        // 4. Si el usuario seleccionó un documento, proceder con la descarga
         resultado.ifPresent(tipoSeleccionado -> {
-            // Encontrar el documento correspondiente al tipo seleccionado
             Documento docADescargar = alumnoCompleto.getDocumentosPorTipo(tipoSeleccionado).get(0);
             File archivoFuente = new File(docADescargar.getRuta());
 
-            // 5. Abrir el diálogo "Guardar como..."
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Guardar Documento Como...");
-            fileChooser.setInitialFileName(archivoFuente.getName()); // Sugerir el nombre original del archivo
+            fileChooser.setInitialFileName(archivoFuente.getName());
 
-            // Obtener el stage de la ventana actual para que el diálogo aparezca sobre ella
             File archivoDestino = fileChooser.showSaveDialog(ventana.getStage());
 
-            // 6. Si el usuario eligió una ubicación, copiar el archivo
             if (archivoDestino != null) {
                 try {
                     Files.copy(archivoFuente.toPath(), archivoDestino.toPath(), StandardCopyOption.REPLACE_EXISTING);
@@ -150,7 +151,14 @@ public class ControlBuscarDocumentos {
     }
 
     public void notificarPadre(String nombreAlumno, String apellidoAlumno) {
-        // ... (lógica de notificación)
+        Alumno alumno = servicioAlumno.recuperarAlumnoPorNombreYApellido(nombreAlumno, apellidoAlumno);
+        if (alumno != null && alumno.getPadre() != null) {
+            Padre padre = alumno.getPadre();
+            servicioNotificacion.notificarPadre(padre, alumno, "Se necesitan actualizar documentos");
+            log.info("Notificación enviada al padre del alumno: {} {}", nombreAlumno, apellidoAlumno);
+        } else {
+            log.warn("No se pudo notificar al padre del alumno: {} {}", nombreAlumno, apellidoAlumno);
+        }
     }
 
     public void regresar() {
@@ -158,7 +166,6 @@ public class ControlBuscarDocumentos {
         ventana.cierra();
     }
 
-    // Método de ayuda para mostrar alertas de información o error
     private void mostrarAlerta(String titulo, String contenido) {
         Alert alerta = new Alert(Alert.AlertType.INFORMATION);
         alerta.setTitle(titulo);
