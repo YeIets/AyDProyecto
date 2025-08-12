@@ -105,6 +105,7 @@ public class VentanaEncargadoCocinaPrincipal{
     @FXML
     private void handleVerPedidos() {
         log.info("Se presiono Ver Pedidos");
+        control.muestraVerPedidos();
     }
 
     //Declara las funciones del boton SubirMenu

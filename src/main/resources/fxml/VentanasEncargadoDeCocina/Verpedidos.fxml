@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="631.0" prefWidth="547.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+       <Button fx:id="btnregresar" layoutX="11.0" layoutY="590.0" mnemonicParsing="false" onAction="#handleRegresar" text="regresar" />
+      <Label fx:id="lbllunes" layoutX="54.0" layoutY="141.0" text="lunes" />
+      <Label fx:id="lblmartes" layoutX="151.0" layoutY="141.0" text="martes" />
+      <Label fx:id="lblmiercoles" layoutX="246.0" layoutY="141.0" text="miercoles" />
+      <Label fx:id="lbljueves" layoutX="347.0" layoutY="141.0" text="jueves" />
+      <Label fx:id="lblviernes" layoutX="453.0" layoutY="141.0" text="viernes " />
+      <Label fx:id="lblmenusemanl" layoutX="219.0" layoutY="27.0" text="Menu semanal" />
+      <ImageView fx:id="imglogo" fitHeight="98.0" fitWidth="95.0" layoutX="14.0" layoutY="10.0">
+         <image>
+            <Image url="@../../Image/LogoInstitucional.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblpagados" layoutX="235.0" layoutY="66.0" text="pagados" />
+      <Label fx:id="lblle1" layoutX="31.0" layoutY="180.0" prefHeight="17.0" prefWidth="75.0" text="estudiante 1" />
+      <Label fx:id="lblle2" layoutX="31.0" layoutY="205.0" prefHeight="17.0" prefWidth="75.0" text="estudiante  2" />
+      <Label fx:id="lblle3" layoutX="31.0" layoutY="235.0" prefHeight="17.0" prefWidth="75.0" text="estudiante  3" />
+      <Label fx:id="lblle4" layoutX="29.0" layoutY="266.0" prefHeight="17.0" prefWidth="78.0" text="estudiante 4" />
+      <Label fx:id="lblle5" layoutX="27.0" layoutY="299.0" text="estudiante  5" />
+      <Label fx:id="lblme1" layoutX="136.0" layoutY="180.0" text="estudiante 1" />
+      <Label fx:id="lblme2" layoutX="136.0" layoutY="205.0" text="estudiante 2" />
+      <Label fx:id="lblme3" layoutX="136.0" layoutY="235.0" text="estudiante 3" />
+      <Label fx:id="lblme4" layoutX="136.0" layoutY="266.0" text="estudiante 4" />
+      <Label fx:id="lblme5" layoutX="136.0" layoutY="299.0" text="estudiante 5" />
+      <Label fx:id="lblmie1" layoutX="238.0" layoutY="180.0" text="estudiante 1" />
+      <Label fx:id="lblmie2" layoutX="241.0" layoutY="205.0" text="estudiante 2" />
+      <Label fx:id="lblmie3" layoutX="238.0" layoutY="235.0" text="estudiante 3" />
+      <Label fx:id="lblmie4" layoutX="235.0" layoutY="266.0" text="estudiante 4" />
+      <Label fx:id="lblmie5" layoutX="235.0" layoutY="299.0" text="estudiante 5" />
+      <Label fx:id="lblje1" layoutX="331.0" layoutY="180.0" text="estudiante 1" />
+      <Label fx:id="lblje2" layoutX="331.0" layoutY="205.0" text="estudiante 2" />
+      <Label fx:id="lblje3" layoutX="331.0" layoutY="235.0" text="estudiante 3" />
+      <Label fx:id="lblje4" layoutX="331.0" layoutY="266.0" text="estudiante 4" />
+      <Label fx:id="lblje5" layoutX="337.0" layoutY="299.0" text="estudiante 5" />
+      <Label fx:id="lblve1" layoutX="441.0" layoutY="180.0" text="estudiante 1" />
+      <Label fx:id="lblve2" layoutX="441.0" layoutY="205.0" text="estudiante 2" />
+      <Label fx:id="lblve3" layoutX="441.0" layoutY="235.0" text="estudiante 3" />
+      <Label fx:id="lblve4" layoutX="441.0" layoutY="266.0" text="estudiante 4" />
+      <Label fx:id="lblve5" layoutX="441.0" layoutY="299.0" text="estudiante 5" />
+      <Label fx:id="lblpendientes1" layoutX="229.0" layoutY="346.0" text="pendientes" />
+      <Label fx:id="lbllunes1" layoutX="41.0" layoutY="375.0" text="lunes" />
+      <Label fx:id="lblle11" layoutX="24.0" layoutY="408.0" prefHeight="17.0" prefWidth="75.0" text="estudiante 1" />
+      <Label fx:id="lblle21" layoutX="24.0" layoutY="439.0" prefHeight="17.0" prefWidth="75.0" text="estudiante  2" />
+      <Label fx:id="lblle31" layoutX="24.0" layoutY="471.0" prefHeight="17.0" prefWidth="75.0" text="estudiante  3" />
+      <Label fx:id="lblle41" layoutX="23.0" layoutY="500.0" prefHeight="17.0" prefWidth="78.0" text="estudiante 4" />
+      <Label fx:id="lblle51" layoutX="21.0" layoutY="536.0" text="estudiante  5" />
+      <Label fx:id="lblmartes1" layoutX="151.0" layoutY="375.0" text="martes" />
+      <Label fx:id="lblme11" layoutX="137.0" layoutY="408.0" text="estudiante 1" />
+      <Label fx:id="lblme21" layoutX="137.0" layoutY="439.0" text="estudiante 2" />
+      <Label fx:id="lblme31" layoutX="136.0" layoutY="471.0" text="estudiante 3" />
+      <Label fx:id="lblme41" layoutX="137.0" layoutY="501.0" text="estudiante 4" />
+      <Label fx:id="lblme51" layoutX="136.0" layoutY="536.0" text="estudiante 5" />
+      <Label fx:id="lblmiercoles1" layoutX="233.0" layoutY="375.0" text="miercoles" />
+      <Label fx:id="lblmie11" layoutX="235.0" layoutY="408.0" text="estudiante 1" />
+      <Label fx:id="lblmie21" layoutX="235.0" layoutY="439.0" text="estudiante 2" />
+      <Label fx:id="lblmie31" layoutX="235.0" layoutY="471.0" text="estudiante 3" />
+      <Label fx:id="lblmie41" layoutX="235.0" layoutY="501.0" text="estudiante 4" />
+      <Label fx:id="lblmie51" layoutX="235.0" layoutY="536.0" text="estudiante 5" />
+      <Label fx:id="lbljueves1" layoutX="353.0" layoutY="375.0" text="jueves" />
+      <Label fx:id="lblje11" layoutX="337.0" layoutY="408.0" text="estudiante 1" />
+      <Label fx:id="lblje21" layoutX="337.0" layoutY="439.0" text="estudiante 2" />
+      <Label fx:id="lblje31" layoutX="337.0" layoutY="471.0" text="estudiante 3" />
+      <Label fx:id="lblje41" layoutX="337.0" layoutY="501.0" text="estudiante 4" />
+      <Label fx:id="lblje51" layoutX="337.0" layoutY="536.0" text="estudiante 5" />
+      <Label fx:id="lblviernes1" layoutX="460.0" layoutY="375.0" text="viernes " />
+      <Label fx:id="lblve11" layoutX="448.0" layoutY="408.0" text="estudiante 1" />
+      <Label fx:id="lblve21" layoutX="448.0" layoutY="439.0" text="estudiante 2" />
+      <Label fx:id="lblve31" layoutX="448.0" layoutY="471.0" text="estudiante 3" />
+      <Label fx:id="lblve41" layoutX="448.0" layoutY="500.0" text="estudiante 4" />
+      <Label fx:id="lblve51" layoutX="448.0" layoutY="536.0" text="estudiante 5" />
+   </children>
+</AnchorPane>
